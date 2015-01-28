@@ -25,12 +25,6 @@ public class GOneConst {
     public static final String HEAD_FILTER = "headers";//used by AddHeaderFilter.java
     public static final String EXCLUDE_PATTERNS = "excludePatterns";//used by AddHeaderFilter.java
     
-    // ------------------------ DB -------------------------------------------
-	public static final String DB_DATASTATE_SEND_NO = "0";
-	public static final String DB_DATASTATE_SEND_YES = "1";
-	public static final String DB_ORDER_TYPE_ASC = "asc";
-	public static final String DB_ORDER_TYPE_DESC = "desc";
-    
 	// ------------------------ KEY -------------------------------------------
     public static final String KEY_USER = "user";
 

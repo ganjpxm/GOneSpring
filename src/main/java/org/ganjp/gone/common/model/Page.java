@@ -10,8 +10,8 @@ package org.ganjp.gone.common.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ganjp.gcore.Const;
 import org.ganjp.gcore.util.StringUtil;
-import org.ganjp.gone.common.GOneConst;
 
 /**
  * <p></p>
@@ -117,7 +117,7 @@ public class Page<T> {
 		// 检查order字符串的合法值
 		String[] orders = StringUtil.split(StringUtil.toLowerCase(order), ",");
 		for (String orderStr : orders) {
-			if (!GOneConst.DB_ORDER_TYPE_DESC.equals(orderStr) && !GOneConst.DB_ORDER_TYPE_ASC.equals(orderStr)) {
+			if (!Const.DB_ORDER_TYPE_DESC.equals(orderStr) && !Const.DB_ORDER_TYPE_ASC.equals(orderStr)) {
 				throw new IllegalArgumentException("排序方向" + orderStr + "不是合法值");
 			}
 		}
