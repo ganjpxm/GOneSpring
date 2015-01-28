@@ -22,5 +22,8 @@
 <property name="createDateTime" type="java.sql.Timestamp" column="create_date_time"/>
 <property name="modifyTimestamp" type="java.sql.Timestamp" column="modify_timestamp"/>
 <property name="dataStatus" type="java.lang.String" column="data_status"/>
+<property name="sendStatus" type="java.lang.String" column="send_status"/>
+<property name="sendDateTime" type="java.sql.Timestamp" column="send_date_time"/>
+<property name="receiveDateTime" type="java.sql.Timestamp" column="receive_date_time"/>
 </class>
 </hibernate-mapping>

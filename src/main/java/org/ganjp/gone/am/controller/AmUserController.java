@@ -42,7 +42,7 @@ public class AmUserController extends BaseController {
 	@RequestMapping(value="/user", method=RequestMethod.GET)
 	public ModelAndView goToUserPage(HttpServletRequest request) {
 		request.setAttribute("fieldNames", "userId,userCd,firstName,lastName,gender,birthday,mobileNumber,email,password,photoUrl,loginCount,description," +
-				"lang,operatorId,operatorName,createDateTime,modifyTimestamp,dataStatus");
+				"lang,operatorId,operatorName,createDateTime,modifyTimestamp,dataStatus,sendStatus,sendDateTime,receiveDateTime");
 		ModelAndView modelAndView = new ModelAndView("am/amUser");
 		
 		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
