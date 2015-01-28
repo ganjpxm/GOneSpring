@@ -77,14 +77,14 @@ function search() {
 }
 
 function load${UPPER_CLASS_NAME_WITHOUT_MODULE_NAME}List(paramJson) {
-  $.getJSON("<c:url value='/${MODULE_NAME}/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Page'/>", paramJson, function(page) {
+  $ .getJSON("<c:url value='/${MODULE_NAME}/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Page'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	var data = page.result;
-	$.each(data, function(index, map) {
+	$ .each(data, function(index, map) {
 	  var uuid = "";
 	  var listTds = [];
 	  listTds.push("<td><input name='uuid' type='checkbox' class='jp-check-box' value='" + map['${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Id'] + "'/></td>");
-	  $.each(mFieldNames, function(index, fieldName) {
+	  $ .each(mFieldNames, function(index, fieldName) {
 		var val = map[fieldName];
 		if (jp.isEmpty(val)) {
 			val = ""; 
@@ -132,7 +132,7 @@ function load${UPPER_CLASS_NAME_WITHOUT_MODULE_NAME}List(paramJson) {
 
 function add() {
   var formFields = [];
-  $.each(mFieldNames, function(index, fieldName) {
+  $ .each(mFieldNames, function(index, fieldName) {
 	if (fieldName == "comment" || fieldName == "content" || fieldName == "remark" || fieldName == "description") {
 		formFields.push("<div class='jp-lable'>" + fieldName + "</div>" + 
 				"<div><textarea name='" + fieldName + "' class='jp-textare'/>");
@@ -150,9 +150,9 @@ function add() {
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $.getJSON(mRootUrl + "${MODULE_NAME}/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}/" + mSelUuids, function(data) {
+	  $ .getJSON(mRootUrl+"${MODULE_NAME}/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}/" + mSelUuids, function(data) {
 		  var formFields = [];
-		  $.each(mFieldNames, function(index, fieldName) {
+		  $ .each(mFieldNames, function(index, fieldName) {
 			var value = data[fieldName];  
 			if (jp.isEmpty(value)) {
 				value="";
@@ -203,9 +203,9 @@ function save() {
 
 function del() {
   var urlStr = "<c:url value='/${MODULE_NAME}/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}/delete'/>";
-  $.ajax({type:"POST", url:urlStr, data: {${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Ids:mSelUuids}, async:true, dataType:'json', 
+  $ .ajax({type:"POST", url:urlStr, data: {${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Ids:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
-${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}f (data.result=="success") {
+	  if (data.result=="success") {
 		load${UPPER_CLASS_NAME_WITHOUT_MODULE_NAME}List(mParamJson);
 		$("#${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}s").show();
 		$("#${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}").hide();  

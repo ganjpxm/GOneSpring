@@ -40,6 +40,10 @@ public class Const {
     // ------------------------ database information -------------------------------------------
 	public static final String DB_DATASTATE_NORMAL = "0";
 	public static final String DB_DATASTATE_DELETE = "1";
+	public static final String DB_DATASTATE_SEND_NO = "0";
+	public static final String DB_DATASTATE_SEND_YES = "1";
+	public static final String DB_ORDER_TYPE_ASC = "asc";
+	public static final String DB_ORDER_TYPE_DESC = "desc";
 	
 	//------------------------------ key and value ---------------------
 	public static final String KEY_RESULT = "result";

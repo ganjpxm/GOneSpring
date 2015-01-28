@@ -41,8 +41,8 @@ public class ${UPPER_CLASS_NAME}Controller extends BaseController {
     // ------------------------------- Go to page -----------------------------------------------
 	@RequestMapping(value="/${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}", method=RequestMethod.GET)
 	public ModelAndView goTo${UPPER_CLASS_NAME_WITHOUT_MODULE_NAME}Page(HttpServletRequest request) {
-		request.setAttribute("fieldNames", "${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Id,${LOWER_CLASS_NAME_WITHOUT_MODULE_NAME}Cd,firstName,lastName,gender,birthday,mobileNumber,email,password,photoUrl,loginCount,description," +
-				"lang,operatorId,operatorName,createDateTime,modifyTimestamp,dataStatus");
+		
+		request.setAttribute("fieldNames", "#set($count=0)#foreach($name in $ALL_FIELD_NAMES)#if($name == $ID)$name#end#if($name != $ID),$name#end#set($count=$count+1)#end");
 		ModelAndView modelAndView = new ModelAndView("${MODULE_NAME}/${LOWER_CLASS_NAME}");
 		
 		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
