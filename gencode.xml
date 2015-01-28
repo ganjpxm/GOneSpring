@@ -14,7 +14,7 @@
 	<property name="resources" value="src/main/resources" />
 	<property name="tmp" value="dist/tmp" />
     <property name="web" value="src/main/webapp" />
-    <property name="page" value="${web}/views/jsp" />
+    <property name="page" value="${web}/WEB-INF/views/jsp" />
     <property name="lib" value="resources/jar/ant" />
 	
 	<path id="lib.path">
@@ -61,7 +61,7 @@
 		
 		<pckpath packagename="${base.package}" pathProperty="base.package.path" />
 		<property name="module.path" value="${src}/${base.package.path}/${module.name}" />
-		<property name="page.path" value="${page}/${module.name}/${lower.class.name}" />
+		<property name="page.path" value="${page}/${module.name}" />
 		<property name="hbmDtd" value="&lt;!DOCTYPE hibernate-mapping PUBLIC &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot; &quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&quot;&gt;" />
 	</target>
 	
@@ -180,14 +180,8 @@
 	<target name="gen-jsp" depends="gen-code-pre">
 		<replace file="${hbmFile}" token="${hbmDtd}" value="&lt;!--  --&gt;" />	
 		<mkdir dir="${page.path}"/>
-		<hbmgencode templateFile="JspJqmList.vm" templatedir="resources/template/vm" hibernatefile="${hbmFile}"
-			outputFileName="${page.path}/${lower.class.name}JqmList.jsp" 
-			classname="${lower.class.name}" modulename="${module.name}" basepackage="${base.package}" />
-		<hbmgencode templateFile="JspJqmAdd.vm" templatedir="resources/template/vm" hibernatefile="${hbmFile}"
-			outputFileName="${page.path}/${lower.class.name}JqmAdd.jsp" 
-			classname="${lower.class.name}" modulename="${module.name}" basepackage="${base.package}" />
-		<hbmgencode templateFile="JspJqmEdit.vm" templatedir="resources/template/vm" hibernatefile="${hbmFile}"
-			outputFileName="${page.path}/${lower.class.name}JqmEdit.jsp" 
+		<hbmgencode templateFile="JspJquery.vm" templatedir="resources/template/vm" hibernatefile="${hbmFile}"
+			outputFileName="${page.path}/${lower.class.name}.jsp" 
 			classname="${lower.class.name}" modulename="${module.name}" basepackage="${base.package}" />
 		<replace file="${hbmFile}" token="&lt;!--  --&gt;" value="${hbmDtd}" />
 		<echo>gen jsp success</echo>
@@ -197,7 +191,7 @@
 		<echo message="gen hbm and po code success"/>
 	</target>
 	
-	<target name="gen-crud" depends="gen-hbm,gen-po-config,gen-service,gen-controller,gen-jsp">
+	<target name="gen-crud" depends="gen-hbm,gen-po-config,gen-dao,gen-service,gen-controller,gen-jsp">
 		<echo message="gen crud code success"/>
 	</target>
 	
