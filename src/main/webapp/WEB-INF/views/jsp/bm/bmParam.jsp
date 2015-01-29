@@ -77,7 +77,7 @@ function search() {
 }
 
 function loadParamList(paramJson) {
-  $ .getJSON("<c:url value='/bm/paramPage'/>", paramJson, function(page) {
+  $ .getJSON("<c:url value='/spring/bm/paramPage'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	var data = page.result;
 	$ .each(data, function(index, map) {
@@ -150,7 +150,7 @@ function add() {
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $ .getJSON(mRootUrl+"bm/param/" + mSelUuids, function(data) {
+	  $ .getJSON(mRootUrl+"spring/bm/param/" + mSelUuids, function(data) {
 		  var formFields = [];
 		  $ .each(mFieldNames, function(index, fieldName) {
 			var value = data[fieldName];  
@@ -182,9 +182,9 @@ function edit() {
 }
 
 function save() {
-  var saveUrl = "<c:url value='/bm/param'/>";
+  var saveUrl = "<c:url value='/spring/bm/param'/>";
   if (mIsAdd == false) {
-	  saveUrl = mRootUrl + "bm/param/" + mSelUuids;
+	  saveUrl = mRootUrl + "spring/bm/param/" + mSelUuids;
   }
   $("#param-form").ajaxSubmit({
     dataType:  'json',
@@ -202,7 +202,7 @@ function save() {
 }
 
 function del() {
-  var urlStr = "<c:url value='/bm/param/delete'/>";
+  var urlStr = "<c:url value='/spring/bm/param/delete'/>";
   $ .ajax({type:"POST", url:urlStr, data: {paramIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {
