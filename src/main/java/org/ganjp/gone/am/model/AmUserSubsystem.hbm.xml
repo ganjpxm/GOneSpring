@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="org.ganjp.gone.am.model.AmUserSubsystem" table="am_user_subsystem">
+<id name="userSubsystemId" column="user_subsystem_id" type="java.lang.String" unsaved-value="">
+<generator class="uuid"/>
+</id>
+<property name="subsystemId" type="java.lang.String" column="subsystem_id"/>
+<property name="userId" type="java.lang.String" column="user_id"/>
+<property name="lang" type="java.lang.String" column="lang"/>
+<property name="operatorId" type="java.lang.String" column="operator_id"/>
+<property name="operatorName" type="java.lang.String" column="operator_name"/>
+<property name="createDateTime" type="java.sql.Timestamp" column="create_date_time"/>
+<property name="modifyTimestamp" type="java.sql.Timestamp" column="modify_timestamp"/>
+<property name="dataStatus" type="java.lang.String" column="data_status"/>
+<property name="sendStatus" type="java.lang.String" column="send_status"/>
+<property name="sendDateTime" type="java.sql.Timestamp" column="send_date_time"/>
+<property name="receiveDateTime" type="java.sql.Timestamp" column="receive_date_time"/>
+</class>
+</hibernate-mapping>
