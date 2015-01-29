@@ -7,17 +7,17 @@
  */
 package org.ganjp.gone.am.model;
 
-import java.sql.Timestamp;
+import org.ganjp.gone.common.model.BaseModel;
+import org.ganjp.gcore.Const;
+import org.ganjp.gcore.util.DateUtil;
+import org.ganjp.gcore.uuid.UUIDHexGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.ganjp.gcore.Const;
-import org.ganjp.gcore.util.DateUtil;
-import org.ganjp.gcore.uuid.UUIDHexGenerator;
-import org.ganjp.gone.common.model.BaseModel;
+import java.sql.Timestamp;
 
 /**
  * <p>AmRole</p>
@@ -28,6 +28,8 @@ import org.ganjp.gone.common.model.BaseModel;
 @Entity
 @Table(name="am_role")
 public class AmRole extends BaseModel{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name="role_id")
 	private String roleId = UUIDHexGenerator.getUuid();
@@ -36,6 +38,8 @@ public class AmRole extends BaseModel{
 	private String roleCd;
 	@Column(name="role_name")
 	private String roleName;
+	@Column(name="display_no")
+	private Integer displayNo;
 	@Column(name="description")
 	private String description;
 	@Column(name="lang")
@@ -101,6 +105,19 @@ public class AmRole extends BaseModel{
 	 */
     public void setRoleName(String roleName) {
 		this.roleName = roleName;
+    }
+    /**
+	 * @return Integer
+	 */
+	public Integer getDisplayNo() {
+        return this.displayNo;
+    }
+    
+    /**
+	 * @param Integer displayNo
+	 */
+    public void setDisplayNo(Integer displayNo) {
+		this.displayNo = displayNo;
     }
     /**
 	 * @return String

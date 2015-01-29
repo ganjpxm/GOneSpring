@@ -160,7 +160,7 @@ function edit() {
 				value = jp.formateFullDateTimeStr(value);
 			}
 			if (fieldName.indexOf("birthday")!=-1) {
-				val = jp.formateDateStr(val);
+				value = jp.formateDateStr(value);
 			}
 			if (fieldName == "comment" || fieldName == "content" || fieldName == "remark" || fieldName == "description") {
 				formFields.push("<div class='jp-lable'>" + fieldName + "</div>" + 

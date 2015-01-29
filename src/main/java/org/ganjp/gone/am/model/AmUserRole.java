@@ -7,17 +7,17 @@
  */
 package org.ganjp.gone.am.model;
 
-import java.sql.Timestamp;
+import org.ganjp.gone.common.model.BaseModel;
+import org.ganjp.gcore.Const;
+import org.ganjp.gcore.util.DateUtil;
+import org.ganjp.gcore.uuid.UUIDHexGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.ganjp.gcore.Const;
-import org.ganjp.gcore.util.DateUtil;
-import org.ganjp.gcore.uuid.UUIDHexGenerator;
-import org.ganjp.gone.common.model.BaseModel;
+import java.sql.Timestamp;
 
 /**
  * <p>AmUserRole</p>
@@ -28,6 +28,8 @@ import org.ganjp.gone.common.model.BaseModel;
 @Entity
 @Table(name="am_user_role")
 public class AmUserRole extends BaseModel{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name="user_role_id")
 	private String userRoleId = UUIDHexGenerator.getUuid();

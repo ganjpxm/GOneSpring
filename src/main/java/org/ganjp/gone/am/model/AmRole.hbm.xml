@@ -7,6 +7,7 @@
 </id>
 <property name="roleCd" type="java.lang.String" column="role_cd"/>
 <property name="roleName" type="java.lang.String" column="role_name"/>
+<property name="displayNo" type="java.lang.Integer" column="display_no"/>
 <property name="description" type="java.lang.String" column="description"/>
 <property name="lang" type="java.lang.String" column="lang"/>
 <property name="operatorId" type="java.lang.String" column="operator_id"/>

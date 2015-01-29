@@ -7,8 +7,8 @@
  */
 package org.ganjp.gone.am.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +30,8 @@ import org.ganjp.gone.common.model.BaseModel;
 @Entity
 @Table(name="am_user")
 public class AmUser extends BaseModel{
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="user_id")
 	private String userId = UUIDHexGenerator.getUuid();
@@ -52,8 +54,8 @@ public class AmUser extends BaseModel{
 	private String password;
 	@Column(name="photo_url")
 	private String photoUrl;
-	@Column(name="login_count")
-	private Integer loginCount;
+	@Column(name="default_subsystem_id")
+	private String defaultSubsystemId;
 	@Column(name="description")
 	private String description;
 	@Column(name="lang")
@@ -212,17 +214,17 @@ public class AmUser extends BaseModel{
 		this.photoUrl = photoUrl;
     }
     /**
-	 * @return Integer
+	 * @return String
 	 */
-	public Integer getLoginCount() {
-        return this.loginCount;
+	public String getDefaultSubsystemId() {
+        return this.defaultSubsystemId;
     }
     
     /**
-	 * @param Integer loginCount
+	 * @param String defaultSubsystemId
 	 */
-    public void setLoginCount(Integer loginCount) {
-		this.loginCount = loginCount;
+    public void setDefaultSubsystemId(String defaultSubsystemId) {
+		this.defaultSubsystemId = defaultSubsystemId;
     }
     /**
 	 * @return String
@@ -354,7 +356,7 @@ public class AmUser extends BaseModel{
     public void setReceiveDateTime(Timestamp receiveDateTime) {
 		this.receiveDateTime = receiveDateTime;
     }
-    
+     
     public String getUserName() {
     	String userName = this.firstName;
     	if (StringUtil.hasText(this.lastName)) {
@@ -362,5 +364,4 @@ public class AmUser extends BaseModel{
     	}
     	return userName;
     }
-     
 }

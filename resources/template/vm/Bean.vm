@@ -8,6 +8,8 @@
 package ${BASE_PACKAGE}.${MODULE_NAME}.model;
 
 import ${BASE_PACKAGE}.common.model.BaseModel;
+import org.ganjp.gcore.Const;
+import org.ganjp.gcore.util.DateUtil;
 import org.ganjp.gcore.uuid.UUIDHexGenerator;
 
 import javax.persistence.Column;
@@ -16,7 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 #foreach( $type in $IMPORT_TYPES )
-import $type;
+#if($type=='java.sql.Date')import java.util.Date#elseif($type!='java.sql.Date')import $type#end;
 #end
 
 /**
@@ -28,13 +30,15 @@ import $type;
 @Entity
 @Table(name="${TABLE_NAME}")
 public class ${UPPER_CLASS_NAME} extends BaseModel{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name="${COLUMN_ID}")
 	private String ${ID} = UUIDHexGenerator.getUuid();
 	
 	#set($count=0)#foreach( $name in $ALL_FIELD_NAMES )
 #if( $name != $ID )@Column(name="$ALL_COLUMN_NAMES.get($count)")
-	private $ALL_SIMPLE_FIELD_TYPES.get($count) $name;
+	private $ALL_SIMPLE_FIELD_TYPES.get($count) $name#if($name == 'createDateTime') = DateUtil.getNowTimstamp()#end#if($name == 'modifyTimestamp') = DateUtil.getNowTimstamp()#end#if($name == 'dataStatus') = Const.DB_DATASTATE_NORMAL#end#if($name == 'sendStatus') = Const.DB_DATASTATE_SEND_NO#end;
 	#end 
 	#set($count=$count+1)#end
 	
