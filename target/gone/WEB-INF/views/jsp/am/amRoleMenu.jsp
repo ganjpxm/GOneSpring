@@ -77,7 +77,7 @@ function search() {
 }
 
 function loadRoleMenuList(paramJson) {
-  $ .getJSON("<c:url value='/am/roleMenuPage'/>", paramJson, function(page) {
+  $ .getJSON("<c:url value='/spring/am/roleMenuPage'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	var data = page.result;
 	$ .each(data, function(index, map) {
@@ -150,7 +150,7 @@ function add() {
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $ .getJSON(mRootUrl+"am/roleMenu/" + mSelUuids, function(data) {
+	  $ .getJSON(mRootUrl+"spring/am/roleMenu/" + mSelUuids, function(data) {
 		  var formFields = [];
 		  $ .each(mFieldNames, function(index, fieldName) {
 			var value = data[fieldName];  
@@ -182,9 +182,9 @@ function edit() {
 }
 
 function save() {
-  var saveUrl = "<c:url value='/am/roleMenu'/>";
+  var saveUrl = "<c:url value='/spring/am/roleMenu'/>";
   if (mIsAdd == false) {
-	  saveUrl = mRootUrl + "am/roleMenu/" + mSelUuids;
+	  saveUrl = mRootUrl + "spring/am/roleMenu/" + mSelUuids;
   }
   $("#roleMenu-form").ajaxSubmit({
     dataType:  'json',
@@ -202,7 +202,7 @@ function save() {
 }
 
 function del() {
-  var urlStr = "<c:url value='/am/roleMenu/delete'/>";
+  var urlStr = "<c:url value='/spring/am/roleMenu/delete'/>";
   $ .ajax({type:"POST", url:urlStr, data: {roleMenuIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {

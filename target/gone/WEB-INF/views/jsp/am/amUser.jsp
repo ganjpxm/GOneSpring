@@ -77,14 +77,14 @@ function search() {
 }
 
 function loadUserList(paramJson) {
-  $.getJSON("<c:url value='/am/userPage'/>", paramJson, function(page) {
+  $ .getJSON("<c:url value='/spring/am/userPage'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	var data = page.result;
-	$.each(data, function(index, map) {
+	$ .each(data, function(index, map) {
 	  var uuid = "";
 	  var listTds = [];
 	  listTds.push("<td><input name='uuid' type='checkbox' class='jp-check-box' value='" + map['userId'] + "'/></td>");
-	  $.each(mFieldNames, function(index, fieldName) {
+	  $ .each(mFieldNames, function(index, fieldName) {
 		var val = map[fieldName];
 		if (jp.isEmpty(val)) {
 			val = ""; 
@@ -132,7 +132,7 @@ function loadUserList(paramJson) {
 
 function add() {
   var formFields = [];
-  $.each(mFieldNames, function(index, fieldName) {
+  $ .each(mFieldNames, function(index, fieldName) {
 	if (fieldName == "comment" || fieldName == "content" || fieldName == "remark" || fieldName == "description") {
 		formFields.push("<div class='jp-lable'>" + fieldName + "</div>" + 
 				"<div><textarea name='" + fieldName + "' class='jp-textare'/>");
@@ -150,9 +150,9 @@ function add() {
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $.getJSON(mRootUrl + "am/user/" + mSelUuids, function(data) {
+	  $ .getJSON(mRootUrl+"spring/am/user/" + mSelUuids, function(data) {
 		  var formFields = [];
-		  $.each(mFieldNames, function(index, fieldName) {
+		  $ .each(mFieldNames, function(index, fieldName) {
 			var value = data[fieldName];  
 			if (jp.isEmpty(value)) {
 				value="";
@@ -160,7 +160,7 @@ function edit() {
 				value = jp.formateFullDateTimeStr(value);
 			}
 			if (fieldName.indexOf("birthday")!=-1) {
-				value = jp.formateDateStr(value);
+				val = jp.formateDateStr(val);
 			}
 			if (fieldName == "comment" || fieldName == "content" || fieldName == "remark" || fieldName == "description") {
 				formFields.push("<div class='jp-lable'>" + fieldName + "</div>" + 
@@ -182,9 +182,9 @@ function edit() {
 }
 
 function save() {
-  var saveUrl = "<c:url value='/am/user'/>";
+  var saveUrl = "<c:url value='/spring/am/user'/>";
   if (mIsAdd == false) {
-	  saveUrl = mRootUrl + "am/user/" + mSelUuids;
+	  saveUrl = mRootUrl + "spring/am/user/" + mSelUuids;
   }
   $("#user-form").ajaxSubmit({
     dataType:  'json',
@@ -202,8 +202,8 @@ function save() {
 }
 
 function del() {
-  var urlStr = "<c:url value='/am/user/delete'/>";
-  $.ajax({type:"POST", url:urlStr, data: {userIds:mSelUuids}, async:true, dataType:'json', 
+  var urlStr = "<c:url value='/spring/am/user/delete'/>";
+  $ .ajax({type:"POST", url:urlStr, data: {userIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {
 		loadUserList(mParamJson);

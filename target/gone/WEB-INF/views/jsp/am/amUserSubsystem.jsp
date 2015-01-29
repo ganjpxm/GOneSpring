@@ -77,7 +77,7 @@ function search() {
 }
 
 function loadUserSubsystemList(paramJson) {
-  $ .getJSON("<c:url value='/am/userSubsystemPage'/>", paramJson, function(page) {
+  $ .getJSON("<c:url value='/spring/am/userSubsystemPage'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	var data = page.result;
 	$ .each(data, function(index, map) {
@@ -150,7 +150,7 @@ function add() {
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $ .getJSON(mRootUrl+"am/userSubsystem/" + mSelUuids, function(data) {
+	  $ .getJSON(mRootUrl+"spring/am/userSubsystem/" + mSelUuids, function(data) {
 		  var formFields = [];
 		  $ .each(mFieldNames, function(index, fieldName) {
 			var value = data[fieldName];  
@@ -182,9 +182,9 @@ function edit() {
 }
 
 function save() {
-  var saveUrl = "<c:url value='/am/userSubsystem'/>";
+  var saveUrl = "<c:url value='/spring/am/userSubsystem'/>";
   if (mIsAdd == false) {
-	  saveUrl = mRootUrl + "am/userSubsystem/" + mSelUuids;
+	  saveUrl = mRootUrl + "spring/am/userSubsystem/" + mSelUuids;
   }
   $("#userSubsystem-form").ajaxSubmit({
     dataType:  'json',
@@ -202,7 +202,7 @@ function save() {
 }
 
 function del() {
-  var urlStr = "<c:url value='/am/userSubsystem/delete'/>";
+  var urlStr = "<c:url value='/spring/am/userSubsystem/delete'/>";
   $ .ajax({type:"POST", url:urlStr, data: {userSubsystemIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {
