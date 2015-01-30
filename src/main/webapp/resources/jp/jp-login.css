@@ -1,0 +1,30 @@
+@charset 'UTF-8';
+/*
+ * jp style : theme color(1abc9c), dark theme color(1cab8f), black color(#333)
+ *  
+ *
+ * Copyright (c) 2014 Gan Jianping. All rights reserved
+ */
+body {background-color: #9E9E9E !important;}
+.login {margin-top:20px;}
+.login .content {background-color:#fff; max-width: 520px; margin: 0 auto; margin-bottom: 0px; padding: 15px 30px 10px 30px; border-radius: 4px;-moz-border-radius: 4px;}
+.login .content .login-form {padding: 0px;margin: 0px;}
+.login .content .input-icon {border-left: 2px solid #009688 !important;}
+.login .content .input-icon .form-control {border-left: 0;}
+.login .content .form-title {font-weight: 700; font-size:25px; padding:10px; text-align:center;}
+
+.copyright {color:#E0E0E0;text-align:center;margin-top:20px;font-weight:normal;font-size:12px;}
+.input-icon i {color: #ccc; display: block; position: absolute; margin: 11px 2px 4px 10px; width: 16px; height: 16px; font-size: 16px; text-align: center;}
+.input-icon input {padding-left: 33px !important;}
+.form-group {margin-top:10px;}
+.form-control {height:40px;}
+
+
+@media (max-width: 480px) {
+  .login {margin-top:0px;}
+  .login .content {max-width:460px;}
+}
+
+@media (max-width: 767px) {
+  .login {margin:10px;}
+}
