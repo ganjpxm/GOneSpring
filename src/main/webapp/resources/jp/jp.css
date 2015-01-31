@@ -19,13 +19,12 @@
 @font-face {font-family: 'Open Sans';font-style: normal;font-weight: 800;
   src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url('font/OpenSans-Extrabold.woff') format('woff');
 }
-html, body, input, select, textarea, button {margin: 0px;line-height: 1.5; font-weight: 400; font-size:14px;} /*300,400,700,800*/
-html, body, input, select, textarea, button, code, h1, h2, h3, h4, h5, h6 {font-family: 'Open Sans', sans-serif;}
-body {background-color: #EEE !important;}
-
 .jp-font-light {font-weight: 300;}
 .jp-font-bold {font-weight: 700;}
 .jp-font-extra-bold {font-weight: 800;}
+
+html, body, input, select, textarea, button {margin: 0px;line-height: 1.5; font-weight: 400; font-size:14px;} /*300,400,700,800*/
+html, body, input, select, textarea, button, code, h1, h2, h3, h4, h5, h6 {font-family: 'Open Sans', sans-serif;}
 
 .jp-mt5 {margin-top:5px;} .jp-mt10 {margin-top:10px;} .jp-mt15 {margin-top:15px;} .jp-mt20 {margin-top:20px;} .jp-mt30 {margin-top:30px;}
 .jp-mb5 {margin-bottom:5px;} .jp-mb10 {margin-bottom:10px;} .jp-mb15 {margin-bottom:15px;} .jp-mb20 {margin-bottom:20px;} .jp-mb30 {margin-bottom:30px;}
@@ -48,7 +47,32 @@ body {background-color: #EEE !important;}
 .jp-fl {float:left;}
 .jp-fr {float:right;}
 
-.jp-gray-table {border-collapse: collapse;}
-.jp-gray-table>thead>tr>th {border-bottom:2px solid #ddd;font-weight:700;}
-.jp-gray-table>tbody>tr>td, .jp-gray-table>thead>tr>th {border-collapse: collapse; border: 1px solid #ddd; padding: 10px;}
+/*! bootstrap.css */
+.modal-backdrop {z-index: 0 !important;}
+.dropdown-menu {z-index:1000000}
+.panel-heading {height:48px;}
+.navbar {margin-bottom:10px;}
+.panel-body {padding:5px;}
+.panel {margin:5px;}
+.modal-body {margin-top:0px;}
+
+/*! intl-tel */
+.intl-tel-input {width:100%;}
+.input-icon input {padding-left:40px !important}
+
+@media (max-width: 480px) {
+	
+}
+
+@media (max-width: 768px) {
+	
+}
+
+@media (max-width: 992px) {
+	
+}
+
+@media (max-width: 1200px) {
+	
+}
 

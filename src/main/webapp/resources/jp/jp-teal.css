@@ -6,6 +6,38 @@
  *
  * Copyright (c) 2014 Gan Jianping. All rights reserved
  */
+body {background-color: #F5F5F5 !important;}
+
+/*! bootstrap.css */
+.panel-primary {border-color: #009688;}
+.panel-primary > .panel-heading {color: #ffffff; background-color: #009688; border-color: #009688;}
+.panel-primary > .panel-heading + .panel-collapse > .panel-body {border-top-color: #009688;}
+.panel-primary > .panel-heading .badge {color: #009688;background-color: #ffffff;}
+.panel-primary > .panel-footer + .panel-collapse > .panel-body {border-bottom-color: #009688;}
+.btn-primary {color: #ffffff; background-color: #009688; border-color: #2e6da4;}
+.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,.btn-primary:active,.btn-primary.active,.open > .dropdown-toggle.btn-primary {
+  color: #ffffff;background-color: #00897B;border-color: #204d74;}
+.btn-primary:active,.btn-primary.active,.open > .dropdown-toggle.btn-primary {background-image: none;}
+.btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled.focus,.btn-primary[disabled].focus,fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active {
+  background-color: #009688;border-color: #2e6da4;}
+.btn-primary .badge {color: #009688;background-color: #ffffff;}
+.bg-primary {color: #fff; background-color:#009688;}
+a.bg-primary:hover {background-color:#757575;}
+.navbar-default {background-color:#fff;}
+.navbar-default .navbar-brand {color:#009688; font-weight:700;}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {color: #00897B;background-color: transparent;}
+.navbar-default .navbar-nav>li>a {color:#000;}
+.panel-body {background-color:#FAFAFA;}
+.pagination>li>a, .pagination>li>span {color:#009688;}
+
  
-
-
+.white-popup-block{background:#FFF;padding:20px 30px;text-align:left;max-width:980px;margin:40px auto;position:relative;}
+.mfp-iframe-holder .mfp-content {max-width:980px;}
+.container {padding-right:0;padding-left:0;}
+.panel {border-radius:0;}
+.panel-heading {border-top-right-radius:0;border-top-left-radius:0;}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+	padding-left:5px;padding-right:5px;}
+.badge {background-color:#999999;font-weight:bold;}
