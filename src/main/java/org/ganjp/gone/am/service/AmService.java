@@ -7,6 +7,8 @@
  */
 package org.ganjp.gone.am.service;
 
+import javax.transaction.Transactional;
+
 import org.ganjp.gone.am.model.AmSubsystem;
 import org.ganjp.gone.am.model.AmUser;
 import org.ganjp.gone.common.dao.Operations;
@@ -36,6 +38,14 @@ public interface AmService extends Operations<BaseModel> {
      */
    	public void updateSubsystemRole(final AmSubsystem amSubsystem, final String roleIds);
    	
+   	/**
+     * <p>deleteAmSubsystemWithRelation</p>
+     * 
+     * @param subsystemId
+     * @return
+     */
+    public void batchDeleteAmSubsystemWithRelation(String subsystemIds);
+    
    	/**
      * <p>getAmSubsystemWithRoleIds</p>
      * 
@@ -97,4 +107,12 @@ public interface AmService extends Operations<BaseModel> {
      */
     public Page<AmUser> getAmUserPageWithRoleSubsystemNames(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+    
+    /**
+     * <p>deleteAmUserWithRelation</p>
+     * 
+     * @param userId
+     * @return
+     */
+    public void batchDeleteAmUserWithRelation(String userIds);
 }

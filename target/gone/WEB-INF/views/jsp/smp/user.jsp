@@ -280,7 +280,7 @@ function popupDelDialog() {
   $("#del-modal").modal('show');
 }
 function del() {
-  var urlStr = "<c:url value='/spring/am/user/delete'/>";
+  var urlStr = "<c:url value='/spring/am/user/deleteWithRelation'/>";
   $.ajax({type:"POST", url:urlStr, data: {userIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {

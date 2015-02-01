@@ -47,7 +47,8 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     public AmServiceImpl() {
         super();
     }
-
+    
+    //---------------------------------------------- Subsystem
     /**
      * <p>getAmSubsystemWithRoleIds</p>
      * 
@@ -64,7 +65,40 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     		}
     	}
     	return amSubsystem;
-    }    
+    }
+    /**
+     * <p>getAmSubsystemPageWithRoleNames</p>
+     * 
+     * @param search
+     * @param startDate
+     * @param endDate
+     * @param dataStates
+     * @param pageNo
+     * @param pageSize
+     * @param orderBy
+     * @return
+     */
+    @Transactional
+    public Page<AmSubsystem> getAmSubsystemPageWithRoleNames(final String search, final String startDate, final String endDate, final String dataStates,
+			 final int pageNo, final int pageSize, final String orderBy) {
+    	Page<AmSubsystem> page = amSubsystemService.getAmSubsystemPage(search, startDate, endDate, "", pageNo, pageSize, "");
+    	List<AmSubsystem> amSubsystems = page.getResult();
+    	Map<String,List<String>> subsystemIdAndRoleIdsMap = amRoleSubsystemService.getSubsystemIdAndRoleIds();
+    	Map<String,String> roleIdNames = amRoleService.getRoleIdAndNames();
+    	for (AmSubsystem amSubsystem : amSubsystems) {
+    		List<String> roleNames = new ArrayList<String>();
+    		List<String> roleIds = subsystemIdAndRoleIdsMap.get(amSubsystem.getSubsystemId());
+    		if (roleIds!=null && !roleIds.isEmpty()) {
+    			for (String roleId : roleIds) {
+    				roleNames.add(roleIdNames.get(roleId));
+    			}
+    		}
+    		if (!roleNames.isEmpty()) {
+    			amSubsystem.setRoleNames(CollectionUtil.getStringWithSplit(roleNames, ","));
+    		}
+    	}
+    	return page;
+    }
     /**
      * <p>saveSubsystemRole</p>
      * 
@@ -105,39 +139,18 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     	}
     }
     /**
-     * <p>getAmSubsystemPageWithRoleNames</p>
+     * <p>deleteAmSubsystemWithRelation</p>
      * 
-     * @param search
-     * @param startDate
-     * @param endDate
-     * @param dataStates
-     * @param pageNo
-     * @param pageSize
-     * @param orderBy
+     * @param subsystemId
      * @return
      */
     @Transactional
-    public Page<AmSubsystem> getAmSubsystemPageWithRoleNames(final String search, final String startDate, final String endDate, final String dataStates,
-			 final int pageNo, final int pageSize, final String orderBy) {
-    	Page<AmSubsystem> page = amSubsystemService.getAmSubsystemPage(search, startDate, endDate, "", pageNo, pageSize, "");
-    	List<AmSubsystem> amSubsystems = page.getResult();
-    	Map<String,List<String>> subsystemIdAndRoleIdsMap = amRoleSubsystemService.getSubsystemIdAndRoleIds();
-    	Map<String,String> roleIdNames = amRoleService.getRoleIdAndNames();
-    	for (AmSubsystem amSubsystem : amSubsystems) {
-    		List<String> roleNames = new ArrayList<String>();
-    		List<String> roleIds = subsystemIdAndRoleIdsMap.get(amSubsystem.getSubsystemId());
-    		if (roleIds!=null && !roleIds.isEmpty()) {
-    			for (String roleId : roleIds) {
-    				roleNames.add(roleIdNames.get(roleId));
-    			}
-    		}
-    		if (!roleNames.isEmpty()) {
-    			amSubsystem.setRoleNames(CollectionUtil.getStringWithSplit(roleNames, ","));
-    		}
-    	}
-    	return page;
+    public void batchDeleteAmSubsystemWithRelation(String subsystemIds) {
+    	amRoleSubsystemService.batchDeleteBySubsystemIds(subsystemIds);
+    	amSubsystemService.batchDelete(subsystemIds);
     }
     
+    //---------------------------------------------- User
     /**
      * <p>getAmUserWithRoleIds</p>
      * 
@@ -154,45 +167,6 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     		}
     	}
     	return amUser;
-    }
-    /**
-     * <p>saveUserRole</p>
-     * 
-     * @param amUser
-     * @param roleIds
-     */
-    @Transactional
-   	public void saveUserRole(final AmUser amUser, final String roleIds) {
-    	amUserService.create(amUser);
-    	if (StringUtil.hasText(roleIds) && roleIds.length()>=32) {
-    		String[] roleIdArr = roleIds.split(",");
-    		for (String roleId : roleIdArr) {
-    			AmUserRole amUserRole = new AmUserRole();
-    			amUserRole.setRoleId(roleId);
-    			amUserRole.setUserId(amUser.getUserId());
-    			amUserRoleService.create(amUserRole);
-    		}
-    	}
-    }
-    /**
-     * <p>updateUserRole</p>
-     * 
-     * @param amUser
-     * @param roleIds
-     */
-    @Transactional
-   	public void updateUserRole(final AmUser amUser, final String roleIds) {
-    	amUserService.update(amUser);
-    	if (StringUtil.hasText(roleIds) && roleIds.length()>=32) {
-    		amUserRoleService.deleteByUserId(amUser.getUserId());
-    		String[] roleIdArr = roleIds.split(",");
-    		for (String roleId : roleIdArr) {
-    			AmUserRole amUserRole = new AmUserRole();
-    			amUserRole.setRoleId(roleId);
-    			amUserRole.setUserId(amUser.getUserId());
-    			amUserRoleService.create(amUserRole);
-    		}
-    	}
     }
     /**
      * <p>getAmUserPageWithRoleSubsystemNames</p>
@@ -242,6 +216,57 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     	}
     	return page;
     }
+    /**
+     * <p>saveUserRole</p>
+     * 
+     * @param amUser
+     * @param roleIds
+     */
+    @Transactional
+   	public void saveUserRole(final AmUser amUser, final String roleIds) {
+    	amUserService.create(amUser);
+    	if (StringUtil.hasText(roleIds) && roleIds.length()>=32) {
+    		String[] roleIdArr = roleIds.split(",");
+    		for (String roleId : roleIdArr) {
+    			AmUserRole amUserRole = new AmUserRole();
+    			amUserRole.setRoleId(roleId);
+    			amUserRole.setUserId(amUser.getUserId());
+    			amUserRoleService.create(amUserRole);
+    		}
+    	}
+    }
+    /**
+     * <p>updateUserRole</p>
+     * 
+     * @param amUser
+     * @param roleIds
+     */
+    @Transactional
+   	public void updateUserRole(final AmUser amUser, final String roleIds) {
+    	amUserService.update(amUser);
+    	if (StringUtil.hasText(roleIds) && roleIds.length()>=32) {
+    		amUserRoleService.deleteByUserId(amUser.getUserId());
+    		String[] roleIdArr = roleIds.split(",");
+    		for (String roleId : roleIdArr) {
+    			AmUserRole amUserRole = new AmUserRole();
+    			amUserRole.setRoleId(roleId);
+    			amUserRole.setUserId(amUser.getUserId());
+    			amUserRoleService.create(amUserRole);
+    		}
+    	}
+    }
+    /**
+     * <p>deleteAmUserWithRelation</p>
+     * 
+     * @param userId
+     * @return
+     */
+    @Transactional
+    public void batchDeleteAmUserWithRelation(String userIds) {
+    	amUserRoleService.batchDeleteByUserIds(userIds);
+    	amUserService.batchDelete(userIds);
+    }
+    
     
     @Autowired
 	private AmUserService amUserService;

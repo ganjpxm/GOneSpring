@@ -29,6 +29,13 @@ public interface AmUserRoleService extends Operations<AmUserRole> {
     public void deleteByUserId(final String userId);
     
     /**
+   	 * <p>batchDeleteByUserIds</p>
+   	 * 
+   	 * @param userIds
+   	 */
+    public void batchDeleteByUserIds(final String userIds);
+    
+    /**
 	 * <p>batchDelete</p>
 	 * 
 	 * @param pks

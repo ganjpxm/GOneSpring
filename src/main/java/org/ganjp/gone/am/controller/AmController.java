@@ -88,7 +88,6 @@ public class AmController extends BaseController {
     	}
     	return map;
     }
-    
     @RequestMapping(value="/user/role", method = RequestMethod.POST)
     public @ResponseBody Map<String,String> creatUserAndRole(HttpServletRequest request, HttpServletResponse response) {
     	Map<String,String> map = new HashMap<String,String>();
@@ -117,7 +116,6 @@ public class AmController extends BaseController {
     	}
     	return map;
     }
-    
     @RequestMapping(value="/user/role/{userId}", method = RequestMethod.POST)
     public @ResponseBody Map<String,String> updateUserAndRole(@PathVariable String userId, HttpServletRequest request, HttpServletResponse response) {
     	Map<String,String> map = new HashMap<String,String>();
@@ -128,6 +126,38 @@ public class AmController extends BaseController {
     		map.put(Const.KEY_RESULT, Const.VALUE_SUCCESS);
     	} catch(Exception ex) {
     		map.put(Const.KEY_RESULT, Const.VALUE_FAIL);
+    	}
+    	return map;
+    }
+    
+    // ------------------------------- Delete -----------------------------------------------
+    @RequestMapping(value="/subsystem/deleteWithRelation", method = RequestMethod.POST)
+    public @ResponseBody Map<String,String> deleteSubsystemWithRelation(HttpServletRequest request, HttpServletResponse response) {
+    	Map<String,String> map = new HashMap<String,String>();
+    	map.put(Const.KEY_RESULT, Const.VALUE_FAIL);
+    	try {
+    		String subsystemIds = request.getParameter("subsystemIds");
+    		if (StringUtil.hasText(subsystemIds)) {
+    			amService.batchDeleteAmSubsystemWithRelation(subsystemIds);
+        		map.put(Const.KEY_RESULT, Const.VALUE_SUCCESS);
+    		}
+    	} catch(Exception ex) {
+    		log.error(ex.getMessage());
+    	}
+    	return map;
+    }
+    @RequestMapping(value="/user/deleteWithRelation", method = RequestMethod.POST)
+    public @ResponseBody Map<String,String> deleteUserWithRelation(HttpServletRequest request, HttpServletResponse response) {
+    	Map<String,String> map = new HashMap<String,String>();
+    	map.put(Const.KEY_RESULT, Const.VALUE_FAIL);
+    	try {
+    		String userIds = request.getParameter("userIds");
+    		if (StringUtil.hasText(userIds)) {
+    			amService.batchDeleteAmUserWithRelation(userIds);
+        		map.put(Const.KEY_RESULT, Const.VALUE_SUCCESS);
+    		}
+    	} catch(Exception ex) {
+    		log.error(ex.getMessage());
     	}
     	return map;
     }

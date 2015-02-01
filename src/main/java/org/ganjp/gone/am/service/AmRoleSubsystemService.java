@@ -29,6 +29,13 @@ public interface AmRoleSubsystemService extends Operations<AmRoleSubsystem> {
    	public void batchDelete(final String pks);
    	
    	/**
+   	 * <p>batchDeleteBySubsystemIds</p>
+   	 * 
+   	 * @param subsystemIds
+   	 */
+    public void batchDeleteBySubsystemIds(final String subsystemIds);
+    
+   	/**
    	 * <p>deleteBySubsystemId</p>
    	 * 
    	 * @param pks

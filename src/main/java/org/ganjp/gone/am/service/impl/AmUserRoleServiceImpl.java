@@ -51,6 +51,15 @@ public class AmUserRoleServiceImpl extends AbstractService<AmUserRole> implement
     }
     
     /**
+   	 * <p>batchDeleteByUserIds</p>
+   	 * 
+   	 * @param userIds
+   	 */
+    public void batchDeleteByUserIds(final String userIds) {
+    	dao.batchDeleteByUserIds(userIds);
+    }
+    
+    /**
 	 * <p>batchDelete</p>
 	 * 
 	 * @param pks

@@ -44,6 +44,16 @@ public class AmRoleSubsystemDaoImpl extends AbstractHibernateDao<AmRoleSubsystem
     }
     
     /**
+   	 * <p>batchDeleteBySubsystemIds</p>
+   	 * 
+   	 * @param subsystemIds
+   	 */
+    public void batchDeleteBySubsystemIds(final String subsystemIds) {
+    	String hql = "delete from AmRoleSubsystem where subsystemId in (" + StringUtil.getStrWithQuote(subsystemIds) + ")";
+		batchExecute(hql);
+    }
+    
+    /**
    	 * <p>batchDelete</p>
    	 * 
    	 * @param pks
