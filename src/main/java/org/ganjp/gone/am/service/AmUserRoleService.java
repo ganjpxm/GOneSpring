@@ -7,8 +7,11 @@
  */
 package org.ganjp.gone.am.service;
 
-import org.ganjp.gone.common.dao.Operations;
+import java.util.List;
+import java.util.Map;
+
 import org.ganjp.gone.am.model.AmUserRole;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 
 /**
@@ -18,6 +21,13 @@ import org.ganjp.gone.common.model.Page;
  * @since 1.0
  */
 public interface AmUserRoleService extends Operations<AmUserRole> {
+	/**
+   	 * <p>deleteByUserId</p>
+   	 * 
+   	 * @param userId
+   	 */
+    public void deleteByUserId(final String userId);
+    
     /**
 	 * <p>batchDelete</p>
 	 * 
@@ -39,4 +49,34 @@ public interface AmUserRoleService extends Operations<AmUserRole> {
      */
 	public Page<AmUserRole> getAmUserRolePage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getRoleIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<String> getRoleIdsByUserId(final String userId);
+	
+	/**
+	 * <p>getUserIdsByRoleId</p>
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	public List<String> getUserIdsByRoleId(final String roleId);
+	
+	/**
+	 * <p>getUserIdAndRoleIds()</p>
+	 * 
+	 * @return
+	 */
+	public Map<String,List<String>> getUserIdAndRoleIds();
+	
+	/**
+	 * <p>getRoleIdAndUserIds()</p>
+	 * 
+	 * @return
+	 */
+	public Map<String,List<String>> getRoleIdAndUserIds();
 }

@@ -7,8 +7,11 @@
  */
 package org.ganjp.gone.am.service;
 
-import org.ganjp.gone.common.dao.Operations;
+import java.util.List;
+import java.util.Map;
+
 import org.ganjp.gone.am.model.AmRoleSubsystem;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 
 /**
@@ -26,6 +29,13 @@ public interface AmRoleSubsystemService extends Operations<AmRoleSubsystem> {
    	public void batchDelete(final String pks);
    	
    	/**
+   	 * <p>deleteBySubsystemId</p>
+   	 * 
+   	 * @param pks
+   	 */
+    public void deleteBySubsystemId(final String subsystemId);
+    
+   	/**
      * <p>getAmRoleSubsystemPage</p>
      * 
      * @param search
@@ -39,4 +49,34 @@ public interface AmRoleSubsystemService extends Operations<AmRoleSubsystem> {
      */
 	public Page<AmRoleSubsystem> getAmRoleSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getRoleIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	public List<String> getRoleIdsBySubsystemId(final String subsystemId);
+	
+	/**
+	 * <p>getSubsystemIdsByRoleId</p>
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByRoleId(final String roleId);
+	
+	/**
+	 * <p>getSubsystemIdAndRoleIds()</p>
+	 * 
+	 * @return
+	 */
+	public  Map<String,List<String>> getSubsystemIdAndRoleIds();
+	
+	/**
+	 * <p>getRoleIdAndSubsystemIds()</p>
+	 * 
+	 * @return
+	 */
+	public Map<String,List<String>> getRoleIdAndSubsystemIds();
 }

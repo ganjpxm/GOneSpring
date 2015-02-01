@@ -42,7 +42,7 @@ public class AmRoleSubsystemController extends BaseController {
 	@RequestMapping(value="/roleSubsystem", method=RequestMethod.GET)
 	public ModelAndView goToRoleSubsystemPage(HttpServletRequest request) {
 		
-		request.setAttribute("fieldNames", "amRoleSusbsystemId,subsystemId,roleId,lang,operatorId,operatorName,createDateTime,modifyTimestamp,dataStatus,sendStatus,sendDateTime,receiveDateTime");
+		request.setAttribute("fieldNames", "roleSubsystemId,subsystemId,roleId,lang,operatorId,operatorName,createDateTime,modifyTimestamp,dataStatus,sendStatus,sendDateTime,receiveDateTime");
 		ModelAndView modelAndView = new ModelAndView("am/amRoleSubsystem");
 		
 		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));

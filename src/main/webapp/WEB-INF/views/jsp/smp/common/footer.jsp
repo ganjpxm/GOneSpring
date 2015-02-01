@@ -20,6 +20,7 @@
 <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/intl-tel-input/js/intlTelInput.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/intl-tel-input/js/utils.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/chosen/v1.1/jquery.chosen.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/other/modalLoading.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/json/json2.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jp/jp.js" />"></script>

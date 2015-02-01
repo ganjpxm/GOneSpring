@@ -1,50 +1,11 @@
-<%@ include file="/WEB-INF/views/jsp/admin/common/jspInfo.jsp" %>
+<%@ include file="/WEB-INF/views/jsp/smp/common/jspInfo.jsp" %>
 <html>
 <head>
   <title>User Manager</title>
-  <%@ include file="/WEB-INF/views/jsp/admin/common/head.jsp" %>
+  <%@ include file="/WEB-INF/views/jsp/smp/common/head.jsp" %>
 </head>
 <body>
-<div style="background-color:white;">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">System Manage Console</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Subsystem</a></li>
-        <li><a href="#">Orgnization</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Authorize <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Role Manager</a></li>
-            <li><a href="#">User Manager</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Setting <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">System Config</a></li>
-            <li><a href="#">Param</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-</div>
-
+<%@ include file="/WEB-INF/views/jsp/smp/common/menu.jsp" %>
 <div id="content">
   <div class="container">
 	<div class="panel panel-primary">
@@ -88,6 +49,7 @@
       </div>
       <div class="modal-body">
         <form id="user-form" method="POST">
+          <input id="role-ids" name="roleIds" type="hidden"/>
           <div class="form-group">
             <label for="user-cd" class="control-label">User CD :</label>
             <input id="user-cd" name="userCd" type="text" class="form-control" placeholder="eg: ganjp" tabindex="1">
@@ -130,7 +92,11 @@
             <input id="password" name="password" type="text" class="form-control" tabindex="8">
           </div>
           <div class="form-group">
-            <label for="description" class="control-label">Descrpition :</label>
+            <label for="role-id" class="control-label">Roles :</label>
+            <select id="role-id" name="roleId" data-placeholder="Choose roles..." class="form-control chosen-select" multiple tabindex="3"></select>
+          </div>
+          <div class="form-group">
+            <label for="description" class="control-label">Description :</label>
             <textarea id="description" name="description" class="form-control" tabindex="9"></textarea>
           </div>
         </form>
@@ -142,7 +108,7 @@
     </div>
   </div>
 </div>
-<%@ include file="/WEB-INF/views/jsp/admin/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
 <script> 
 var mFieldNames = "${fieldNames}".split(",");
 var mSelUuids = "";
@@ -168,7 +134,7 @@ function search(pageNo) {
 }
 
 function loadUserList(paramJson) {
-  $.getJSON("<c:url value='/spring/am/userPage'/>", paramJson, function(page) {
+  $.getJSON("<c:url value='/spring/am/userPageWithRoleSubsystemNames'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	$("#total-number").text(page.totalCount);
 	var data = page.result;
@@ -179,13 +145,17 @@ function loadUserList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['userId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['userCd'])) listItemList += "<b>" + map['userCd'] + "</b>";
 	  if (!jp.isEmpty(map['userName'])) listItemList += " (" + map['userName'] + ")";
-	  if (!jp.isEmpty(map['userCd']) || !jp.isEmpty(map['userCd'])) listItemList += "<br/> "
+	  if (!jp.isEmpty(map['userCd']) || !jp.isEmpty(map['userCd'])) listItemList += "<br/> ";
+	  
+	  if (!jp.isEmpty(map['gender']) || !jp.isEmpty(map['birthday']) || !jp.isEmpty(map['mobileNumber']) || !jp.isEmpty(map['email'])) listItemList += "<i class='fa fa-user fa-fw'></i> ";
 	  if (!jp.isEmpty(map['gender'])) listItemList += " " + map['gender'] + ", ";
 	  if (!jp.isEmpty(map['birthday'])) listItemList += " birth on " + jp.formateDateStr(map["birthday"]) + ", ";
 	  if (!jp.isEmpty(map['mobileNumber'])) listItemList += " " + map['mobileNumber'] + ", ";
 	  if (!jp.isEmpty(map['email'])) listItemList += " " + map['email'];
-	  listItemList += "<br/> create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
-	  if (!jp.isEmpty(map['description'])) listItemList += "<br/>" + map['description'];
+	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw'></i> Roles : " + map['roleNames'];
+	  if (!jp.isEmpty(map['subsystemNames'])) listItemList += "<br/><i class='fa fa-life-ring fa-fw'></i> Subsystems : " + map['subsystemNames'];
+	  listItemList += "<br/> <i class='fa fa-calendar fa-fw'></i>  Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  if (!jp.isEmpty(map['description'])) listItemList += "<br/><i class='fa fa-comment fa-fw'></i>  " + map['description'];
 	  $("#list-group").append(listItemList);
 	});
 	
@@ -239,7 +209,7 @@ function loadUserList(paramJson) {
 
 function add() { 
   //data-toggle="modal" data-target="#user-modal", keyboard: false, show:false, .modal('toggle'), .modal('show'), .modal('hide')
-  $('#user-modal').modal({backdrop : 'static'});
+  
   $("#user-title").html("Add User");
   $("#user-cd").val("");
   $("#first-name").val("");
@@ -249,12 +219,15 @@ function add() {
   $("#email").val("");
   $("#password").val("");
   $("#description").val("");
+  $("#role-id").val("");
+  $('#user-modal').modal({backdrop : 'static'});
+  $("#role-id").trigger("chosen:updated");
   mIsAdd = true;
 }
 
 function edit() {
   if (!jp.isEmpty(mSelUuids) && mSelUuids.length==32) {
-	  $.getJSON(mRootUrl+"spring/am/user/" + mSelUuids, function(data) {
+	  $.getJSON(mRootUrl+"spring/am/userWithRoleIds/" + mSelUuids, function(data) {
 		  $("#user-cd").val(data["userCd"]);
 		  $("#first-name").val(data["firstName"]);
 		  $("#last-name").val(data["lastName"]);
@@ -265,7 +238,14 @@ function edit() {
 		  $("#password").val(data["password"]);
 		  $("#description").val(data["description"]);
 		  
+		  var roleIds = data["roleIds"];
+		  if (jp.isEmpty(roleIds)) {
+			  $("#role-id").val("");
+		  } else {
+			  $("#role-id").val(roleIds.split(","));
+		  }
 		  $('#user-modal').modal({backdrop : 'static'});
+		  $("#role-id").trigger("chosen:updated");
 	  });
 	  $("#user-title").html("Edit User");
   } else {
@@ -275,9 +255,10 @@ function edit() {
 }
 
 function save() {
-  var saveUrl = "<c:url value='/spring/am/user'/>";
+  $("#role-ids").val($("#role-id").val());
+  var saveUrl = "<c:url value='/spring/am/user/role'/>";
   if (mIsAdd == false) {
-	  saveUrl = mRootUrl + "spring/am/user/" + mSelUuids;
+	  saveUrl = mRootUrl + "spring/am/user/role/" + mSelUuids;
   }
   $("#user-form").ajaxSubmit({
     dataType:  'json',
@@ -346,6 +327,15 @@ $(document).ready(function() {
   
   $("#birthday").mask("99/99/9999", {placeholder:"dd/mm/yyyy"});
   $("#mobile-number").intlTelInput({preferredCountries: [ "sg", "cn", "hk", "my" ], defaultCountry: "sg"});
+  
+  $.getJSON("<c:url value='/spring/am/roles'/>", function(data) {
+    var roleOptions = "";
+	  $.each(data, function(index, map) {
+	  roleOptions += "<option value='" + map['roleId'] + "'>" + map['roleName'] + "</option>";
+	});
+	$("#role-id").html(roleOptions);
+	$("#role-id").chosen({search_contains:false, width:"100%"});
+  });
 });
 
 </script>

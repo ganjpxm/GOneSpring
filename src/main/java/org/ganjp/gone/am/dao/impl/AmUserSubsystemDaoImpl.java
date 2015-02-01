@@ -95,5 +95,27 @@ public class AmUserSubsystemDaoImpl extends AbstractHibernateDao<AmUserSubsystem
 		
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
 	}
+	
+	/**
+	 * <p>getUserIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	public List<String> getUserIdsBySubsystemId(final String subsystemId) {
+		String hql = "select userId from AmUserSubsystem where subsystemId = ?";
+		return findByHql(hql, subsystemId);
+	}
+	
+	/**
+	 * <p>getSubsystemIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByUserId(final String userId) {
+		String hql = "select subsystem from AmUserSubsystem where userId = ?";
+		return findByHql(hql, userId);
+	}
 
 }

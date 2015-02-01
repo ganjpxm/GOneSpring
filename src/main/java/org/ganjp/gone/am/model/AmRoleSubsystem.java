@@ -31,8 +31,8 @@ public class AmRoleSubsystem extends BaseModel{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="am_role_susbsystem_id")
-	private String amRoleSusbsystemId = UUIDHexGenerator.getUuid();
+	@Column(name="role_subsystem_id")
+	private String roleSubsystemId = UUIDHexGenerator.getUuid();
 	
 	@Column(name="subsystem_id")
 	private String subsystemId;
@@ -66,15 +66,15 @@ public class AmRoleSubsystem extends BaseModel{
 /**
 	 * @return String
 	 */
-	public String getAmRoleSusbsystemId() {
-        return this.amRoleSusbsystemId;
+	public String getRoleSubsystemId() {
+        return this.roleSubsystemId;
     }
     
     /**
-	 * @param String amRoleSusbsystemId
+	 * @param String roleSubsystemId
 	 */
-    public void setAmRoleSusbsystemId(String amRoleSusbsystemId) {
-		this.amRoleSusbsystemId = amRoleSusbsystemId;
+    public void setRoleSubsystemId(String roleSubsystemId) {
+		this.roleSubsystemId = roleSubsystemId;
     }
     /**
 	 * @return String

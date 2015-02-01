@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.ganjp.gcore.Const;
 import org.ganjp.gcore.util.DateUtil;
@@ -77,6 +78,15 @@ public class AmUser extends BaseModel{
 	@Column(name="receive_date_time")
 	private Timestamp receiveDateTime;
 		
+	@Transient
+	private String roleIds;
+	@Transient
+	private String roleNames;
+	@Transient
+	private String subsystemIds;
+	@Transient
+	private String subsystemNames;
+	
 	//----------------------------------------------- default constructor --------------------------
     public AmUser() {
     	super();
@@ -364,4 +374,37 @@ public class AmUser extends BaseModel{
     	}
     	return userName;
     }
+    
+    public String getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public String getRoleNames() {
+		return roleNames;
+	}
+
+	public void setRoleNames(String roleNames) {
+		this.roleNames = roleNames;
+	}
+
+	public String getSubsystemIds() {
+		return subsystemIds;
+	}
+
+	public void setSubsystemIds(String subsystemIds) {
+		this.subsystemIds = subsystemIds;
+	}
+
+	public String getSubsystemNames() {
+		return subsystemNames;
+	}
+
+	public void setSubsystemNames(String subsystemNames) {
+		this.subsystemNames = subsystemNames;
+	}
+	
 }

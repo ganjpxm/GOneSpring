@@ -7,11 +7,15 @@
  */
 package org.ganjp.gone.am.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
+import org.ganjp.gone.am.dao.AmRoleDao;
 import org.ganjp.gone.am.model.AmRole;
 import org.ganjp.gone.am.service.AmRoleService;
-import org.ganjp.gone.am.dao.AmRoleDao;
 import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 import org.ganjp.gone.common.service.AbstractService;
@@ -63,6 +67,21 @@ public class AmRoleServiceImpl extends AbstractService<AmRole> implements AmRole
 		return dao.getAmRolePage(search, startDate, endDate, dataStates, pageNo, pageSize, orderBy);
 	}
 
+	/**
+	 * <p>getRoleIdAndNames()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,String> getRoleIdAndNames() {
+		List<AmRole> amRoles = dao.findAll();
+		Map<String,String> map = new HashMap<String,String>();
+		for (AmRole amRole : amRoles) {
+			map.put(amRole.getRoleId(), amRole.getRoleName());
+		}
+		return map;
+	}
+	
     @Override
     protected Operations<AmRole> getDao() {
         return dao;

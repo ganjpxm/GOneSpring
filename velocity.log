@@ -216,3 +216,15 @@ Was expecting one of:
 2015-01-29 17:24:19,505 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
 2015-01-29 17:24:19,506 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
 2015-01-29 17:24:19,506 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:24:36,334 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:24:36,335 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:24:36,336 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:24:36,336 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:27:10,688 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:27:10,688 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:27:10,689 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:27:10,690 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:28:40,243 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:28:40,244 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm
+2015-01-31 22:28:40,245 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2015-01-31 22:28:40,245 - KindFileResourceLoader : classpath loader failed to load: VM_global_library.vm

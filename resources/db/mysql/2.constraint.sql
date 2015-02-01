@@ -8,6 +8,9 @@ ALTER TABLE am_subsystem ADD UNIQUE `subsystem_cd_lang_index`(`subsystem_cd`, `l
 ALTER TABLE am_config ADD UNIQUE `config_cd_lang_index`(`config_cd`, `lang`);
 ALTER TABLE am_param ADD UNIQUE `config_cd_lang_index`(`param_cd`, `lang`);
 
+ALTER TABLE am_role_subsystem ADD UNIQUE `subsystem_id_role_id_index`(`subsystem_id`, `role_id`);
+ALTER TABLE am_user_role ADD UNIQUE `user_id_role_id_index`(`user_id`, `role_id`);
+
 alter table am_role_menu add constraint FK_me_relate_ro_me foreign key (menu_id)
       references am_menu (menu_id) on delete restrict on update restrict;
 

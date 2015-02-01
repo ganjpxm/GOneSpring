@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.ganjp.gcore.util.DateUtil;
 import org.ganjp.gcore.util.StringUtil;
-import org.ganjp.gone.am.model.AmUserRole;
 import org.ganjp.gone.am.dao.AmUserRoleDao;
+import org.ganjp.gone.am.model.AmUserRole;
 import org.ganjp.gone.common.dao.impl.AbstractHibernateDao;
 import org.ganjp.gone.common.model.Page;
 import org.springframework.stereotype.Repository;
@@ -33,6 +33,16 @@ public class AmUserRoleDaoImpl extends AbstractHibernateDao<AmUserRole> implemen
         setClazz(AmUserRole.class);
     }
 
+    /**
+   	 * <p>deleteByUserId</p>
+   	 * 
+   	 * @param pks
+   	 */
+    public void deleteByUserId(final String userId) {
+    	String hql = "delete from AmUserRole where userId = ?";
+		batchExecute(hql, userId);
+    }
+    
     /**
    	 * <p>batchDelete</p>
    	 * 
@@ -94,6 +104,28 @@ public class AmUserRoleDaoImpl extends AbstractHibernateDao<AmUserRole> implemen
 		}
 		
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
+	}
+	
+	/**
+	 * <p>getRoleIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<String> getRoleIdsByUserId(final String userId) {
+		String hql = "select roleId from AmUserRole where userId = ?";
+		return findByHql(hql, userId);
+	}
+	
+	/**
+	 * <p>getUserIdsByRoleId</p>
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	public List<String> getUserIdsByRoleId(final String roleId) {
+		String hql = "select user from AmUserRole where roleId = ?";
+		return findByHql(hql, roleId);
 	}
 
 }

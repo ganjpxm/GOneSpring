@@ -60,6 +60,9 @@ html, body, input, select, textarea, button, code, h1, h2, h3, h4, h5, h6 {font-
 .intl-tel-input {width:100%;}
 .input-icon input {padding-left:40px !important}
 
+/*! chosen */
+.chosen-container-multi .chosen-choices {padding:8px;border:1px solid #ccc;border-radius:0px;color:#555;}
+
 @media (max-width: 480px) {
 	
 }

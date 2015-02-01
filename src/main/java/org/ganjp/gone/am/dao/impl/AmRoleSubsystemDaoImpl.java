@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.ganjp.gcore.util.DateUtil;
 import org.ganjp.gcore.util.StringUtil;
-import org.ganjp.gone.am.model.AmRoleSubsystem;
 import org.ganjp.gone.am.dao.AmRoleSubsystemDao;
+import org.ganjp.gone.am.model.AmRoleSubsystem;
 import org.ganjp.gone.common.dao.impl.AbstractHibernateDao;
 import org.ganjp.gone.common.model.Page;
 import org.springframework.stereotype.Repository;
@@ -34,12 +34,22 @@ public class AmRoleSubsystemDaoImpl extends AbstractHibernateDao<AmRoleSubsystem
     }
 
     /**
+   	 * <p>deleteBySubsystemId</p>
+   	 * 
+   	 * @param pks
+   	 */
+    public void deleteBySubsystemId(final String subsystemId) {
+    	String hql = "delete from AmRoleSubsystem where subsystemId = ?";
+		batchExecute(hql, subsystemId);
+    }
+    
+    /**
    	 * <p>batchDelete</p>
    	 * 
    	 * @param pks
    	 */
     public void batchDelete(final String pks) {
-    	String hql = "delete from AmRoleSubsystem where amRoleSusbsystemId in (" + StringUtil.getStrWithQuote(pks) + ")";
+    	String hql = "delete from AmRoleSubsystem where roleSubsystemId in (" + StringUtil.getStrWithQuote(pks) + ")";
 		batchExecute(hql);
     }
     
@@ -96,4 +106,25 @@ public class AmRoleSubsystemDaoImpl extends AbstractHibernateDao<AmRoleSubsystem
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
 	}
 
+	/**
+	 * <p>getRoleIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	public List<String> getRoleIdsBySubsystemId(final String subsystemId) {
+		String hql = "select roleId from AmRoleSubsystem where subsystemId = ?";
+		return findByHql(hql, subsystemId);
+	}
+	
+	/**
+	 * <p>getSubsystemIdsByRoleId</p>
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByRoleId(final String roleId) {
+		String hql = "select subsystem from AmRoleSubsystem where roleId = ?";
+		return findByHql(hql, roleId);
+	}
 }

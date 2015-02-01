@@ -181,7 +181,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param criterions
   	 * @return List<T>
   	 */
-  	@SuppressWarnings("unchecked")
   	public List<T> findByCriterion(Class<T> entityClass, final Criterion... criterions) {
   		return buildCriteria(entityClass, criterions).list();
   	}
@@ -195,7 +194,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param criterions
   	 * @return
   	 */
-  	@SuppressWarnings("unchecked")
   	public List<T> findByCriterion(Class<T> entityClass, String orderBy, boolean isAsc, final Criterion... criterions) {
   		return buildCriteria(entityClass, orderBy, isAsc, criterions).list();
   	}
@@ -245,7 +243,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param boolean
   	 * @return List<T>
   	 */
-  	@SuppressWarnings("unchecked")
   	public List<T> findAllWithOrder(Class<T> entityClass, String orderBy, boolean isAsc) {
   		Criteria c = buildCriteria(entityClass, orderBy, isAsc);
   		return c.list();
@@ -317,7 +314,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param Object... "ganjp","123"
   	 * @return X
   	 */
-  	@SuppressWarnings("unchecked")
   	public <X> X findUniqueByHql(final String hql, final Object... values) {
   		return (X) buildQuery(hql, values).uniqueResult();
   	}
@@ -328,7 +324,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param Map eg:map.put("userName", "ganjp");
   	 * @return X
   	 */
-  	@SuppressWarnings("unchecked")
   	public <X> X findUniqueByHql(final String hql, final Map<String, ?> values) {
   		return (X) buildQuery(hql, values).uniqueResult();
   	}
@@ -339,7 +334,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param values eg:"ganjp","123"
   	 * @return List<X>
   	 */
-  	@SuppressWarnings("unchecked")
   	public <X> List<X> findByHql(final String hql, final Object... values) {
   		return buildQuery(hql, values).list();
   	}
@@ -350,7 +344,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param values map.put("userName", "ganjp");
   	 * @return
   	 */
-  	@SuppressWarnings("unchecked")
   	public <X> List<X> findByHql(final String hql, final Map<String, ?> values) {
   		return buildQuery(hql, values).list();
   	}
@@ -376,7 +369,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Op
   	 * @param Object... eg:"%illume%"
   	 * @return Page<T> 
   	 */
-  	@SuppressWarnings("unchecked")
   	public Page<T> fetchPageByHql(final Page<T> page, final String hql, final Object... values) {
   		Assert.notNull(page, "page cann't be empty");
   		Query q = buildQuery(hql, values);

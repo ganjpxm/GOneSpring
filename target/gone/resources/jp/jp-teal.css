@@ -31,6 +31,8 @@ a.bg-primary:hover {background-color:#757575;}
 .navbar-default .navbar-nav>li>a {color:#000;}
 .panel-body {background-color:#FAFAFA;}
 .pagination>li>a, .pagination>li>span {color:#009688;}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, 
+	.navbar-default .navbar-nav>.active>a:focus {color:#fff;background-color:#009688;}
 
  
 .white-popup-block{background:#FFF;padding:20px 30px;text-align:left;max-width:980px;margin:40px auto;position:relative;}

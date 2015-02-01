@@ -7,8 +7,13 @@
  */
 package org.ganjp.gone.am.service;
 
-import org.ganjp.gone.common.dao.Operations;
+import java.util.List;
+import java.util.Map;
+
+import javax.transaction.Transactional;
+
 import org.ganjp.gone.am.model.AmUserSubsystem;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 
 /**
@@ -39,4 +44,38 @@ public interface AmUserSubsystemService extends Operations<AmUserSubsystem> {
      */
 	public Page<AmUserSubsystem> getAmUserSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getUserIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getUserIdsBySubsystemId(final String subsystemId);
+	
+	/**
+	 * <p>getSubsystemIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getSubsystemIdsByUserId(final String userId);
+	
+	/**
+	 * <p>getSubsystemIdAndUserIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getSubsystemIdAndUserIds();
+	
+	/**
+	 * <p>getUserIdAndSubsystemIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getUserIdAndSubsystemIds();
 }

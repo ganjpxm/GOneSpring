@@ -69,7 +69,7 @@ public class CollectionUtil {
 	 * @param split eg:","
 	 * @return
 	 */
-	public static String getStringWithSplit(List<Object> objs, String split) {
+	public static String getStringWithSplit(List<String> objs, String split) {
 		String str = "";
 		for (int i = 0; i < objs.size(); i++) {
 			if (i==0) {

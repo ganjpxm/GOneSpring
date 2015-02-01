@@ -94,7 +94,7 @@ create table am_role_menu
 /*==============================================================*/
 create table am_role_subsystem
 (
-   am_role_susbsystem_id char(32) not null,
+   role_subsystem_id    char(32) not null,
    subsystem_id         char(32),
    role_id              char(32),
    lang                 varchar(10),

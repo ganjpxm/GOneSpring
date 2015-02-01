@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="org.ganjp.gone.am.model.AmRoleSubsystem" table="am_role_subsystem">
-<id name="amRoleSusbsystemId" column="am_role_susbsystem_id" type="java.lang.String" unsaved-value="">
+<id name="roleSubsystemId" column="role_subsystem_id" type="java.lang.String" unsaved-value="">
 <generator class="uuid"/>
 </id>
 <property name="subsystemId" type="java.lang.String" column="subsystem_id"/>

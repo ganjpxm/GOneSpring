@@ -7,11 +7,16 @@
  */
 package org.ganjp.gone.am.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
+import org.ganjp.gone.am.dao.AmUserRoleDao;
 import org.ganjp.gone.am.model.AmUserRole;
 import org.ganjp.gone.am.service.AmUserRoleService;
-import org.ganjp.gone.am.dao.AmUserRoleDao;
 import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 import org.ganjp.gone.common.service.AbstractService;
@@ -37,6 +42,15 @@ public class AmUserRoleServiceImpl extends AbstractService<AmUserRole> implement
     }
 
     /**
+   	 * <p>deleteByUserId</p>
+   	 * 
+   	 * @param userId
+   	 */
+    public void deleteByUserId(final String userId) {
+    	dao.deleteByUserId(userId);
+    }
+    
+    /**
 	 * <p>batchDelete</p>
 	 * 
 	 * @param pks
@@ -58,11 +72,76 @@ public class AmUserRoleServiceImpl extends AbstractService<AmUserRole> implement
      * @param orderBy
      * @return
      */
+    @Transactional
 	public Page<AmUserRole> getAmUserRolePage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy) {
 		return dao.getAmUserRolePage(search, startDate, endDate, dataStates, pageNo, pageSize, orderBy);
 	}
 
+	/**
+	 * <p>getRoleIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getRoleIdsByUserId(final String userId) {
+		return dao.getRoleIdsByUserId(userId);
+	}
+	
+	/**
+	 * <p>getUserIdsByRoleId</p>
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getUserIdsByRoleId(final String roleId) {
+		return dao.getUserIdsByRoleId(roleId);
+	}
+	
+	/**
+	 * <p>getUserIdAndRoleIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getUserIdAndRoleIds() {
+		List<AmUserRole> amUserRoles = dao.findAll();
+		Map<String,List<String>> map = new HashMap<String,List<String>>();
+		for (AmUserRole amUserRole : amUserRoles) {
+			if (map.containsKey(amUserRole.getUserId())) {
+				map.get(amUserRole.getUserId()).add(amUserRole.getRoleId());
+			} else {
+				List<String> list = new ArrayList<String>();
+				list.add(amUserRole.getRoleId());
+				map.put(amUserRole.getUserId(), list);
+			}
+		}
+		return map;
+	}
+	
+	/**
+	 * <p>getRoleIdAndUserIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getRoleIdAndUserIds() {
+		List<AmUserRole> amUserRoles = dao.findAll();
+		Map<String,List<String>> map = new HashMap<String,List<String>>();
+		for (AmUserRole amUserRole : amUserRoles) {
+			if (map.containsKey(amUserRole.getRoleId())) {
+				map.get(amUserRole.getRoleId()).add(amUserRole.getUserId());
+			} else {
+				List<String> list = new ArrayList<String>();
+				list.add(amUserRole.getUserId());
+				map.put(amUserRole.getRoleId(), list);
+			}
+		}
+		return map;
+	}
+	
     @Override
     protected Operations<AmUserRole> getDao() {
         return dao;

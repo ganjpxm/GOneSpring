@@ -7,11 +7,16 @@
  */
 package org.ganjp.gone.am.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
+import org.ganjp.gone.am.dao.AmUserSubsystemDao;
 import org.ganjp.gone.am.model.AmUserSubsystem;
 import org.ganjp.gone.am.service.AmUserSubsystemService;
-import org.ganjp.gone.am.dao.AmUserSubsystemDao;
 import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 import org.ganjp.gone.common.service.AbstractService;
@@ -61,6 +66,70 @@ public class AmUserSubsystemServiceImpl extends AbstractService<AmUserSubsystem>
 	public Page<AmUserSubsystem> getAmUserSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy) {
 		return dao.getAmUserSubsystemPage(search, startDate, endDate, dataStates, pageNo, pageSize, orderBy);
+	}
+	
+	/**
+	 * <p>getUserIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getUserIdsBySubsystemId(final String subsystemId) {
+		return dao.getUserIdsBySubsystemId(subsystemId);
+	}
+	
+	/**
+	 * <p>getSubsystemIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@Transactional
+	public List<String> getSubsystemIdsByUserId(final String userId) {
+		return dao.getSubsystemIdsByUserId(userId);
+	}
+	
+	/**
+	 * <p>getSubsystemIdAndUserIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getSubsystemIdAndUserIds() {
+		List<AmUserSubsystem> amUserSubsystems = dao.findAll();
+		Map<String,List<String>> map = new HashMap<String,List<String>>();
+		for (AmUserSubsystem amUserSubsystem : amUserSubsystems) {
+			if (map.containsKey(amUserSubsystem.getSubsystemId())) {
+				map.get(amUserSubsystem.getSubsystemId()).add(amUserSubsystem.getUserId());
+			} else {
+				List<String> list = new ArrayList<String>();
+				list.add(amUserSubsystem.getUserId());
+				map.put(amUserSubsystem.getSubsystemId(), list);
+			}
+		}
+		return map;
+	}
+	
+	/**
+	 * <p>getUserIdAndSubsystemIds()</p>
+	 * 
+	 * @return
+	 */
+	@Transactional
+	public Map<String,List<String>> getUserIdAndSubsystemIds() {
+		List<AmUserSubsystem> amUserSubsystems = dao.findAll();
+		Map<String,List<String>> map = new HashMap<String,List<String>>();
+		for (AmUserSubsystem amUserSubsystem : amUserSubsystems) {
+			if (map.containsKey(amUserSubsystem.getUserId())) {
+				map.get(amUserSubsystem.getUserId()).add(amUserSubsystem.getSubsystemId());
+			} else {
+				List<String> list = new ArrayList<String>();
+				list.add(amUserSubsystem.getSubsystemId());
+				map.put(amUserSubsystem.getUserId(), list);
+			}
+		}
+		return map;
 	}
 
     @Override

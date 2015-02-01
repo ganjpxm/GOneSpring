@@ -7,8 +7,10 @@
  */
 package org.ganjp.gone.am.service;
 
-import org.ganjp.gone.common.dao.Operations;
+import java.util.Map;
+
 import org.ganjp.gone.am.model.AmRole;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 
 /**
@@ -39,4 +41,11 @@ public interface AmRoleService extends Operations<AmRole> {
      */
 	public Page<AmRole> getAmRolePage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getRoleIdAndNames()</p>
+	 * 
+	 * @return
+	 */
+	public Map<String,String> getRoleIdAndNames();
 }

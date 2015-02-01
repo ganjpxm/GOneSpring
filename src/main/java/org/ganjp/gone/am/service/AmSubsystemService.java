@@ -7,8 +7,10 @@
  */
 package org.ganjp.gone.am.service;
 
-import org.ganjp.gone.common.dao.Operations;
+import java.util.Map;
+
 import org.ganjp.gone.am.model.AmSubsystem;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 
 /**
@@ -39,4 +41,11 @@ public interface AmSubsystemService extends Operations<AmSubsystem> {
      */
 	public Page<AmSubsystem> getAmSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getSubsystemIdAndNames()</p>
+	 * 
+	 * @return
+	 */
+	public Map<String,String> getSubsystemIdAndNames();
 }

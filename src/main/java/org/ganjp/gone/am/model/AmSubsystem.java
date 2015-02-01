@@ -7,17 +7,18 @@
  */
 package org.ganjp.gone.am.model;
 
-import org.ganjp.gone.common.model.BaseModel;
-import org.ganjp.gcore.Const;
-import org.ganjp.gcore.util.DateUtil;
-import org.ganjp.gcore.uuid.UUIDHexGenerator;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import java.sql.Timestamp;
+import org.ganjp.gcore.Const;
+import org.ganjp.gcore.util.DateUtil;
+import org.ganjp.gcore.uuid.UUIDHexGenerator;
+import org.ganjp.gone.common.model.BaseModel;
 
 /**
  * <p>AmSubsystem</p>
@@ -61,6 +62,11 @@ public class AmSubsystem extends BaseModel{
 	@Column(name="receive_date_time")
 	private Timestamp receiveDateTime;
 		
+	@Transient
+	private String roleIds;
+	@Transient
+	private String roleNames;
+	
 	//----------------------------------------------- default constructor --------------------------
     public AmSubsystem() {
     	super();
@@ -249,5 +255,21 @@ public class AmSubsystem extends BaseModel{
     public void setReceiveDateTime(Timestamp receiveDateTime) {
 		this.receiveDateTime = receiveDateTime;
     }
-     
+
+	public String getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public String getRoleNames() {
+		return roleNames;
+	}
+
+	public void setRoleNames(String roleNames) {
+		this.roleNames = roleNames;
+	}
+	    
 }

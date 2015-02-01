@@ -7,9 +7,10 @@
  */
 package org.ganjp.gone.am.dao;
 
-import org.ganjp.gone.common.dao.Operations;
-import org.ganjp.gone.am.model.AmUserSubsystem;
+import java.util.List;
 
+import org.ganjp.gone.am.model.AmUserSubsystem;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 /**
  * <p>AmUserSubsystemDao</p>
@@ -39,4 +40,20 @@ public interface AmUserSubsystemDao extends Operations<AmUserSubsystem> {
      */
 	public Page<AmUserSubsystem> getAmUserSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getUserIdsBySubsystemId</p>
+	 * 
+	 * @param subsystemId
+	 * @return
+	 */
+	public List<String> getUserIdsBySubsystemId(final String subsystemId);
+	
+	/**
+	 * <p>getSubsystemIdsByUserId</p>
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByUserId(final String userId);
 }

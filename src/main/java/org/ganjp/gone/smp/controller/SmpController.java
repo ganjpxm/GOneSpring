@@ -5,7 +5,7 @@
  * GOne Project
  *
  */
-package org.ganjp.gone.admin.controller;
+package org.ganjp.gone.smp.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,14 +21,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @since 1.0
  */
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/smp")
+public class SmpController {
 	// ------------------------------- Go to page -----------------------------------------------
 	@RequestMapping(value="/user", method=RequestMethod.GET)
 	public String goToUserPage(HttpServletRequest request) {
-		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
-		request.setAttribute("pageSize",  StringUtil.isEmpty(request.getParameter("pageSize"))?100:request.getParameter("pageSize"));
-		return "admin/user";
+		setPageInfo(request);
+		return "smp/user";
 	}
 	
+	@RequestMapping(value="/role", method=RequestMethod.GET)
+	public String goToRolePage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "smp/role";
+	}
+	
+	@RequestMapping(value="/subsystem", method=RequestMethod.GET)
+	public String goToSubsystemPage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "smp/subsystem";
+	}
+	
+	@RequestMapping(value="/org", method=RequestMethod.GET)
+	public String goToOrgPage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "smp/org";
+	}
+	
+	private void setPageInfo(HttpServletRequest request) {
+		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
+		request.setAttribute("pageSize",  StringUtil.isEmpty(request.getParameter("pageSize"))?100:request.getParameter("pageSize"));
+	}
 }
