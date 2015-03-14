@@ -9,6 +9,7 @@
 <div id="content">
   <div class="container">
 	<div class="panel panel-primary">
+	  <!-- Tool Bar -->
 	  <div class="panel-heading" style="font-weight:bold;font-size:18px;">
 	    <input id='check-all' name='check-all' type='checkbox' class='jp-check-box jp-hide' value='all'/> Subsystems <span id="total-number" class="badge"></span>
 		<div class="pull-right">
@@ -17,6 +18,7 @@
 		  <button id="delete-btn" type="button" class="btn btn-primary jp-hide" style="margin-top:-4px;" onclick="popupDelDialog();"><i class="fa fa-edit"></i>&nbsp;Delete</button>
         </div>
 	  </div>
+	  <!-- Search -->
 	  <div id="search-panel" class="panel-body">
 	    <div class="row" style="margin:5px 0px 5px 0px;">
 			<div class="col-md-12">
@@ -27,7 +29,7 @@
 			</div>
 		</div>
 	  </div>
-	  <!-- List group -->
+	  <!-- data list -->
 	  <ul id="list-group" class="list-group">
 	    <li class="list-group-item text-center">No record</li>
 	  </ul>
@@ -39,7 +41,7 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
+<!-- add and edit Modal -->
 <div id="subsystem-modal" class="modal fade" role="dialog" aria-labelledby="subsystem-title" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -59,8 +61,12 @@
             <input id="subsystem-name" name="subsystemName" type="text" class="form-control" placeholder="eg: System Manager Platform" tabindex="2">
           </div>
           <div class="form-group">
+            <label for="home_url" class="control-label">Home URL :</label>
+            <input id="home_url" name="homeUrl" type="text" class="form-control" placeholder="eg: /mmp/home" tabindex="2">
+          </div>
+          <div class="form-group">
             <label for="role-id" class="control-label">Roles :</label>
-            <select id="role-id" name="roleId" data-placeholder="Choose roles..." class="form-control chosen-select" multiple tabindex="3"></select>
+            <select id="role-id" name="roleId" data-placeholder="- Select roles -" class="form-control chosen-select" multiple tabindex="3"></select>
           </div>
           <div class="form-group">
             <label for="description" class="control-label">Description :</label>
@@ -77,30 +83,7 @@
 </div>
 <%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
 <script> 
-var mFieldNames = "${fieldNames}".split(",");
-var mSelUuids = "";
-var mIsAdd = true;
-var mRootUrl = "<c:url value='/'/>";
-if (mRootUrl.indexOf(";")!=-1) {
-  var mRootUrlArr = mRootUrl.split(";");
-  mRootUrl = mRootUrlArr[0];
-}
-var mPageNo = "${pageNo}";
-var mPageSize = "${pageSize}";
-
-function search(pageNo) {
-  if (!jp.isEmpty(pageNo)) {
-	mPageNo = pageNo;
-  }
-  var paramJson = {pageNo:mPageNo, pageSize:mPageSize};
-  var search = $("#search").val();
-  if (!jp.isEmpty(search)) {
-	  paramJson.search = search;	
-  }
-  loadSubsystemList(paramJson);
-}
-
-function loadSubsystemList(paramJson) {
+function loadDataList(paramJson) {
   $.getJSON("<c:url value='/spring/am/subsystemPageWithRoleNames'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	$("#total-number").text(page.totalCount);
@@ -112,9 +95,10 @@ function loadSubsystemList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['subsystemId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['subsystemName'])) listItemList += "<b>" + map['subsystemName'] + "</b>";
 	  if (!jp.isEmpty(map['subsystemCd'])) listItemList += " (" + map['subsystemCd'] + ")";
-	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw'></i> Roles : " + map['roleNames'];
-	  listItemList += "<br/><i class='fa fa-calendar fa-fw'></i> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
-	  if (!jp.isEmpty(map['description'])) listItemList += "<br/> <i class='fa fa-comment fa-fw'></i> " + map['description'];
+	  if (!jp.isEmpty(map['homeUrl'])) listItemList += "<br/><i class='fa fa-link fa-fw' style='margin-left:-20px;'></i> Manage Console URL : " + map['homeUrl'];
+	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw' style='margin-left:-20px;'></i> Roles : " + map['roleNames'];
+	  listItemList += "<br/><i class='fa fa-calendar fa-fw' style='margin-left:-20px;'></i> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  if (!jp.isEmpty(map['description'])) listItemList += "<br/> <i class='fa fa-comment fa-fw' style='margin-left:-20px;'></i> " + map['description'];
 	  $("#list-group").append(listItemList);
 	});
 	
@@ -172,6 +156,7 @@ function add() {
   $("#subsystem-title").html("Add Subsystem");
   $("#subsystem-cd").val("");
   $("#subsystem-name").val("");
+  $("#home_url").val("");
   $("#description").val("");
   
   $("#role-id").val("");
@@ -185,6 +170,7 @@ function edit() {
 	  $.getJSON(mRootUrl+"spring/am/subsystemWithRoleIds/" + mSelUuids, function(data) {
 		  $("#subsystem-cd").val(data["subsystemCd"]);
 		  $("#subsystem-name").val(data["subsystemName"]);
+		  $("#home_url").val(data["homeUrl"]);
 		  $("#description").val(data["description"]);
 		  
 		  var roleIds = data["roleIds"];
@@ -225,9 +211,6 @@ function save() {
   });
 }
 
-function popupDelDialog() {
-  $("#del-modal").modal('show');
-}
 function del() {
   var urlStr = "<c:url value='/spring/am/subsystem/deleteWithRelation'/>";
   $.ajax({type:"POST", url:urlStr, data: {subsystemIds:mSelUuids}, async:true, dataType:'json', 

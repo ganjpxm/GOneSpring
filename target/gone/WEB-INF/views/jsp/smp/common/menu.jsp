@@ -10,7 +10,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">System Manage Platform</a>
+      <c:if test="${user==null}">
+        <a class="navbar-brand" href="#">System Manage Platform</a>
+      </c:if>
+      <c:if test="${user!=null && fn:length(user.subsystemIds)==32}">
+        <a class="navbar-brand" href="#">${user.currentSubsystemName}</a>
+      </c:if>
+      <c:if test="${user!=null && fn:length(user.subsystemIds)>32}">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="navbar-brand dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">${user.currentSubsystemName}</a>
+            <ul class="dropdown-menu" role="menu">
+              <c:forTokens items="${user.subsystemIdNameAndHomeUrls}" delims="," var="subsystemIdNameAndHomeUrl">
+                <c:set var="arr" value="${fn:split(subsystemIdNameAndHomeUrl, '_')}" />
+                <c:if test="${arr[0]!=user.currentSubsystemId}">
+				  <li><a href="<c:url value='${arr[2]}?subsystemId=${arr[0]}&subsystemName=${arr[1]}'/>">${arr[1]}&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+				</c:if>
+			  </c:forTokens>
+            </ul>
+          </li>
+        </ul>
+      </c:if>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -30,7 +50,7 @@
             <li><a href="#">Param</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

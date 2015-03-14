@@ -17,22 +17,22 @@
 <body>
 <div class="login">
   <div class="content">
-	<form id="login-form" action="<c:url value='/${orgCd}/driver/login'/>" method="post">
+	<form id="login-form" action="<c:url value='/spring/login'/>" method="post">
 	  <div class="form-title">GOne</div>
 	  <div id="login-error-info" style="color:red;margin-top:10px;margin-bottom:-15px;text-align:center;"></div>
 	  <div class="form-group" <c:if test="${userCd!=null}">style='display:none;'</c:if>>
-	  <label class="control-label display-label">User ID or Email</label>
+	  <label class="control-label display-label">User ID</label>
 	  <div class="input-icon">
 		<i class="fa fa-user"></i>
-		<input id="userCdOrEmail" name="userCdOrEmail"
-		  class="form-control placeholder-no-fix" type="tel" autocomplete="off" placeholder="eg: ganjp or ganjpxm@gmail.com" value="${userCd}"/>
+		<input id="user-cd-email-mobile-number" name="userCdOrEmailOrMobileNumber"
+		  class="form-control placeholder-no-fix" type="text" placeholder="eg: ganjp or ganjpxm@gmail.com or +65 8888 0000" value="${userCd}"/>
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label class="control-label display-label">Password</label>
 		<div class="input-icon">
 			<i class="fa fa-lock"></i>
-			<input id="userPassword" name="userPassword" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="eg: 1234" />
+			<input id="password" name="password" class="form-control placeholder-no-fix" type="password" placeholder="eg: 1234" />
 		</div>
 	  </div>
 	  <div class="form-groups" style="padding-bottom:30px;margin-top:30px;text-align:center;">
@@ -54,7 +54,7 @@
 <script type="text/javascript" src="<c:url value="/resources/jquery/jquery-1.11.1.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jqueryform/jquery.form-3.51.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jqueryvalidation/1.13.1/jquery.validate.min.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/bootstrap/v3.3.2/js/bootstrap.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/other/modalLoading.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/json/json2.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jp/jp.js" />"></script> 
@@ -62,40 +62,32 @@
 </html>
 <script type="text/javascript">
 function login() {
-  if ($('#loginForm').validate().form()) {
+  if ($('#login-form').validate().form()) {
 	  var loading = $(document.body).modalLoading(100, 'Processing...');
-	  $("#loginForm").ajaxSubmit({dataType:'json', success : function(data) {
+	  $("#login-form").ajaxSubmit({dataType:'json', success : function(data) {
 		if (data.result=="success") {
-		  //var userCdOrEmail = $("#userCdOrEmail").val();
-		  var userPassword = $("#userPassword").val();
-		  /* if (userCd==userCdOrEmail) {
-			  setCookie("ltUserCdP", userCdOrEmail + userPassword, 7);
-		  } */
-		  // setCookie("ltUserP", userPassword, 7);
-		  localStorage.setItem("ltUserP", userPassword);
-		  window.location.href = "<c:url value='/${orgCd}/driver/home'/>";	
+		  window.location.href = data.url;	
 		} else {
 		  loading.remove();
-		  $("#loginBtn").removeAttr("disabled");	
-		  $("#login-error-info").html("Password is wrong.");
+		  $("#login-error-info").html("User ID or password is wrong.");
 		}
 	  }});  
   }
 }
 $(document).ready(function(){
-  $('#loginForm').validate({
+  $('#login-form').validate({
 	errorElement: 'span', //default input error message container
 	errorClass: 'help-block', // default input error message class
 	focusInvalid: false, // do not focus the last invalid input
 	rules: {
-	  userCdOrEmail: {required: true},
-	  userPassword: {required: true},
+	  userCdOrEmailOrMobileNumber: {required: true},
+	  password: {required: true},
 	},
 	messages: {
-	  username: {
-	    required: "Username is required."
+	  userCdOrEmailOrMobileNumber: {
+	    required: "User ID is required."
 	  },
-	  userPassword: {
+	  password: {
 	    required: "Password is required."
 	  }
 	},
@@ -105,24 +97,14 @@ $(document).ready(function(){
     errorPlacement: function (error, element) {error.insertAfter(element.closest('.input-icon'));},
     submitHandler: function (form) {form.submit();}
   });
-  $('#loginForm input').keypress(function (e) {
+  $('#login-form input').keypress(function (e) {
 	if (e.which == 13) {
 	  login();
 	}
   });
    
-  $("#userCdOrEmail,#userPassword").focus(function() {
+  $("#user-cd-email-mobile-number,#password").focus(function() {
 	  $("#login-error-info").html("");
   });
-  
-  if (userCd!="") {
-	$("#userPassword").focus();
-	
-	var userPassword = localStorage.getItem("ltUserP");
-	if (userPassword) {
-		$("#userPassword").val(userPassword);
-		login();
-	}
-  }
 });
 </script>

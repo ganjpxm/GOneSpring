@@ -72,30 +72,7 @@
 </div>
 <%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
 <script> 
-var mFieldNames = "${fieldNames}".split(",");
-var mSelUuids = "";
-var mIsAdd = true;
-var mRootUrl = "<c:url value='/'/>";
-if (mRootUrl.indexOf(";")!=-1) {
-  var mRootUrlArr = mRootUrl.split(";");
-  mRootUrl = mRootUrlArr[0];
-}
-var mPageNo = "${pageNo}";
-var mPageSize = "${pageSize}";
-
-function search(pageNo) {
-  if (!jp.isEmpty(pageNo)) {
-	mPageNo = pageNo;
-  }
-  var paramJson = {pageNo:mPageNo, pageSize:mPageSize};
-  var search = $("#search").val();
-  if (!jp.isEmpty(search)) {
-	  paramJson.search = search;	
-  }
-  loadRoleList(paramJson);
-}
-
-function loadRoleList(paramJson) {
+function loadDataList(paramJson) {
   $.getJSON("<c:url value='/spring/am/rolePage'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	$("#total-number").text(page.totalCount);
@@ -107,7 +84,7 @@ function loadRoleList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['roleId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['roleName'])) listItemList += "<b>" + map['roleName'] + "</b>";
 	  if (!jp.isEmpty(map['roleCd'])) listItemList += " (" + map['roleCd'] + ")";
-	  listItemList += "<br/> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  listItemList += "<br/> <span style='margin-left:-20px;'>Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]) + "</span>";
 	  if (!jp.isEmpty(map['description'])) listItemList += "<br/>" + map['description'];
 	  $("#list-group").append(listItemList);
 	});
@@ -206,11 +183,8 @@ function save() {
   });
 }
 
-function popupDelDialog() {
-  $("#del-modal").modal('show');
-}
 function del() {
-  var urlStr = "<c:url value='/spring/am/role/delete'/>";
+  var urlStr = "<c:url value='/spring/am/role/deleteWithRelation'/>";
   $.ajax({type:"POST", url:urlStr, data: {roleIds:mSelUuids}, async:true, dataType:'json', 
 	success : function(data) {
 	  if (data.result=="success") {
