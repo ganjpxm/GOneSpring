@@ -87,7 +87,14 @@ public class AmUser extends BaseModel{
 	@Transient
 	private String subsystemNames;
 	@Transient
-	private String defaultSubsystemName;
+	private String currentSubsystemId;
+	@Transient
+	private String currentSubsystemName;
+	@Transient
+	private String defaultSubsystemHomeUrl;
+	@Transient
+	private String subsystemIdNameAndHomeUrls;
+	
 	
 	//----------------------------------------------- default constructor --------------------------
     public AmUser() {
@@ -409,12 +416,36 @@ public class AmUser extends BaseModel{
 		this.subsystemNames = subsystemNames;
 	}
 
-	public String getDefaultSubsystemName() {
-		return defaultSubsystemName;
+	public String getCurrentSubsystemName() {
+		return currentSubsystemName;
 	}
 
-	public void setDefaultSubsystemName(String defaultSubsystemName) {
-		this.defaultSubsystemName = defaultSubsystemName;
+	public void setCurrentSubsystemName(String currentSubsystemName) {
+		this.currentSubsystemName = currentSubsystemName;
 	}
+
+	public String getDefaultSubsystemHomeUrl() {
+		return defaultSubsystemHomeUrl;
+	}
+
+	public void setDefaultSubsystemHomeUrl(String defaultSubsystemHomeUrl) {
+		this.defaultSubsystemHomeUrl = defaultSubsystemHomeUrl;
+	}
+
+	public String getSubsystemIdNameAndHomeUrls() {
+		return subsystemIdNameAndHomeUrls;
+	}
+
+	public void setSubsystemIdNameAndHomeUrls(String subsystemIdNameAndHomeUrls) {
+		this.subsystemIdNameAndHomeUrls = subsystemIdNameAndHomeUrls;
+	}
+
+	public String getCurrentSubsystemId() {
+		return currentSubsystemId;
+	}
+
+	public void setCurrentSubsystemId(String currentSubsystemId) {
+		this.currentSubsystemId = currentSubsystemId;
+	}	
 	
 }

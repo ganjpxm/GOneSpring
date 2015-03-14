@@ -125,7 +125,7 @@ public class ServletUtil {
 						Date date = DateUtil.parseDate(value, "dd/MM/yyyy HH:mm");
 						method.invoke(baseModel, DateUtil.convertDateToTimestamp(date));
 					} else {
-						if ("null".equals(value)) {
+						if ("null".equalsIgnoreCase(value) || !StringUtil.hasText(value)) {
 							value = null;
 						}
 						method.invoke(baseModel, value);

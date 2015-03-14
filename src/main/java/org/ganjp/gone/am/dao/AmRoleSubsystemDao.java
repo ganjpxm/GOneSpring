@@ -78,4 +78,11 @@ public interface AmRoleSubsystemDao extends Operations<AmRoleSubsystem> {
 	 * @return
 	 */
 	public List<String> getSubsystemIdsByRoleIds(final String roleIds);
+	
+	/**
+   	 * <p>batchDeleteByRoleIds</p>
+   	 * 
+   	 * @param roleIds
+   	 */
+    public void batchDeleteByRoleIds(final String roleIds);
 }

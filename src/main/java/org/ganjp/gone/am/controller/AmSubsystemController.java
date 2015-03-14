@@ -42,7 +42,7 @@ public class AmSubsystemController extends BaseController {
 	@RequestMapping(value="/subsystem", method=RequestMethod.GET)
 	public ModelAndView goToSubsystemPage(HttpServletRequest request) {
 		
-		request.setAttribute("fieldNames", "subsystemId,subsystemCd,subsystemName,displayNo,description,operatorId,operatorName,lang,createDateTime,modifyTimestamp,dataStatus,sendStatus,sendDateTime,receiveDateTime");
+		request.setAttribute("fieldNames", "subsystemId,subsystemCd,subsystemName,homeUrl,displayNo,description,operatorId,operatorName,lang,createDateTime,modifyTimestamp,dataStatus,sendStatus,sendDateTime,receiveDateTime");
 		ModelAndView modelAndView = new ModelAndView("am/amSubsystem");
 		
 		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
@@ -55,6 +55,10 @@ public class AmSubsystemController extends BaseController {
     public @ResponseBody List<AmSubsystem> findAll(HttpServletRequest request, HttpServletResponse response) {
         List<AmSubsystem> amSubsystems = amSubsystemService.findAll();
         return amSubsystems;
+    }
+    @RequestMapping(value="/subsystemIdNames", method=RequestMethod.GET)
+    public @ResponseBody Map<String,String> findSubsystemIdAndNames(HttpServletRequest request, HttpServletResponse response) {
+        return amSubsystemService.getSubsystemIdAndNames();
     }
     @RequestMapping(value="/subsystemPage/{pageNo}/{pageSize}", method=RequestMethod.GET)
     public @ResponseBody Page<AmSubsystem> getSubsystemPageWithParam(@PathVariable String pageNo, @PathVariable String pageSize, 

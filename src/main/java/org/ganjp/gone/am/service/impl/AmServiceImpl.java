@@ -171,6 +171,21 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     			if (subsystemIds!=null && !subsystemIds.isEmpty()) {
     				amUser.setSubsystemIds(CollectionUtil.getStringWithSplit(subsystemIds, ","));
     			}
+    			List<AmSubsystem> amSubsystems = amSubsystemService.getAmSubsystemsBySubsystemIds(amUser.getSubsystemIds());
+    			String subsystemIdNameAndHomeUrls = "";
+    			for (AmSubsystem amSubsystem: amSubsystems) {
+    				if (amSubsystem.getSubsystemId().equals(amUser.getDefaultSubsystemId())) {
+    					amUser.setDefaultSubsystemHomeUrl(amSubsystem.getHomeUrl());
+    					amUser.setCurrentSubsystemId(amUser.getDefaultSubsystemId());
+    					amUser.setCurrentSubsystemName(amSubsystem.getSubsystemName());
+    				}
+    				if (StringUtil.hasText(subsystemIdNameAndHomeUrls)) {
+    					subsystemIdNameAndHomeUrls += "," + amSubsystem.getSubsystemId() + "_" + amSubsystem.getSubsystemName() + "_" + amSubsystem.getHomeUrl();
+					} else {
+						subsystemIdNameAndHomeUrls = amSubsystem.getSubsystemId() + "_" + amSubsystem.getSubsystemName() + "_" + amSubsystem.getHomeUrl();
+					}
+    			}
+    			amUser.setSubsystemIdNameAndHomeUrls(subsystemIdNameAndHomeUrls);
     		}
     	}
     	return amUser;
@@ -238,7 +253,7 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     		if (!subsystemNames.isEmpty()) {
     			amUser.setSubsystemNames(CollectionUtil.getStringWithSplit(subsystemNames, ","));
     		}
-    		amUser.setDefaultSubsystemName(subsystemIdNames.get(amUser.getDefaultSubsystemId()));
+    		amUser.setCurrentSubsystemName(subsystemIdNames.get(amUser.getCurrentSubsystemId()));
     	}
     	return page;
     }
@@ -291,6 +306,19 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     public void batchDeleteAmUserWithRelation(String userIds) {
     	amUserRoleService.batchDeleteByUserIds(userIds);
     	amUserService.batchDelete(userIds);
+    }
+    
+    /**
+     * <p>deleteAmRoleWithRelation</p>
+     * 
+     * @param userId
+     * @return
+     */
+    @Transactional
+    public void batchDeleteAmRoleWithRelation(String roleIds) {
+    	amRoleSubsystemService.batchDeleteByRoleIds(roleIds);
+    	amUserRoleService.batchDeleteByRoleIds(roleIds);
+    	amRoleService.batchDelete(roleIds);
     }
     
     

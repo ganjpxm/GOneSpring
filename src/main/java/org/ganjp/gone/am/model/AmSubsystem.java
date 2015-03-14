@@ -39,6 +39,9 @@ public class AmSubsystem extends BaseModel{
 	private String subsystemCd;
 	@Column(name="subsystem_name")
 	private String subsystemName;
+	@Column(name="home_url")
+	private String homeUrl;
+	
 	@Column(name="display_no")
 	private Integer displayNo;
 	@Column(name="description")
@@ -112,7 +115,12 @@ public class AmSubsystem extends BaseModel{
     public void setSubsystemName(String subsystemName) {
 		this.subsystemName = subsystemName;
     }
-    /**
+    
+   	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
 	 * @return Integer
 	 */
 	public Integer getDisplayNo() {
@@ -271,5 +279,12 @@ public class AmSubsystem extends BaseModel{
 	public void setRoleNames(String roleNames) {
 		this.roleNames = roleNames;
 	}
-	    
+
+	public String getHomeUrl() {
+		return homeUrl;
+	}
+
+	public void setHomeUrl(String homeUrl) {
+		this.homeUrl = homeUrl;
+	}
 }

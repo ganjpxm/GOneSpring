@@ -30,8 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 1.0
  */
 @Controller
-@RequestMapping("/free")
-public class FreeController extends BaseController {
+public class CommonController extends BaseController {
 	// ------------------------------- Go to page -----------------------------------------------
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String goToLoginPage(HttpServletRequest request) {
@@ -40,7 +39,7 @@ public class FreeController extends BaseController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return "redirect:/spring/free/login";
+		return "redirect:/spring/login";
 	}
 	
 	// ------------------------------- Json -----------------------------------------------
@@ -53,11 +52,17 @@ public class FreeController extends BaseController {
     		String password = request.getParameter("password");
     		if (StringUtil.hasText(userCdOrEmailOrMobileNumber) && StringUtil.hasText(password)) {
     			AmUser amUser = amService.getAmUserWithRoleSubsystemIds(userCdOrEmailOrMobileNumber, password);
-    			if (amUser!=null && StringUtil.hasText(amUser.getRoleIds()) && StringUtil.hasText(amUser.getSubsystemIds())) {
+    			if (amUser!=null && StringUtil.hasText(amUser.getRoleIds()) && StringUtil.hasText(amUser.getSubsystemIds()) 
+    						&& StringUtil.hasText(amUser.getDefaultSubsystemId())) {
     				HttpSession session = request.getSession();
     				synchronized (session) {
     					session.setAttribute(Const.KEY_USER, amUser);
     					session.setAttribute(Const.LANGUAGE, Const.LANGUAGE_EN_SG);
+    					String url = amUser.getDefaultSubsystemHomeUrl();
+    					if (url.indexOf("http")==-1) {
+    						url = super.getBasePath(request) + url; 
+    					}
+    					map.put("url", url);
     				}
     				map.put(Const.KEY_RESULT, Const.VALUE_SUCCESS);
     			}

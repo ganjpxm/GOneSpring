@@ -161,6 +161,21 @@ public class AmController extends BaseController {
     	}
     	return map;
     }
+    @RequestMapping(value="/role/deleteWithRelation", method = RequestMethod.POST)
+    public @ResponseBody Map<String,String> deleteRoleWithRelation(HttpServletRequest request, HttpServletResponse response) {
+    	Map<String,String> map = new HashMap<String,String>();
+    	map.put(Const.KEY_RESULT, Const.VALUE_FAIL);
+    	try {
+    		String roleIds = request.getParameter("roleIds");
+    		if (StringUtil.hasText(roleIds)) {
+    			amService.batchDeleteAmRoleWithRelation(roleIds);
+        		map.put(Const.KEY_RESULT, Const.VALUE_SUCCESS);
+    		}
+    	} catch(Exception ex) {
+    		log.error(ex.getMessage());
+    	}
+    	return map;
+    }
     
     @Autowired
 	private AmUserService amUserService;

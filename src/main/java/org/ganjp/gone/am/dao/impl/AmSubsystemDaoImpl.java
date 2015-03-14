@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.ganjp.gcore.util.DateUtil;
 import org.ganjp.gcore.util.StringUtil;
-import org.ganjp.gone.am.model.AmSubsystem;
 import org.ganjp.gone.am.dao.AmSubsystemDao;
+import org.ganjp.gone.am.model.AmSubsystem;
 import org.ganjp.gone.common.dao.impl.AbstractHibernateDao;
 import org.ganjp.gone.common.model.Page;
 import org.springframework.stereotype.Repository;
@@ -95,5 +95,17 @@ public class AmSubsystemDaoImpl extends AbstractHibernateDao<AmSubsystem> implem
 		
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
 	}
+	
+	/**
+	 * <p>getAmSubsystemsBySubsystemIds</p>
+	 * 
+	 * @param subsystemIds
+	 * @return
+	 */
+	public List<AmSubsystem> getAmSubsystemsBySubsystemIds(final String subsystemIds) {
+		String hql = "from AmSubsystem where subsystemId in (" + StringUtil.getStrWithQuote(subsystemIds) + ") order by displayNo asc";
+	    return findByHql(hql);
+	}
+	    
 
 }

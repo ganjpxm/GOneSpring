@@ -10,30 +10,38 @@ package org.ganjp.gone.subsystem.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.ganjp.gcore.util.StringUtil;
+import org.ganjp.gone.am.model.AmUser;
+import org.ganjp.gone.common.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * <p>AdminController</p>
+ * <p>SmpController for System Manage Platform</p>
  * 
  * @author GanJianping
  * @since 1.0
  */
 @Controller
 @RequestMapping("/smp")
-public class SmpController {
+public class SmpController extends BaseController  {
 	// ------------------------------- Go to page -----------------------------------------------
-	@RequestMapping(value="/home", method=RequestMethod.GET)
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public String goToHome(HttpServletRequest request) {
-		setPageInfo(request);
+		AmUser amUserLogin = super.getLoginUser(request);
+		if (amUserLogin!=null) {
+			String subsystemId = request.getParameter("subsystemId");
+			if (StringUtil.hasText(subsystemId)) amUserLogin.setCurrentSubsystemId(subsystemId);
+			String subsystemName = request.getParameter("subsystemName");
+			if (StringUtil.hasText(subsystemName)) amUserLogin.setCurrentSubsystemName(subsystemName);
+		}
 		return "redirect:/spring/smp/subsystem";
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.GET)
-	public String goToUserPage(HttpServletRequest request) {
+	@RequestMapping(value="/subsystem", method=RequestMethod.GET)
+	public String goToSubsystemPage(HttpServletRequest request) {
 		setPageInfo(request);
-		return "smp/user";
+		return "smp/subsystem";
 	}
 	
 	@RequestMapping(value="/role", method=RequestMethod.GET)
@@ -42,10 +50,10 @@ public class SmpController {
 		return "smp/role";
 	}
 	
-	@RequestMapping(value="/subsystem", method=RequestMethod.GET)
-	public String goToSubsystemPage(HttpServletRequest request) {
+	@RequestMapping(value="/user", method=RequestMethod.GET)
+	public String goToUserPage(HttpServletRequest request) {
 		setPageInfo(request);
-		return "smp/subsystem";
+		return "smp/user";
 	}
 	
 	@RequestMapping(value="/org", method=RequestMethod.GET)

@@ -60,6 +60,15 @@ public class AmRoleSubsystemServiceImpl extends AbstractService<AmRoleSubsystem>
     }
     
     /**
+   	 * <p>batchDeleteByRoleIds</p>
+   	 * 
+   	 * @param roleIds
+   	 */
+    public void batchDeleteByRoleIds(final String roleIds) {
+    	dao.batchDeleteByRoleIds(roleIds);
+    }
+    
+    /**
 	 * <p>batchDelete</p>
 	 * 
 	 * @param pks

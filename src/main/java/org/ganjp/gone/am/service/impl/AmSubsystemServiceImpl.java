@@ -62,6 +62,7 @@ public class AmSubsystemServiceImpl extends AbstractService<AmSubsystem> impleme
      * @param orderBy
      * @return
      */
+    @Transactional
 	public Page<AmSubsystem> getAmSubsystemPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy) {
 		return dao.getAmSubsystemPage(search, startDate, endDate, dataStates, pageNo, pageSize, orderBy);
@@ -82,6 +83,16 @@ public class AmSubsystemServiceImpl extends AbstractService<AmSubsystem> impleme
 		return map;
 	}
 
+	/**
+	 * <p>getAmSubsystemsBySubsystemIds</p>
+	 * 
+	 * @param subsystemIds
+	 * @return
+	 */
+	public List<AmSubsystem> getAmSubsystemsBySubsystemIds(final String subsystemIds) {
+		return dao.getAmSubsystemsBySubsystemIds(subsystemIds);
+	}
+	
     @Override
     protected Operations<AmSubsystem> getDao() {
         return dao;

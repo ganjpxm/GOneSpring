@@ -54,6 +54,16 @@ public class AmUserRoleDaoImpl extends AbstractHibernateDao<AmUserRole> implemen
     }
     
     /**
+   	 * <p>batchDeleteByRoleIds</p>
+   	 * 
+   	 * @param roleIds
+   	 */
+    public void batchDeleteByRoleIds(final String roleIds) {
+    	String hql = "delete from AmUserRole where roleId in (" + StringUtil.getStrWithQuote(roleIds) + ")";
+		batchExecute(hql);
+    }
+    
+    /**
    	 * <p>batchDelete</p>
    	 * 
    	 * @param pks

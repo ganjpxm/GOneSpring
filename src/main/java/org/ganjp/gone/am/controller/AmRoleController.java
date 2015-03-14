@@ -56,6 +56,10 @@ public class AmRoleController extends BaseController {
         List<AmRole> amRoles = amRoleService.findAll();
         return amRoles;
     }
+    @RequestMapping(value="/roleIdNames", method=RequestMethod.GET)
+    public @ResponseBody Map<String,String> findRoleIdNames(HttpServletRequest request, HttpServletResponse response) {
+        return amRoleService.getRoleIdAndNames();
+    }
     @RequestMapping(value="/rolePage/{pageNo}/{pageSize}", method=RequestMethod.GET)
     public @ResponseBody Page<AmRole> getRolePageWithParam(@PathVariable String pageNo, @PathVariable String pageSize, 
     		HttpServletRequest request, HttpServletResponse response) {

@@ -86,4 +86,11 @@ public interface AmUserRoleService extends Operations<AmUserRole> {
 	 * @return
 	 */
 	public Map<String,List<String>> getRoleIdAndUserIds();
+	
+	/**
+   	 * <p>batchDeleteByRoleIds</p>
+   	 * 
+   	 * @param roleIds
+   	 */
+    public void batchDeleteByRoleIds(final String roleIds);
 }

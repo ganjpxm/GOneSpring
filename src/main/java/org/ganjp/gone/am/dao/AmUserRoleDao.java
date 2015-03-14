@@ -56,6 +56,13 @@ public interface AmUserRoleDao extends Operations<AmUserRole> {
 			 final int pageNo, final int pageSize, final String orderBy);
 	
 	/**
+   	 * <p>batchDeleteByRoleIds</p>
+   	 * 
+   	 * @param roleIds
+   	 */
+    public void batchDeleteByRoleIds(final String roleIds);
+    
+	/**
 	 * <p>getRoleIdsByUserId</p>
 	 * 
 	 * @param userId

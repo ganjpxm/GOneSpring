@@ -122,4 +122,12 @@ public interface AmService extends Operations<BaseModel> {
      * @return
      */
     public AmUser getAmUserWithRoleSubsystemIds(final String userCdOrEmailOrMobileNumber, final String password);
+    
+    /**
+     * <p>deleteAmRoleWithRelation</p>
+     * 
+     * @param userId
+     * @return
+     */
+    public void batchDeleteAmRoleWithRelation(String roleIds);
 }
