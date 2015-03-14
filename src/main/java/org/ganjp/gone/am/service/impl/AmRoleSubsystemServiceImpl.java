@@ -150,6 +150,17 @@ public class AmRoleSubsystemServiceImpl extends AbstractService<AmRoleSubsystem>
 		return map;
 	}
 	
+	/**
+	 * <p>getSubsystemIdsByRoleIds</p>
+	 * 
+	 * @param roleIds
+	 * @return
+	 */
+	@Transactional
+	public List<String> getSubsystemIdsByRoleIds(final String roleIds) {
+		return dao.getSubsystemIdsByRoleIds(roleIds);
+	}
+	
     @Override
     protected Operations<AmRoleSubsystem> getDao() {
         return dao;

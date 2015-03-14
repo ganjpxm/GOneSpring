@@ -134,7 +134,19 @@ public class AmRoleSubsystemDaoImpl extends AbstractHibernateDao<AmRoleSubsystem
 	 * @return
 	 */
 	public List<String> getSubsystemIdsByRoleId(final String roleId) {
-		String hql = "select subsystem from AmRoleSubsystem where roleId = ?";
+		String hql = "select subsystemId from AmRoleSubsystem where roleId = ?";
 		return findByHql(hql, roleId);
 	}
+	
+	/**
+	 * <p>getSubsystemIdsByRoleIds</p>
+	 * 
+	 * @param roleIds
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByRoleIds(final String roleIds) {
+		String hql = "select distinct subsystemId from AmRoleSubsystem where roleId in (" + StringUtil.getStrWithQuote(roleIds) + ")";
+		return findByHql(hql);
+	}
+	
 }

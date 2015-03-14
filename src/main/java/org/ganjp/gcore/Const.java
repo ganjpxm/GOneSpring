@@ -47,7 +47,7 @@ public class Const {
 	
 	//------------------------------ key and value ---------------------
 	public static final String KEY_RESULT = "result";
-	
+	public static final String KEY_USER = "user";
 	public static final String VALUE_SUCCESS = "success";
 	public static final String VALUE_FAIL = "fail";
 	

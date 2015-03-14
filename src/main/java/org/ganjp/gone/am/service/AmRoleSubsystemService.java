@@ -86,4 +86,12 @@ public interface AmRoleSubsystemService extends Operations<AmRoleSubsystem> {
 	 * @return
 	 */
 	public Map<String,List<String>> getRoleIdAndSubsystemIds();
+	
+	/**
+	 * <p>getSubsystemIdsByRoleIds</p>
+	 * 
+	 * @param roleIds
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByRoleIds(final String roleIds);
 }

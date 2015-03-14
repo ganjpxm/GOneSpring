@@ -33,13 +33,16 @@ public class AmUserServiceImpl extends AbstractService<AmUser> implements AmUser
     }
     
     /**
-	 * <p>batchDelete</p>
-	 * 
-	 * @param pks
-	 */
+     * <p>getAmUser</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @return
+     */
     @Transactional
-   	public void batchDelete(final String pks) {
-    	dao.batchDelete(pks);
+    public AmUser getAmUser(final String userCdOrEmailOrMobileNumber, final String password) {
+    	AmUser amUser = dao.getAmUser(userCdOrEmailOrMobileNumber, password);
+    	return amUser;
     }
     
     /**
@@ -54,10 +57,23 @@ public class AmUserServiceImpl extends AbstractService<AmUser> implements AmUser
      * @param orderBy
      * @return
      */
+    @Transactional
 	public Page<AmUser> getAmUserPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy) {
 		return dao.getAmUserPage(search, startDate, endDate, dataStates, pageNo, pageSize, orderBy);
 	}
+    
+    /**
+	 * <p>batchDelete</p>
+	 * 
+	 * @param pks
+	 */
+    @Transactional
+   	public void batchDelete(final String pks) {
+    	dao.batchDelete(pks);
+    }
+     
+    
 
     @Override
     protected Operations<AmUser> getDao() {

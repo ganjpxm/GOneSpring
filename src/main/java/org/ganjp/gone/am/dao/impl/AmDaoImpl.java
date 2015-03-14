@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AmDaoImpl extends AbstractHibernateDao<BaseModel> implements AmDao {
-
+	
     public AmDaoImpl() {
         super();
         setClazz(BaseModel.class);

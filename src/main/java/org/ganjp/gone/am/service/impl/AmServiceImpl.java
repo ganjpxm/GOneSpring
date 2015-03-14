@@ -152,6 +152,31 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     
     //---------------------------------------------- User
     /**
+     * <p>getAmUserWithRoleSubsystemIds</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @return
+     */
+    @Transactional
+    public AmUser getAmUserWithRoleSubsystemIds(final String userCdOrEmailOrMobileNumber, final String password) {
+    	AmUser amUser = amUserService.getAmUser(userCdOrEmailOrMobileNumber, password);
+    	if (amUser != null) {
+    		String userId = amUser.getUserId();
+    		List<String> roleIds = amUserRoleService.getRoleIdsByUserId(userId);
+    		if (roleIds!=null && !roleIds.isEmpty()) {
+    			String roleIdsStr = CollectionUtil.getStringWithSplit(roleIds, ",");
+    			amUser.setRoleIds(roleIdsStr);
+    			List<String> subsystemIds = amRoleSubsystemService.getSubsystemIdsByRoleIds(roleIdsStr);
+    			if (subsystemIds!=null && !subsystemIds.isEmpty()) {
+    				amUser.setSubsystemIds(CollectionUtil.getStringWithSplit(subsystemIds, ","));
+    			}
+    		}
+    	}
+    	return amUser;
+    }
+    
+    /**
      * <p>getAmUserWithRoleIds</p>
      * 
      * @param userId
@@ -213,6 +238,7 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     		if (!subsystemNames.isEmpty()) {
     			amUser.setSubsystemNames(CollectionUtil.getStringWithSplit(subsystemNames, ","));
     		}
+    		amUser.setDefaultSubsystemName(subsystemIdNames.get(amUser.getDefaultSubsystemId()));
     	}
     	return page;
     }

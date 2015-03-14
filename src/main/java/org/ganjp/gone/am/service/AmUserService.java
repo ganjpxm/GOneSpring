@@ -18,14 +18,17 @@ import org.ganjp.gone.common.model.Page;
  * @since 1.0
  */
 public interface AmUserService extends Operations<AmUser> {
+	
 	/**
-	 * <p>batchDelete</p>
-	 * 
-	 * @param pks
-	 */
-   	public void batchDelete(final String pks);
-   	
-   	/**
+     * <p>getAmUser</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @return
+     */
+    public AmUser getAmUser(final String userCdOrEmailOrMobileNumber, final String password);
+    
+    /**
      * <p>getAmUserPage</p>
      * 
      * @param search
@@ -39,5 +42,12 @@ public interface AmUserService extends Operations<AmUser> {
      */
 	public Page<AmUser> getAmUserPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>batchDelete</p>
+	 * 
+	 * @param pks
+	 */
+   	public void batchDelete(final String pks);
    	
 }

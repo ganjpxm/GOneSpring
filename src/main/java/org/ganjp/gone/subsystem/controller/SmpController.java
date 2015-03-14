@@ -1,11 +1,11 @@
 /**
- * $Id: FreeController.java,v 1.0 2015/01/29 20:35:49 GanJianping Exp $
+ * $Id: SmpController.java,v 1.0 2015/01/29 20:35:49 GanJianping Exp $
  *
- * Copyright (c) 2012 Gan Jianping. All rights reserved
+ * Copyright (c) 2015 Gan Jianping. All rights reserved
  * GOne Project
  *
  */
-package org.ganjp.gone.smp.controller;
+package org.ganjp.gone.subsystem.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/smp")
 public class SmpController {
 	// ------------------------------- Go to page -----------------------------------------------
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String goToHome(HttpServletRequest request) {
+		setPageInfo(request);
+		return "redirect:/spring/smp/subsystem";
+	}
+	
 	@RequestMapping(value="/user", method=RequestMethod.GET)
 	public String goToUserPage(HttpServletRequest request) {
 		setPageInfo(request);

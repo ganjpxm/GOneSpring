@@ -86,6 +86,8 @@ public class AmUser extends BaseModel{
 	private String subsystemIds;
 	@Transient
 	private String subsystemNames;
+	@Transient
+	private String defaultSubsystemName;
 	
 	//----------------------------------------------- default constructor --------------------------
     public AmUser() {
@@ -405,6 +407,14 @@ public class AmUser extends BaseModel{
 
 	public void setSubsystemNames(String subsystemNames) {
 		this.subsystemNames = subsystemNames;
+	}
+
+	public String getDefaultSubsystemName() {
+		return defaultSubsystemName;
+	}
+
+	public void setDefaultSubsystemName(String defaultSubsystemName) {
+		this.defaultSubsystemName = defaultSubsystemName;
 	}
 	
 }

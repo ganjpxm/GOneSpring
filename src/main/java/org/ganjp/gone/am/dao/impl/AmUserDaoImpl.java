@@ -33,14 +33,22 @@ public class AmUserDaoImpl extends AbstractHibernateDao<AmUser> implements AmUse
         setClazz(AmUser.class);
     }
 
+    //---------------------------------------------- Search --------------------------------------
     /**
-   	 * <p>batchDelete</p>
-   	 * 
-   	 * @param pks
-   	 */
-    public void batchDelete(final String pks) {
-    	String hql = "delete from AmUser where userId in (" + StringUtil.getStrWithQuote(pks) + ")";
-		batchExecute(hql);
+     * <p>getAmUser</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @return
+     */
+    public AmUser getAmUser(final String userCdOrEmailOrMobileNumber, final String password) {
+    	String hql = "from AmUser where (userCd=? or email=? or mobileNumber=?) and password=? ";
+    	List<AmUser> amUsers = findByHql(hql, userCdOrEmailOrMobileNumber, userCdOrEmailOrMobileNumber, userCdOrEmailOrMobileNumber, password);
+    	if (amUsers!=null && !amUsers.isEmpty()) {
+    		return amUsers.get(0);
+    	} else {
+    		return null;
+    	}
     }
     
     /**
@@ -95,5 +103,18 @@ public class AmUserDaoImpl extends AbstractHibernateDao<AmUser> implements AmUse
 		
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
 	}
+	
+	//------------------------------------------ delete --------------------------------------
+    /**
+   	 * <p>batchDelete</p>
+   	 * 
+   	 * @param pks
+   	 */
+    public void batchDelete(final String pks) {
+    	String hql = "delete from AmUser where userId in (" + StringUtil.getStrWithQuote(pks) + ")";
+		batchExecute(hql);
+    }
+    
+    
 
 }

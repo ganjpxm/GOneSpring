@@ -70,4 +70,12 @@ public interface AmRoleSubsystemDao extends Operations<AmRoleSubsystem> {
 	 * @return
 	 */
 	public List<String> getSubsystemIdsByRoleId(final String roleId);
+	
+	/**
+	 * <p>getSubsystemIdsByRoleIds</p>
+	 * 
+	 * @param roleIds
+	 * @return
+	 */
+	public List<String> getSubsystemIdsByRoleIds(final String roleIds);
 }
