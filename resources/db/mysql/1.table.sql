@@ -117,6 +117,7 @@ create table am_subsystem
    subsystem_id         char(32) not null,
    subsystem_cd         varchar(32),
    subsystem_name       varchar(128),
+   home_url             varchar(256),
    display_no           numeric(9,0),
    description          text,
    operator_id          char(32),
