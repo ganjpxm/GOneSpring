@@ -107,7 +107,7 @@ function loadRoleList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['roleId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['roleName'])) listItemList += "<b>" + map['roleName'] + "</b>";
 	  if (!jp.isEmpty(map['roleCd'])) listItemList += " (" + map['roleCd'] + ")";
-	  listItemList += "<br/> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  listItemList += "<br/> <span style='margin-left:-20px;'>Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]) + "</span>";
 	  if (!jp.isEmpty(map['description'])) listItemList += "<br/>" + map['description'];
 	  $("#list-group").append(listItemList);
 	});

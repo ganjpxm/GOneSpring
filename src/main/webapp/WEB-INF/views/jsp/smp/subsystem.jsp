@@ -112,9 +112,9 @@ function loadSubsystemList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['subsystemId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['subsystemName'])) listItemList += "<b>" + map['subsystemName'] + "</b>";
 	  if (!jp.isEmpty(map['subsystemCd'])) listItemList += " (" + map['subsystemCd'] + ")";
-	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw'></i> Roles : " + map['roleNames'];
-	  listItemList += "<br/><i class='fa fa-calendar fa-fw'></i> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
-	  if (!jp.isEmpty(map['description'])) listItemList += "<br/> <i class='fa fa-comment fa-fw'></i> " + map['description'];
+	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw' style='margin-left:-20px;'></i> Roles : " + map['roleNames'];
+	  listItemList += "<br/><i class='fa fa-calendar fa-fw' style='margin-left:-20px;'></i> Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", Modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  if (!jp.isEmpty(map['description'])) listItemList += "<br/> <i class='fa fa-comment fa-fw' style='margin-left:-20px;'></i> " + map['description'];
 	  $("#list-group").append(listItemList);
 	});
 	

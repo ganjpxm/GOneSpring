@@ -30,7 +30,7 @@
             <li><a href="#">Param</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        <li><a href="<c:url value='/spring/free/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

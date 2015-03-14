@@ -93,11 +93,15 @@
           </div>
           <div class="form-group">
             <label for="role-id" class="control-label">Roles :</label>
-            <select id="role-id" name="roleId" data-placeholder="Choose roles..." class="form-control chosen-select" multiple tabindex="3"></select>
+            <select id="role-id" name="roleId" data-placeholder="Choose roles..." class="form-control chosen-select" multiple tabindex="9"></select>
+          </div>
+          <div class="form-group">
+            <label for="default-subsystem-id" class="control-label">Default Subsystem :</label>
+            <select id="default-subsystem-id" name="defaultSubsystemId" data-placeholder="Choose..." class="form-control" tabindex="10"></select>
           </div>
           <div class="form-group">
             <label for="description" class="control-label">Description :</label>
-            <textarea id="description" name="description" class="form-control" tabindex="9"></textarea>
+            <textarea id="description" name="description" class="form-control" tabindex="11"></textarea>
           </div>
         </form>
       </div>
@@ -145,17 +149,26 @@ function loadUserList(paramJson) {
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['userId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['userCd'])) listItemList += "<b>" + map['userCd'] + "</b>";
 	  if (!jp.isEmpty(map['userName'])) listItemList += " (" + map['userName'] + ")";
-	  if (!jp.isEmpty(map['userCd']) || !jp.isEmpty(map['userCd'])) listItemList += "<br/> ";
+	  if (!jp.isEmpty(map['userCd']) || !jp.isEmpty(map['userCd'])) listItemList += "<br/>";
 	  
-	  if (!jp.isEmpty(map['gender']) || !jp.isEmpty(map['birthday']) || !jp.isEmpty(map['mobileNumber']) || !jp.isEmpty(map['email'])) listItemList += "<i class='fa fa-user fa-fw'></i> ";
+	  if (!jp.isEmpty(map['gender']) || !jp.isEmpty(map['birthday']) || !jp.isEmpty(map['mobileNumber']) || !jp.isEmpty(map['email'])) listItemList += "<i class='fa fa-user fa-fw' style='margin-left:-20px;'></i> ";
 	  if (!jp.isEmpty(map['gender'])) listItemList += " " + map['gender'] + ", ";
 	  if (!jp.isEmpty(map['birthday'])) listItemList += " birth on " + jp.formateDateStr(map["birthday"]) + ", ";
 	  if (!jp.isEmpty(map['mobileNumber'])) listItemList += " " + map['mobileNumber'] + ", ";
 	  if (!jp.isEmpty(map['email'])) listItemList += " " + map['email'];
-	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw'></i> Roles : " + map['roleNames'];
-	  if (!jp.isEmpty(map['subsystemNames'])) listItemList += "<br/><i class='fa fa-life-ring fa-fw'></i> Subsystems : " + map['subsystemNames'];
-	  listItemList += "<br/> <i class='fa fa-calendar fa-fw'></i>  Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
-	  if (!jp.isEmpty(map['description'])) listItemList += "<br/><i class='fa fa-comment fa-fw'></i>  " + map['description'];
+	  if (!jp.isEmpty(map['roleNames'])) listItemList += "<br/><i class='fa fa-user-secret fa-fw' style='margin-left:-20px;'></i> Roles : " + map['roleNames'];
+	  if (!jp.isEmpty(map['subsystemNames'])) { 
+		  var subsystemNames = map['subsystemNames'];
+		  if (!jp.isEmpty(map['defaultSubsystemName']) && map['defaultSubsystemName']!=subsystemNames) {
+			  var subsystemNames = subsystemNames.replace(map['defaultSubsystemName'] + ",", "");
+			  subsystemNames = subsystemNames.replace("," + map['defaultSubsystemName'], "");
+			  subsystemNames = subsystemNames.replace("," + ", ");
+			  subsystemNames = "<span style='color: #009688;'>" + map['defaultSubsystemName'] + "</span>, " + subsystemNames;
+		  }
+		  listItemList += "<br/><i class='fa fa-life-ring fa-fw' style='margin-left:-20px;'></i> Subsystems : " + subsystemNames;
+	  }
+	  listItemList += "<br/> <i class='fa fa-calendar fa-fw' style='margin-left:-20px;'></i>  Create on " + jp.formateDateTimeStr(map["createDateTime"]) + ", modify on " + jp.formateDateTimeStr(map["modifyTimestamp"]);
+	  if (!jp.isEmpty(map['description'])) listItemList += "<br/><i class='fa fa-comment fa-fw' style='margin-left:-20px;'></i>  " + map['description'];
 	  $("#list-group").append(listItemList);
 	});
 	
@@ -220,6 +233,7 @@ function add() {
   $("#password").val("");
   $("#description").val("");
   $("#role-id").val("");
+  $("#default-subsystem-id").val("");
   $('#user-modal').modal({backdrop : 'static'});
   $("#role-id").trigger("chosen:updated");
   mIsAdd = true;
@@ -236,6 +250,7 @@ function edit() {
 		  $("#mobile-number").val(data["mobileNumber"]);
 		  $("#email").val(data["email"]);
 		  $("#password").val(data["password"]);
+		  $("#default-subsystem-id").val(data["defaultSubsystemId"]);
 		  $("#description").val(data["description"]);
 		  
 		  var roleIds = data["roleIds"];
@@ -335,6 +350,14 @@ $(document).ready(function() {
 	});
 	$("#role-id").html(roleOptions);
 	$("#role-id").chosen({search_contains:false, width:"100%"});
+  });
+  
+  $.getJSON("<c:url value='/spring/am/subsystems'/>", function(data) {
+    var roleOptions = "";
+	  $.each(data, function(index, map) {
+	  subsystemOptions += "<option value='" + map['subsystemId'] + "'>" + map['subsystemName'] + "</option>";
+	});
+	$("#default-subsystem-id").html(subsystemOptions);
   });
 });
 
