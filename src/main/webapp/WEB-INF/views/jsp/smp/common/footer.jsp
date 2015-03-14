@@ -30,3 +30,30 @@
   <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
   <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
+<script> 
+var mSelUuids = "";
+var mIsAdd = true;
+var mRootUrl = "<c:url value='/'/>";
+if (mRootUrl.indexOf(";")!=-1) {
+  var mRootUrlArr = mRootUrl.split(";");
+  mRootUrl = mRootUrlArr[0];
+}
+var mPageNo = "${pageNo}";
+var mPageSize = "${pageSize}";
+
+function search(pageNo) {
+  if (!jp.isEmpty(pageNo)) {
+	mPageNo = pageNo;
+  }
+  var paramJson = {pageNo:mPageNo, pageSize:mPageSize};
+  var search = $("#search").val();
+  if (!jp.isEmpty(search)) {
+	  paramJson.search = search;	
+  }
+  loadDataList(paramJson);
+}
+
+function popupDelDialog() {
+  $("#del-modal").modal('show');
+}
+</script>

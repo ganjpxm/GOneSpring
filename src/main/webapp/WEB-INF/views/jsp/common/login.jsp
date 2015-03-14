@@ -17,7 +17,7 @@
 <body>
 <div class="login">
   <div class="content">
-	<form id="login-form" action="<c:url value='/spring/free/login'/>" method="post">
+	<form id="login-form" action="<c:url value='/spring/login'/>" method="post">
 	  <div class="form-title">GOne</div>
 	  <div id="login-error-info" style="color:red;margin-top:10px;margin-bottom:-15px;text-align:center;"></div>
 	  <div class="form-group" <c:if test="${userCd!=null}">style='display:none;'</c:if>>
@@ -66,7 +66,7 @@ function login() {
 	  var loading = $(document.body).modalLoading(100, 'Processing...');
 	  $("#login-form").ajaxSubmit({dataType:'json', success : function(data) {
 		if (data.result=="success") {
-		  window.location.href = "<c:url value='/spring/smp/subsystem'/>";	
+		  window.location.href = data.url;	
 		} else {
 		  loading.remove();
 		  $("#login-error-info").html("User ID or password is wrong.");

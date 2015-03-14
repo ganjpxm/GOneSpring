@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
       </button>
       <c:if test="${user==null}">
-        <a class="navbar-brand" href="#">System Manage Platform</a>
+        <a class="navbar-brand" href="#">GDemo Manage Platform</a>
       </c:if>
       <c:if test="${user!=null && fn:length(user.subsystemIds)==32}">
         <a class="navbar-brand" href="#">${user.currentSubsystemName}</a>
@@ -34,25 +34,14 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/subsystem.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/smp/subsystem'/>"><i class="fa fa-life-ring fa-fw"></i> Subsystem</a>
-        </li>
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/role.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/smp/role'/>"><i class='fa fa-user-secret fa-fw'></i> Role</a></li>
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/user.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/smp/user'/>"><i class='fa fa-user fa-fw'></i> User</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-cog fa-fw"></i> Setting <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">System Config</a></li>
-            <li><a href="#">Param</a></li>
-          </ul>
+        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/map.jsp')}">class="active"</c:if>>
+        	<a href="<c:url value='/spring/mmp/subsystem'/>"><i class="fa fa-life-ring fa-fw"></i> Map</a>
         </li>
         <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 </div>

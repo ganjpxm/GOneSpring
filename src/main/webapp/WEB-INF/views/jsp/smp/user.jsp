@@ -93,11 +93,11 @@
           </div>
           <div class="form-group">
             <label for="role-id" class="control-label">Roles :</label>
-            <select id="role-id" name="roleId" data-placeholder="Choose roles..." class="form-control chosen-select" multiple tabindex="9"></select>
+            <select id="role-id" name="roleId" data-placeholder="- Select roles -" class="form-control chosen-select" multiple tabindex="9"></select>
           </div>
           <div class="form-group">
             <label for="default-subsystem-id" class="control-label">Default Subsystem :</label>
-            <select id="default-subsystem-id" name="defaultSubsystemId" data-placeholder="Choose..." class="form-control" tabindex="10"></select>
+            <select id="default-subsystem-id" name="defaultSubsystemId" data-placeholder="Select..." class="form-control" tabindex="10"></select>
           </div>
           <div class="form-group">
             <label for="description" class="control-label">Description :</label>
@@ -114,30 +114,7 @@
 </div>
 <%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
 <script> 
-var mFieldNames = "${fieldNames}".split(",");
-var mSelUuids = "";
-var mIsAdd = true;
-var mRootUrl = "<c:url value='/'/>";
-if (mRootUrl.indexOf(";")!=-1) {
-  var mRootUrlArr = mRootUrl.split(";");
-  mRootUrl = mRootUrlArr[0];
-}
-var mPageNo = "${pageNo}";
-var mPageSize = "${pageSize}";
-
-function search(pageNo) {
-  if (!jp.isEmpty(pageNo)) {
-	mPageNo = pageNo;
-  }
-  var paramJson = {pageNo:mPageNo, pageSize:mPageSize};
-  var search = $("#search").val();
-  if (!jp.isEmpty(search)) {
-	  paramJson.search = search;	
-  }
-  loadUserList(paramJson);
-}
-
-function loadUserList(paramJson) {
+function loadDataList(paramJson) {
   $.getJSON("<c:url value='/spring/am/userPageWithRoleSubsystemNames'/>", paramJson, function(page) {
 	$("#list-items").html("");
 	$("#total-number").text(page.totalCount);
@@ -220,9 +197,7 @@ function loadUserList(paramJson) {
   });
 }
 
-function add() { 
-  //data-toggle="modal" data-target="#user-modal", keyboard: false, show:false, .modal('toggle'), .modal('show'), .modal('hide')
-  
+function add() {
   $("#user-title").html("Add User");
   $("#user-cd").val("");
   $("#first-name").val("");
@@ -233,7 +208,7 @@ function add() {
   $("#password").val("");
   $("#description").val("");
   $("#role-id").val("");
-  $("#default-subsystem-id").val("");
+  $("#default-subsystem-id").val("null");
   $('#user-modal').modal({backdrop : 'static'});
   $("#role-id").trigger("chosen:updated");
   mIsAdd = true;
@@ -291,9 +266,6 @@ function save() {
   });
 }
 
-function popupDelDialog() {
-  $("#del-modal").modal('show');
-}
 function del() {
   var urlStr = "<c:url value='/spring/am/user/deleteWithRelation'/>";
   $.ajax({type:"POST", url:urlStr, data: {userIds:mSelUuids}, async:true, dataType:'json', 
@@ -343,19 +315,20 @@ $(document).ready(function() {
   $("#birthday").mask("99/99/9999", {placeholder:"dd/mm/yyyy"});
   $("#mobile-number").intlTelInput({preferredCountries: [ "sg", "cn", "hk", "my" ], defaultCountry: "sg"});
   
-  $.getJSON("<c:url value='/spring/am/roles'/>", function(data) {
+  $.getJSON("<c:url value='/spring/am/roleIdNames'/>", function(data) {
     var roleOptions = "";
-	  $.each(data, function(index, map) {
-	  roleOptions += "<option value='" + map['roleId'] + "'>" + map['roleName'] + "</option>";
+	$.map(data, function(value, key) {
+	  roleOptions += "<option value='" + key + "'>" + value + "</option>";
 	});
+	  
 	$("#role-id").html(roleOptions);
 	$("#role-id").chosen({search_contains:false, width:"100%"});
   });
   
-  $.getJSON("<c:url value='/spring/am/subsystems'/>", function(data) {
-    var roleOptions = "";
-	  $.each(data, function(index, map) {
-	  subsystemOptions += "<option value='" + map['subsystemId'] + "'>" + map['subsystemName'] + "</option>";
+  $.getJSON("<c:url value='/spring/am/subsystemIdNames'/>", function(data) {
+    var subsystemOptions = "<option value='null'>- Select a default subsystem -</option>";
+	$.map(data, function(value, key) {
+		subsystemOptions += "<option value='" + key + "'>" + value + "</option>";
 	});
 	$("#default-subsystem-id").html(subsystemOptions);
   });
