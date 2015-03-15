@@ -8,7 +8,9 @@
 package org.ganjp.gone.common.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.ganjp.gcore.Const;
 import org.ganjp.gcore.util.StringUtil;
@@ -29,6 +31,7 @@ public class Page<T> {
 	protected int start = 0;
 
 	protected List<T> resultList = new ArrayList<T>();
+	protected Map<String, List<T>> resultMap = new LinkedHashMap<String, List<T>>();
 	protected long totalCount = -1;
 
 	public Page() {
@@ -233,5 +236,13 @@ public class Page<T> {
 		} else {
 			return pageNo;
 		}
+	}
+
+	public Map<String, List<T>> getResultMap() {
+		return resultMap;
+	}
+
+	public void setResultMap(Map<String, List<T>> resultMap) {
+		this.resultMap = resultMap;
 	}
 }

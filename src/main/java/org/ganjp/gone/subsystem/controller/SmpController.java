@@ -62,6 +62,18 @@ public class SmpController extends BaseController  {
 		return "smp/org";
 	}
 	
+	@RequestMapping(value="/config", method=RequestMethod.GET)
+	public String goToConfigPage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "smp/config";
+	}
+	
+	@RequestMapping(value="/param", method=RequestMethod.GET)
+	public String goToParamPage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "smp/param";
+	}
+	
 	private void setPageInfo(HttpServletRequest request) {
 		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
 		request.setAttribute("pageSize",  StringUtil.isEmpty(request.getParameter("pageSize"))?100:request.getParameter("pageSize"));
