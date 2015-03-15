@@ -16,6 +16,7 @@
 <script type="text/javascript" src="<c:url value="/resources/jqueryform/jquery.form-3.51.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jqueryvalidation/1.13.1/jquery.validate.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/jqueryMaskedinput/jquery.maskedinput-1.4.0.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/jqueryAutosize/jquery.autosize-1.18.13.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap/v3.3.2/js/bootstrap.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/intl-tel-input/js/intlTelInput.min.js" />"></script>

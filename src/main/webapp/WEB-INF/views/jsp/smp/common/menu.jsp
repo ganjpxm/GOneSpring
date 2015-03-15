@@ -46,8 +46,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-cog fa-fw"></i> Setting <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">System Config</a></li>
-            <li><a href="#">Param</a></li>
+            <li><a href="<c:url value='/spring/smp/config'/>">System Parameter</a></li>
           </ul>
         </li>
         <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
