@@ -3,10 +3,10 @@
 <html>
 <head>
   <title>Subsystem Manager</title>
-  <%@ include file="/WEB-INF/views/jsp/smp/common/head.jsp" %>
+  <%@ include file="/WEB-INF/views/spring/smp/common/head.jsp" %>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/jsp/smp/common/menu.jsp" %>
+<%@ include file="/WEB-INF/views/spring/smp/common/menu.jsp" %>
 <div id="content">
   <div class="container">
 	<div class="panel panel-primary">
@@ -82,7 +82,7 @@
     </div>
   </div>
 </div>
-<%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/spring/smp/common/footer.jsp" %>
 <script> 
 function loadDataList(paramJson) {
   $.getJSON("<c:url value='/spring/am/subsystemPageWithRoleNames'/>", paramJson, function(page) {
@@ -92,7 +92,7 @@ function loadDataList(paramJson) {
 	$("#list-group").html("");
 	var index = 0;
 	$.each(data, function(index, map) {
-	  var listItemList = "<li class='list-group-item' style='min-height:48px;'><label class='checkbox-inline'>" +
+	  var listItemList = "<li class='list-group-item' style='min-height:48px;word-break: break-all;'><label class='checkbox-inline'>" +
 	  		"<input name='uuid' type='checkbox' class='jp-check-box' value='" + map['subsystemId'] + "' style='padding-right:10px;'/>";
 	  if (!jp.isEmpty(map['subsystemName'])) listItemList += "<b>" + map['subsystemName'] + "</b>";
 	  if (!jp.isEmpty(map['subsystemCd'])) listItemList += " (" + map['subsystemCd'] + ")";

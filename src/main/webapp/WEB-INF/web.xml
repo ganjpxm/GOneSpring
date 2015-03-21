@@ -29,7 +29,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/spring/servlet-context.xml</param-value>
+      <param-value>/WEB-INF/config/spring/servlet-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
     <async-supported>true</async-supported>
@@ -39,6 +39,6 @@
     <url-pattern>/spring/*</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file></welcome-file>
+    <welcome-file>/WEB-INF/views/home.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * <p>GompController : GOne Manage Platform Controller</p>
+ * <p>Gan Jianping Management Platform Controller</p>
  * 
  * @author GanJianping
  * @since 1.0
  */
 @Controller
-@RequestMapping("/gomp")
-public class GompController extends BaseController {
+@RequestMapping("/gjmp")
+public class GjmpController extends BaseController {
 	// ------------------------------- Go to page -----------------------------------------------
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String goToHome(HttpServletRequest request) {
@@ -35,7 +35,7 @@ public class GompController extends BaseController {
 			String subsystemName = request.getParameter("subsystemName");
 			if (StringUtil.hasText(subsystemName)) amUserLogin.setCurrentSubsystemName(subsystemName);
 		}
-		return "gomp/home";
+		return "gjpmp/home";
 	}
 	
 }

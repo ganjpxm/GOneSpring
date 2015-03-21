@@ -321,6 +321,18 @@ public class AmServiceImpl extends AbstractService<BaseModel> implements AmServi
     	amRoleService.batchDelete(roleIds);
     }
     
+    /**
+     * <p>getRoleIdNames</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @param subsystemId
+     * @return
+     */
+    @Transactional
+    public List<String> getRoleIdNames(final String userCdOrEmailOrMobileNumber, final String password, final String subsystemId) {
+    	return dao.getRoleIdNames(userCdOrEmailOrMobileNumber, password, subsystemId);
+    }
     
     @Autowired
 	private AmUserService amUserService;

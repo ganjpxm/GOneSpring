@@ -7,9 +7,11 @@
  */
 package org.ganjp.gone.bm.dao;
 
-import org.ganjp.gone.common.dao.Operations;
-import org.ganjp.gone.bm.model.BmConfig;
+import java.util.List;
+import java.util.Map;
 
+import org.ganjp.gone.bm.model.BmConfig;
+import org.ganjp.gone.common.dao.Operations;
 import org.ganjp.gone.common.model.Page;
 /**
  * <p>BmConfigDao</p>
@@ -39,4 +41,13 @@ public interface BmConfigDao extends Operations<BmConfig> {
      */
 	public Page<BmConfig> getBmConfigPage(final String search, final String startDate, final String endDate, final String dataStates,
 			 final int pageNo, final int pageSize, final String orderBy);
+	
+	/**
+	 * <p>getConfigCdAndInfos</p>
+	 * 
+	 * @param configCds : all, tags
+	 * @param lang
+	 * @return
+	 */
+	public List<Map<String,String>> getConfigInfos(final String configCds, final String lang);
 }

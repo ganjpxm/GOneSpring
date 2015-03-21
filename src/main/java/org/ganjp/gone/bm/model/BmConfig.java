@@ -7,17 +7,19 @@
  */
 package org.ganjp.gone.bm.model;
 
-import org.ganjp.gone.common.model.BaseModel;
-import org.ganjp.gcore.Const;
-import org.ganjp.gcore.util.DateUtil;
-import org.ganjp.gcore.uuid.UUIDHexGenerator;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import java.sql.Timestamp;
+import org.ganjp.gcore.Const;
+import org.ganjp.gcore.util.DateUtil;
+import org.ganjp.gcore.util.StringUtil;
+import org.ganjp.gcore.uuid.UUIDHexGenerator;
+import org.ganjp.gone.common.model.BaseModel;
 
 /**
  * <p>BmConfig</p>
@@ -63,6 +65,9 @@ public class BmConfig extends BaseModel{
 	@Column(name="send_date_time")
 	private Timestamp sendDateTime;
 		
+	@Transient
+	private String category;
+	
 	//----------------------------------------------- default constructor --------------------------
     public BmConfig() {
     	super();
@@ -264,5 +269,27 @@ public class BmConfig extends BaseModel{
     public void setSendDateTime(Timestamp sendDateTime) {
 		this.sendDateTime = sendDateTime;
     }
+
+    /**
+     * <p>getCategory()</p>
+     * 
+     * @return
+     */
+	public String getCategory() {
+		String category = "";
+		if (configValue.indexOf(":")!=-1 && configValue.indexOf(";")!=-1 ) {
+			String[] valueArr = configValue.split(";");
+			for (String val : valueArr) {
+				if (StringUtil.hasText(category)) {
+					category += "," + val.split(":")[0];
+				} else {
+					category = val.split(":")[0];
+				}
+			}
+		}
+		return category;
+	}
+    
+    
      
 }

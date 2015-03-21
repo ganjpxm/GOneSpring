@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ganjp.gcore.util.StringUtil;
@@ -355,4 +356,15 @@ public class BaseController {
 		return mobileNumber.replaceAll("\\+", "").replaceAll("-", "").replaceAll(" ", "");
 	}
 	
+	/**
+	 * <p>setCORS</p>
+	 * 
+	 * @param response
+	 */
+	protected void setCORS(HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+	}
 }

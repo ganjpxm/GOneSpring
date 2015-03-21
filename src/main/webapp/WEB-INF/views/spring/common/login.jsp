@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="author" content="Gan Jianping"/>
-  <title>All-In-One</title>
+  <title>GOne Login</title>
   <link rel="shortcut icon" href="<c:url value='/resources/jp/image/favicon.png'/>"/>
   <link rel="stylesheet" href="<c:url value='/resources/bootstrap/v3.3.2/css/bootstrap.min.css'/>"/>
   <link rel="stylesheet" href="<c:url value='/resources/font-awesome/v4.3.0/css/font-awesome.min.css'/>"/>
@@ -18,7 +18,7 @@
 <div class="login">
   <div class="content">
 	<form id="login-form" action="<c:url value='/spring/login'/>" method="post">
-	  <div class="form-title">All-In-One</div>
+	  <div class="form-title">GOne</div>
 	  <div id="login-error-info" style="color:red;margin-top:10px;margin-bottom:-15px;text-align:center;"></div>
 	  <div class="form-group" <c:if test="${userCd!=null}">style='display:none;'</c:if>>
 	  <label class="control-label display-label">User ID</label>

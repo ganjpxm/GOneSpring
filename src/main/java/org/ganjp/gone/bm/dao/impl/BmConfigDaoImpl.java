@@ -8,12 +8,15 @@
 package org.ganjp.gone.bm.dao.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.ganjp.gcore.Const;
 import org.ganjp.gcore.util.DateUtil;
 import org.ganjp.gcore.util.StringUtil;
-import org.ganjp.gone.bm.model.BmConfig;
 import org.ganjp.gone.bm.dao.BmConfigDao;
+import org.ganjp.gone.bm.model.BmConfig;
 import org.ganjp.gone.common.dao.impl.AbstractHibernateDao;
 import org.ganjp.gone.common.model.Page;
 import org.springframework.stereotype.Repository;
@@ -94,6 +97,65 @@ public class BmConfigDaoImpl extends AbstractHibernateDao<BmConfig> implements B
 		}
 		
 		return fetchPageByHql(pageNo, pageSize, hql, paramList.toArray());
+	}
+	
+	/**
+	 * <p>getConfigCdAndInfos</p>
+	 * 
+	 * @param configCds : all, tags
+	 * @param lang
+	 * @return
+	 */
+	public List<Map<String,String>> getConfigInfos(final String configCds, final String lang) {
+		List<Map<String,String>> configInfos = new ArrayList<Map<String,String>>();
+		String hql = "select configId, configCd, configValue, lang from BmConfig where dataStatus=? ";
+		List<Object> paramList = new ArrayList<Object>();
+		paramList.add(Const.DB_DATASTATE_NORMAL);
+		if (StringUtil.hasText(lang) && !"all".equalsIgnoreCase(lang)) {
+			hql += " and lang = ? ";
+			paramList.add(lang);
+		}
+		
+		if (StringUtil.hasText(configCds)) {
+			if (!"all".equals(configCds)) {
+				String[] configCdArr = configCds.split(",");
+				hql +=" and (";
+				for (int i=0; i<configCdArr.length; i++) {
+					if (i>0) {
+						hql +=" or ";
+					}
+					hql +=" configCd = ? ";
+					paramList.add(configCdArr[i]);
+				}
+				hql +=") ";
+			}
+		} else {
+			return configInfos;
+		}
+		
+		List<Object[]> configInfoArrs = findByHql(hql, paramList.toArray());
+		for (Object[] configInfo : configInfoArrs) {
+			Map<String,String> map = new LinkedHashMap<String,String>();
+			String value = StringUtil.toString(configInfo[2]);
+			map.put("uuid", StringUtil.toString(configInfo[0]));
+			map.put("cd", StringUtil.toString(configInfo[1]));
+			map.put("value", value);
+			map.put("lang", StringUtil.toString(configInfo[3]));
+			String category = "";
+			if (value.indexOf(":")!=-1 && value.indexOf(";")!=-1 ) {
+				String[] valueArr = value.split(";");
+				for (String val : valueArr) {
+					if (StringUtil.hasText(category)) {
+						category += "," + val.split(":")[0];
+					} else {
+						category = val.split(":")[0];
+					}
+				}
+			}
+			map.put("category", category);
+			configInfos.add(map);
+		}
+		return configInfos;
 	}
 
 }

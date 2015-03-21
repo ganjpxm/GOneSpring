@@ -7,6 +7,8 @@
  */
 package org.ganjp.gone.am.service;
 
+import java.util.List;
+
 import org.ganjp.gone.am.model.AmSubsystem;
 import org.ganjp.gone.am.model.AmUser;
 import org.ganjp.gone.common.dao.Operations;
@@ -130,4 +132,14 @@ public interface AmService extends Operations<BaseModel> {
      * @return
      */
     public void batchDeleteAmRoleWithRelation(String roleIds);
+    
+    /**
+     * <p>getRoleIdNames</p>
+     * 
+     * @param userCdOrEmailOrMobileNumber
+     * @param password
+     * @param subsystemId
+     * @return
+     */
+    public List<String> getRoleIdNames(final String userCdOrEmailOrMobileNumber, final String password, final String subsystemId);
 }

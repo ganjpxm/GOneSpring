@@ -3,10 +3,10 @@
 <html>
 <head>
   <title>Org Manager</title>
-  <%@ include file="/WEB-INF/views/jsp/smp/common/head.jsp" %>
+  <%@ include file="/WEB-INF/views/spring/smp/common/head.jsp" %>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/jsp/smp/common/menu.jsp" %>
+<%@ include file="/WEB-INF/views/spring/smp/common/menu.jsp" %>
 <div id="content">
   <div class="container">
 	<div class="panel panel-primary">
@@ -71,7 +71,7 @@
     </div>
   </div>
 </div>
-<%@ include file="/WEB-INF/views/jsp/smp/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/spring/smp/common/footer.jsp" %>
 <script> 
 function loadDataList(paramJson) {
   $.getJSON("<c:url value='/spring/am/orgPage'/>", paramJson, function(page) {
