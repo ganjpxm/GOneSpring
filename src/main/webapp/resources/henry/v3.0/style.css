@@ -1,0 +1,295 @@
+#henry {
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+}
+
+#toolbar, #toolbar a {
+	margin: 0;
+	padding: 3px;
+	height: 30px;
+	background: url(icon.png) repeat-x transparent;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+#toolbar {
+	background-position: 0 -180px;
+}
+
+#paper {
+	height: 500px;
+	padding: 0 3px;
+	margin: 3px 0;
+	overflow: auto;
+	background: #fff;
+	outline: 0;
+}
+
+#toolbar a {
+	display: inline-block;
+	width: 30px;
+	border: none;
+	border-radius: 5px;
+	padding: 0;
+	margin-left: 3px;
+	background-repeat: no-repeat;
+}
+
+#toolbar a:hover {
+	background-color: #fff;
+}
+
+#toolbar a.active {
+	background-color: #ffd700;
+}
+
+a#bold {
+	background-position: -60px 0;
+}
+
+a#italic {
+	background-position: -60px -30px;
+}
+
+a#underline {
+	background-position: -60px -60px;
+}
+
+a#strikeout {
+	background-position: -60px -90px;
+}
+
+a#superscript {
+	background-position: -60px -120px;
+}
+
+a#subscript {
+	background-position: -60px -150px;
+}
+
+a#horizontalrule {
+	background-position: -150px -120px;
+}
+
+a#indent {
+	background-position: -90px -120px;
+}
+
+a#outdent {
+	background-position: -90px -150px;
+}
+
+a#numberedlist {
+	background-position: -120px 0;
+}
+
+a#bulletedlist {
+	background-position: -150px -0px;
+}
+
+a#about {
+	background-position: -150px -150px;
+}
+
+a#format {
+	background-position: 0 -30px;
+	border-radius: 0;
+}
+
+a#format:hover, a#alignment:hover {
+	background-color: transparent;
+}
+
+a#format.active, a#alignment.active, a#link.active {
+	background-color: transparent;
+}
+
+#format.p, #format div a.p {
+	background-position: 0 -60px;
+}
+
+#format.blockquote, #format div a.blockquote {
+	background-position: 0 -90px;
+}
+
+#format.pre, #format div a.pre {
+	background-position: 0 -120px;
+}
+
+#format.address, #format div a.address {
+	background-position: 0 -150px;
+}
+
+#format.h1, #format div a.h1 {
+	background-position: -30px 0;
+}
+
+#format.h2, #format div a.h2 {
+	background-position: -30px -30px;
+}
+
+#format.h3, #format div a.h3 {
+	background-position: -30px -60px;
+}
+
+#format.h4, #format div a.h4 {
+	background-position: -30px -90px;
+}
+
+#format.h5, #format div a.h5 {
+	background-position: -30px -120px;
+}
+
+#format.h6, #format div a.h6 {
+	background-position: -30px -150px;
+}
+
+#format:after, #color:after, #background:after, #alignment:after {
+	content: "";
+	display: block;
+	height: 30px;
+	width: 5px;
+	background: url(icon.png) no-repeat -25px 0;
+	float: right;
+}
+
+#format div a, #alignment div a {
+	display: block;
+	margin: 0;
+}
+
+a#color {
+	background-position: -120px -90px;
+	border-radius: 0;
+}
+
+a#color, a#color:hover {
+	background-color: black;
+}
+
+a#background {
+	background-position: -150px -90px;
+	border-radius: 0;
+}
+
+a#background, a#background:hover {
+	background-color: transparent;
+}
+
+#color div a.webColor, #background div a.webColor {
+	margin: 0 0 0 1px;
+	background: none;
+	border: none;
+	border-radius: 0;
+	height: 20px;
+	width: 20px;
+}
+
+a#alignment, #alignment.left, #alignment div a.left {
+	background-position: -90px -0px;
+}
+
+#alignment.right, #alignment div a.right {
+	background-position: -90px -30px;
+}
+
+#alignment.centered, #alignment div a.centered {
+	background-position: -90px -60px;
+}
+
+#alignment.justify, #alignment div a.justify {
+	background-position: -90px -90px;
+}
+
+a#link {
+	background-position: -150px -30px;
+}
+
+a#link.active {
+	background-position: -120px -30px;
+}
+
+a#image {
+	background-position: -120px -60px;
+}
+
+a#youtube {
+	background-position: -150px -60px;
+}
+
+a#src {
+	background-position: -120px -150px;
+}
+
+.src, .code {
+	color: #fff;
+	background-color: #333;
+	resize: none;
+	font-family: monospace;
+	font-size: 1.2em;
+	margin: 0 .3em;
+}
+
+.code {
+	line-height: 1.1em;
+	padding: 1em;
+	display: block;
+	width: auto;
+	height: 200px;
+}
+
+textarea.code {
+	resize: vertical;
+}
+
+a#code {
+	background-position: -120px -120px;
+}
+
+div#popupWindow {
+	border-radius: 5px;
+	background: #ececec;
+	height: auto;
+	width: auto;
+	margin: 0;
+	padding: 0 5px 5px 5px;
+	position: absolute;
+	z-index: 999;
+}
+
+#popupWindow:before {
+	display: block;
+	content: "";
+	background: url(icon.png) no-repeat transparent;
+	position: relative;
+	height: 5px;
+	width: 8px;
+	top: -5px;
+	left: 11px;
+	z-index: 9999;
+}
+
+#popupWindow p {
+	text-align: right;
+	font: 1.2em;
+	color: #333;
+	margin: .3em;
+}
+
+#popupWindow p label {
+	font: bolder;
+	margin-left: 5px;
+}
+
+#popupWindow p label:after {
+	content: ":";
+	margin: 0 5px 0 2px;
+}
+
+#popupWindow p input {
+	width: 200px;
+	padding: 3px;
+}
+
+#popupWindow p input#width, #popupWindow p input#height {
+	width: 50px;
+}

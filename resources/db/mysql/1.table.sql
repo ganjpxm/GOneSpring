@@ -17,7 +17,7 @@ create table am_menu
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (menu_id)
@@ -41,7 +41,7 @@ create table am_org
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (org_id)
@@ -63,7 +63,7 @@ create table am_role
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (role_id)
@@ -83,7 +83,7 @@ create table am_role_menu
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (role_menu_id)
@@ -103,7 +103,7 @@ create table am_role_subsystem
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (am_role_susbsystem_id)
@@ -126,7 +126,7 @@ create table am_subsystem
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (subsystem_id)
@@ -146,7 +146,7 @@ create table am_subsystem_menu
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (subsystem_menu_id)
@@ -175,7 +175,7 @@ create table am_user
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (user_id)
@@ -195,7 +195,7 @@ create table am_user_org
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (user_org_id)
@@ -215,7 +215,7 @@ create table am_user_role
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (user_role_id)
@@ -235,7 +235,7 @@ create table am_user_subsystem
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (user_subsystem_id)
@@ -258,7 +258,7 @@ create table bm_config
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    receive_date_time    datetime,
    send_date_time       datetime,
    primary key (config_id)
@@ -282,8 +282,88 @@ create table bm_param
    create_date_time     datetime,
    modify_timestamp     timestamp,
    data_status          char(1),
-   send_status          varchar(1) comment '0��don''t sent, 1��has sent',
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
    send_date_time       datetime,
    receive_date_time    datetime,
    primary key (param_id)
+);
+
+/*==============================================================*/
+/* Table: cm_article                                            */
+/*==============================================================*/
+create table cm_article
+(
+   article_id           char(32) not null,
+   article_cd           varchar(32),
+   title                varchar(256),
+   summary              varchar(512),
+   content              text,
+   image_url            varchar(256),
+   origin_url           varchar(256),
+   author_name          varchar(128),
+   tags                 varchar(256),
+   role_ids             varchar(256),
+   display_no           numeric(9,0),
+   lang                 varchar(10),
+   operator_id          char(32),
+   operator_name        varchar(128),
+   create_date_time     datetime,
+   modify_timestamp     timestamp,
+   data_status          char(1),
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
+   send_date_time       datetime,
+   receive_date_time    datetime,
+   primary key (article_id)
+);
+
+/*==============================================================*/
+/* Table: cm_image                                              */
+/*==============================================================*/
+create table cm_image
+(
+   image_id             char(32) not null,
+   image_cd             varchar(32),
+   image_name           varchar(64),
+   image_url            varchar(256),
+   origin_url           varchar(256),
+   description          text,
+   tags                 varchar(256),
+   role_ids             varchar(256),
+   display_no           numeric(9,0),
+   lang                 varchar(10),
+   operator_id          char(32),
+   operator_name        varchar(128),
+   create_date_time     datetime,
+   modify_timestamp     timestamp,
+   data_status          char(1),
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
+   send_date_time       datetime,
+   receive_date_time    datetime,
+   primary key (image_id)
+);
+
+/*==============================================================*/
+/* Table: cm_website                                            */
+/*==============================================================*/
+create table cm_website
+(
+   website_id           char(32) not null,
+   website_cd           varchar(32),
+   website_name         varchar(128),
+   website_url          varchar(256),
+   logo_url             varchar(256),
+   tags                 varchar(256),
+   role_ids             varchar(256),
+   description          text,
+   display_no           numeric(9,0),
+   lang                 varchar(10),
+   operator_id          char(32),
+   operator_name        varchar(128),
+   create_date_time     datetime,
+   modify_timestamp     timestamp,
+   data_status          char(1),
+   send_status          varchar(1) comment '0 for do not sent, 1 for has sent',
+   receive_date_time    datetime,
+   send_date_time       datetime,
+   primary key (website_id)
 );

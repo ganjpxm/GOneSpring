@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Personal,Software,Hardeware">
+  <meta name="author" content="Gan Jianping">
+  <link rel="icon" href="../../resources/jp/image/favicon.png">
+  <title>Gan Jianping Personal Website</title>
+
+  <link rel="stylesheet" href="../../resources/jqueryui/1.11.2/jquery-ui.css">
+  <link rel="stylesheet" href="../../resources/bootstrap/v3.3.2/css/bootstrap.css">
+  <link rel="stylesheet" href="../../resources/henry/v3.0/style.css">
+  <link rel="stylesheet" href="../../resources/font-awesome/v4.3.0/css/font-awesome.css">
+  <link rel="stylesheet" href="../../resources/chosen/v1.1/chosen.css">
+  <link rel="stylesheet" href="../../resources/fileupload/v5.41/fileupload.css">
+  <link rel="stylesheet" href="../../resources/magnific-popup/v0.9/magnific-popup.css">
+  <link rel="stylesheet" href="../../resources/jp/jp-gone.css">
+</head>
+<body>
+  <!-- ***************************************************** Menu ******************************************************* -->
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-extra-bold" href="#">&nbsp;&nbsp;&nbsp;<span id="brand-name"></span>&nbsp;&nbsp;&nbsp;</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="font-size:16px;">
+              <li class="active" style="display:none;"><a href="#"><i class="fa fa-home fa-fw"></i><span id="menu-home"></span></a></li>
+              <li><a href="websites.html"><i class="fa fa-globe fa-fw"></i> <span id="menu-websites"></span></a></li>
+              <li><a href="articles.html"><i class="fa fa-book fa-fw"></i> <span id="menu-articles"></span></a></li>
+              <li><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-volume-up fa-fw"></i> <span id="menu-audios"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
+              <!-- <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right"  style="font-size:16px;">
+              <li>
+              	<a id="login-out-menu" name="login" href="javascript:showLoginPanelOrLogout();" >
+              		<i class="fa fa-sign-in fa-fw"></i> <span id="menu-login"></span>
+              	</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                	<img id="img-language" style="height:18px;"> <span class="caret"></span> 
+                </a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li>
+	                  <a id="login-out-menu" name="login" href="javascript:changeLanguage('zh_CN');" >
+	              		<img src="../../resources/jp/image/ic_flag_cn.png" alt="中文" style="height:18px;"> 中文
+	              	  </a>
+	              	</li>
+	                <li>
+	              	<a id="login-out-menu" name="login" href="javascript:changeLanguage('en_SG');" > 
+	              		<img src="../../resources/jp/image/ic_flag_us.png" alt="English" style="height:18px;"> English
+	              	</a>
+	              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- ***************************************************** Carousel ******************************************************* -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="../../resources/jp/image/img_platform.png" alt="First slide">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1 id="carousel-title-1"></h1>
+            <p id="carousel-content-1"></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="../../resources/jp/image/img_website.png" alt="Second slide">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1 id="carousel-title-2"></h1>
+            <p id="carousel-content-2"></p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="../../resources/jp/image/img_mobileapp.png" alt="Third slide">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1 id="carousel-title-3"></h1>
+            <p id="carousel-content-3"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+  </div><!-- /.carousel -->
+	
+  <!-- ***************************************************** Content ******************************************************* -->
+  <div>
+ 	<div class="container">
+	  <div id="website-caption" class="jp-title" style="cursor:pointer;">
+	  	<i class="fa fa-globe"></i> <span id="website-caption-name"></span> <span style="font-size:8px;"><i class="fa fa-chevron-down"></i></span>
+	  </div>
+	  <div id="website-tag-btns" style="display:none;"></div>
+	  <div class="jp-box">
+	    <div id="website-cells" style="display:block;"> 
+		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
+		</div>
+	  </div>
+	  <div style="clear:both;"></div>
+	  <div id="website-operate-btns">
+	  	 <a id="edit-website-btn" href="javascript:editWebsites();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="margin:4px;">
+	  	 	<i class="fa fa-edit"></i> <span id="edit-website"></span></a>
+	  	 <a href="javascript:showWebsiteAddPanel();" class="btn btn-primary btn-xs" role="button" style="float:right;margin:4px;">
+	  	 	<i class="fa fa-plus"></i> <span id="add-website"></span></a>
+	  </div>
+	</div>
+	
+	<div class="container">
+	  <div id="article-caption" class="jp-title" style="margin-top:1px;cursor:pointer;">
+	  	<i class="fa fa-book"></i> <span id="article-caption-name"></span> <span style="font-size:8px;"><i class="fa fa-chevron-down"></i></span>
+	  </div>
+	  <div id="article-tag-btns" style="display:none;"></div>
+	  <div style="clear:both;"></div>
+	  <div class="jp-box">
+	    <div id="article-cells" style="display:block;"> 
+		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
+		</div>
+	  </div>
+	  <div id="article-operate-btns">
+	  	 <a id="edit-article-btn" href="javascript:editArticles();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="margin:4px;">
+	  	 	<i class="fa fa-edit"></i> <span id="edit-article"></span></a>
+	  	 <a href="javascript:showArticleAddPanel();" class="btn btn-primary btn-xs" role="button" style="float:right;margin:4px;">
+	  	 	<i class="fa fa-plus"></i> <span id="add-article"></span></a>
+	  </div>
+	</div>
+	
+	<div class="container">
+	  <div id="image-caption" class="jp-title" style="margin-top:1px;cursor:pointer;">
+	  	<i class="fa fa-picture-o"></i> <span id="image-caption-name"></span> <span style="font-size:8px;"><i class="fa fa-chevron-down"></i></span>
+	  </div>
+	  <div id="image-tag-btns" style="display:none;"></div>
+	  <div style="clear:both;"></div>
+	  <div class="jp-box">
+	    <div id="image-cells" class="popup-gallery" style="display:block;"> 
+		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
+		</div>
+	  </div>
+	  <div id="image-operate-btns">
+	  	 <a id="edit-image-btn" href="javascript:editImages();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="margin:4px;">
+	  	 	<i class="fa fa-edit"></i> <span id="edit-image"></span></a>
+	  	 <a id="add-image-btn" href="javascript:showImageAddPanel();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="float:right;margin:4px;">
+	  	 	<i class="fa fa-plus"></i> <span id="add-image"></span></a>
+	  	 <label class="fileinput-button mt5" style="float:right;margin:4px;">
+		   <form method="post">
+		     <input type="hidden" name="folder" value="images"/>
+		     <input type="hidden" id="upload_image_lang" name="lang" />
+		     <button type="button" class="btn btn-primary btn-xs" style="margin-right:10px;">
+			   <span class="glyphicon glyphicon-upload"></span> <span id="upload-text"></span>
+			 </button>
+		     <input id="upload-image-save-db-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
+		   </form>
+		 </label>
+	  </div>
+	</div>
+  </div>
+  
+  <hr class="featurette-divider">
+  <footer>
+    <div style="background-color:#00796B; text-align:center;color:white;padding:20px;margin-top:-30px;">
+        <p>Email : ganjpxm@gmail.com</p>
+    	<p>Copyright &copy; 2015 Gan Jianping. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ******************************************* magnific-popup Panel ************************************************** -->
+  <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
+    <form id="login-form" action="http://192.168.1.4:8088/gone/spring/gjpw/login" method="post">
+      <input name="subsystemId" type="hidden" value='402881844c364ba2014c3659098d006c'/>
+	  <h3 id="login-title" class="jp-tc"></h3>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+		<input id="user-cd" name="userCd" class="form-control placeholder-no-fix" autocomplete="off" placeholder="" tabindex="1"/>
+	  </div>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		<input id="password" name="password" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="" tabindex="2" />
+	  </div>
+	  <div id="login-error-info" class="jp-red jp-tc"></div>
+	  <div id="login-btn" class="jp-mt30 jp-mb30">  
+		<a href="javascript:login();" class="btn btn-primary" style="height:40px;width:100%;" role="button" tabindex="3"><i class="fa fa-sign-in"></i> <span id="btn-login"></span></a>        
+	  </div>
+	  <div id="login-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+	</form>    
+  </div>
+  <div id="website-panel" class="white-popup-block mfp-hide" style="max-width:650px;">
+    <form id="website-form" action="http://192.168.1.4:8088/gone/spring/gjpw/websiteInfo/save" method="post">
+      <input id="website-lang" name="lang" type="hidden" value="en_SG"/>
+      <input id="website-uuid" name="uuid" type="hidden"/>
+      <input id="website-tags" name="websiteTags" type="hidden"/>
+      <input id="website-role-ids" name="roleIds" type="hidden"/>
+	  <h3 style="text-align:center;"><img id="website-logo" src='' style='height:30px;margin-right:5px;'/> <span id="add-website-title"></span> </h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <input id="website-name" name="websiteName" class="form-control" type="text" placeholder="" tabindex="1">
+	  <input id="website-url" name="websiteUrl" class="form-control" type="text" placeholder="" style="margin-top:10px;" tabindex="2">
+	  <div style="margin-top:15px;">
+	    <select id="website-tag" name="websiteTag" data-placeholder="" class="form-control chosen-select" multiple tabindex="3"></select>
+      </div>
+      <div id="website-tags-error" style="color:red;margin-top:5px;margin-bottom:5px;"></div>
+	  <div class="form-group" style="margin-top:10px;">
+	    <div class="input-group">
+	      <input id="website-logo-url" name="websiteLogoUrl" class="form-control" type="text" placeholder="" tabindex="4">
+	      <div class="input-group-addon" style="padding:2px;">
+	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
+			  <input type="hidden" name="folder" value="images/logo"/>
+			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
+				<i class="fa fa-cloud-upload"></i>
+			  </button>
+			  <input id="upload-website-logo-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
+			</label>
+	      </div>
+	    </div>
+	  </div>
+	  <input id="website-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;" tabindex="5">
+	  <div id="website-roles" class="jp-mt15 jp-hide">
+	  <select id="website-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+      </div>
+	</form>
+	<div id="save-website-error-info" class="jp-red jp-tc"></div>
+	<div id="save-website-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	  <a href="javascript:dismiss();" class="btn btn-default" style="width:100px;" role="button"><i class="fa fa-remove"></i> <span id="cancel-website"></span></a> 
+	  <a href="javascript:saveWebsite();" class="btn btn-primary" style="width:200px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-website"></span></a>     
+	</div>
+	<div id="save-website-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="article-panel" class="white-popup-block mfp-hide">
+    <form id="article-form" action="http://192.168.1.4:8088/gone/spring/gjpw/article/save" method="post">
+      <input id="article-lang" name="lang" type="hidden" value="en_SG"/>
+      <input id="article-uuid" name="uuid" type="hidden"/>
+      <input id="article-tags" name="tags" type="hidden"/>
+      <input id="article-role-ids" name="roleIds" type="hidden"/>
+      <input id="article-image-urls" name="imageUrls" type="hidden"/>
+	  <h3 style="text-align:center;"><img id="article-logo" src='' style='height:30px;margin-right:5px;'/> <span id="add-article-title"></span> </h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <div style="margin-top:5px;">
+	  	<input id="article-title" name="title" class="form-control" type="text" placeholder="">
+	  </div>
+	  <div style="margin-top:10px;">
+	  	<textarea id="article-content" name="content" class="form-control" rows="10" cols="70"></textarea>
+	  </div>
+	  <div class="form-group" style="margin-top:10px;">
+	    <div class="input-group">
+	      <input id="article-image-url" name="imageUrl" class="form-control" type="text" placeholder=""/>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	&nbsp;&nbsp;<a href="javascript:addArticleImageUrl();" style="color:black;"><i class="fa fa-plus-circle fa-lg"></a></i>&nbsp;&nbsp;
+	      </div>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
+			  <input type="hidden" name="folder" value="images/article"/>
+			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
+				<i class="fa fa-cloud-upload fa-lg"></i>
+			  </button>
+			  <input id="upload-article-image-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
+			</label>
+	      </div>
+	    </div>
+	  </div>
+	  <div style="margin-top:10px;">
+	    <select id="article-tag" name="articleTag" data-placeholder="" class="form-control chosen-select" multiple></select>
+      </div>
+      <div id="article-tags-error" style="color:red;margin-top:5px;margin-bottom:5px;"></div>
+	  <input id="article-cd" name="articleCd" class="form-control" type="text" placeholder="" style="margin-top:10px;"/>
+	  <input id="article-origin-url" name="originUrl" class="form-control" type="text" placeholder="" style="margin-top:10px;"/>
+	  <input id="article-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;" tabindex="5">
+	  <div id="article-roles" class="jp-mt15 jp-hide">
+	  <select id="article-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+      </div>
+	</form>
+	<div id="article-images" style="margin-top:10px;">
+	</div>
+	<div id="save-article-error-info" class="jp-red jp-tc"></div>
+	<div id="save-article-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	  <a href="javascript:dismiss();" class="btn btn-default" style="width:100px;" role="button"><i class="fa fa-remove"></i> <span id="cancel-article"></span></a> 
+	  <a href="javascript:saveArticle();" class="btn btn-primary" style="width:200px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-article"></span></a>     
+	</div>
+	<div id="save-article-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  <div id="article-detail-panel" class="white-popup-block mfp-hide">
+    <h3 id="article-detail-title" style="text-align:center;" ></h3>
+    <div style="float:right;"><a href="javascript:changeBackground('article-detail-panel');"><i class="fa fa-square"></i></a></div>
+	<div id="article-detail-content" style="margin-top:10px;">
+	 
+	</div>
+	<div style="text-align:right;"><a href="javascript:changeBackground('article-detail-panel');"><i class="fa fa-square"></i></a></div>
+  </div>
+  
+  <div id="image-panel" class="white-popup-block mfp-hide" style="max-width:800px;">
+    <form id="image-form" action="http://192.168.1.4:8088/gone/spring/gjpw/image/save" method="post">
+      <input id="image-lang" name="lang" type="hidden" value="en_SG"/>
+      <input id="image-uuid" name="uuid" type="hidden"/>
+      <input id="image-tags" name="tags" type="hidden"/>
+      <input id="image-role-ids" name="roleIds" type="hidden"/>
+	  <h3 style="text-align:center;"><span id="add-image-title"></span></h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <div class="form-group" style="margin-top:10px;">
+	    <div class="input-group">
+	      <input id="image-url" name="url" class="form-control" type="text" placeholder=""/>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
+			  <input type="hidden" name="folder" value="images"/>
+			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
+				<i class="fa fa-cloud-upload fa-lg"></i>
+			  </button>
+			  <input id="upload-image-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
+			</label>
+	      </div>
+	    </div>
+	  </div>
+	  <div id="image-display" style="margin-top:10px;"></div>
+	  <div style="margin-top:5px;">
+	  	<input id="image-name" name="name" class="form-control" type="text" placeholder="">
+	  </div>
+	  <div style="margin-top:10px;">
+	    <select id="image-tag" name="imageTag" data-placeholder="" class="form-control chosen-select" multiple>
+        </select>
+      </div>
+      <div id="image-tags-error" style="color:red;margin-top:5px;margin-bottom:5px;"></div>
+      <div id="image-roles" class="jp-mt15 jp-hide">
+	    <select id="image-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+      </div>
+	  <input id="image-origin-url" name="originUrl" class="form-control" type="text" placeholder="" style="margin-top:10px;"/>
+	  <input id="image-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;">
+	  <div style="margin-top:10px;">
+	  	<textarea id="image-content" name="content" class="form-control" rows="5" cols="70"></textarea>
+	  </div>
+	</form>
+	<div id="save-image-error-info" class="jp-red jp-tc"></div>
+	<div id="save-image-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	  <a href="javascript:dismiss();" class="btn btn-default" style="width:100px;" role="button"><i class="fa fa-remove"></i> <span id="cancel-image"></span></a>
+	  <a href="javascript:saveImage();" class="btn btn-primary" style="width:200px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-image"></span></a>     
+	</div>
+	<div id="save-image-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="tags-panel" class="mfp-hide white-popup-block">
+    <form id="tags-form" action="http://192.168.1.4:8088/gone/spring/gjpw/tags/save" method="post"> 
+	  <input id="tags-uuid" name="uuid" type="hidden"/>
+	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <textarea id="tags" name="tags" class="form-control" placeholder="Tags"></textarea>
+	</form>   
+	<div id="save-tags-error-info" class="jp-red jp-tc"></div> 
+	<div id="save-tags-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	    <a href="javascript:saveTags();" class="btn btn-primary" style="width:250px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-tags"></span></a>   
+	</div>
+	<div id="save-tags-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="processing-panel" class="mfp-hide white-popup-block" style="max-width:60px;background-color:#1abc9c;opacity:0.65;border-radius:4px;">
+    <!-- <div style="float:right;margin-top:-10px;margin-right:-5px;font-size:10px;cursor:pointer;" onclick="closeProcessingPanel();"><i class="fa fa-times"></i></div> -->
+    <div><i class="fa fa-spinner fa-spin fa-3x" style="text-align:center;color:white;"></i></div>
+  </div>
+</body>
+<script src="../../resources/jquery/jquery-1.11.1.js"></script>
+<script src="../../resources/jqueryui/1.11.2/jquery-ui.js"></script>
+<script src="../../resources/bootstrap/v3.3.2/js/bootstrap.js"></script>
+<script src="../../resources/henry/v3.0/henry.js"></script>
+<script src="../../resources/henry/v3.0/tools.js"></script>
+<script src="../../resources/henry/v3.0/lang/en.js"></script>
+<script src="../../resources/chosen/v1.1/jquery.chosen.js"></script>
+<script src="../../resources/fileupload/v5.41/jquery.fileupload.js"></script>
+<script src="../../resources/magnific-popup/v0.9/jquery.magnific-popup.js"></script>
+<script src="../../resources/jqueryform/jquery.form-3.51.js"></script>
+<script src="../../resources/jqueryvalidation/1.13.1/jquery.validate.js"></script>
+<script src="../../resources/jp/jp-gone.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../resources/other/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="../../resources/other/html5shiv.min.js"></script>
+  <script src="../../resources/other/respond.min.js"></script>
+<![endif]--> 
+</html>
+
+<script type="text/javascript">
+var docWidth = $(document).width();
+var currentWebsiteTag = "";
+var currentWebsiteTagIndex = 0;
+var allWebsiteInfos = [];
+
+var currentArticleTag = "all";
+var currentArticleTagIndex = 0;
+var currentImageTag = "all";
+var currentImageTagIndex = 0;
+
+var isInitArticleContent = false;
+var isInitImageContent = false;
+// --------------------------------------------------- init Page ---------------------------------------------
+setPage(currentLanguage);
+function setPage(lang) {
+  if (lang == "zh_CN") {
+	loadJs("i18nZhCnJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_cn.png");
+  } else {
+	loadJs("i18nEnSgJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_us.png");
+  }
+  var loadI18nTimeout = setInterval(function () {
+	if (I18N) {
+	  if ((currentLanguage=="en_SG"&&I18N.home=="Home") || (currentLanguage=="zh_CN"&&I18N.home=="首页")) {
+	    setTextInPage();
+	    clearTimeout(loadI18nTimeout);
+	  }
+	}
+  }, 100);
+}
+function setTextInPage() {
+  $("#title").text(I18N.brandName);
+  $("#brand-name").text(I18N.brandName);
+  $("#menu-home").text(I18N.home);
+  $("#menu-websites").text(I18N.websites);
+  $("#menu-articles").text(I18N.articles);
+  $("#menu-images").text(I18N.images);
+  $("#menu-audios").text(I18N.audios);
+  $("#menu-videos").text(I18N.videos);
+  $("#menu-download").text(I18N.download);
+  $("#btn-login").text(I18N.login);
+  
+  $("#carousel-title-1").text(I18N.carouselTitle1);
+  $("#carousel-content-1").text(I18N.carouselContent1);
+  $("#carousel-title-2").text(I18N.carouselTitle2);
+  $("#carousel-content-2").text(I18N.carouselContent2);
+  $("#carousel-title-3").text(I18N.carouselTitle3);
+  $("#carousel-content-3").text(I18N.carouselContent3);
+  
+  $("#login-title").text(I18N.loginTitle);
+  $("#user-cd").attr("placeholder", I18N.loginWay); 
+  $("#password").attr("placeholder", I18N.password);
+  
+  $("#save-tags").text(I18N.save);
+  
+  $("#website-name").attr("placeholder", I18N.wesiteName);
+  $("#website-url").attr("placeholder", I18N.websiteUrl);
+  $("#website-logo-url").attr("placeholder", I18N.websiteLogoUrl);
+  $("#website-tag").attr("data-placeholder", I18N.chooseTags);
+  $("#website-display-no").attr("placeholder", I18N.displayNo);
+  $("#website-role-id").attr("data-placeholder", I18N.chooseRoles);
+  $("#website-form .chosen-select").trigger("chosen:updated");
+  $("#website-caption-name").text(I18N.websites);
+  $("#add-website").text(I18N.add);
+  $("#edit-website").text(I18N.edit);
+  $("#save-website").text(I18N.save);
+  $("#cancel-website").text(I18N.cancel);
+  $("#add-website-title").text(I18N.addWebsiteTitle);
+  
+  $("#article-title").attr("placeholder", I18N.articleTitle);
+  $("#article-content").attr("placeholder", I18N.articleContent);
+  $("#article-origin-url").attr("placeholder", I18N.articleOriginUrl);
+  $("#article-tag").attr("data-placeholder", I18N.chooseTags);
+  $("#article-display-no").attr("placeholder", I18N.displayNo);
+  $("#article-role-id").attr("data-placeholder", I18N.chooseRoles);
+  $("#article-cd").attr("placeholder", I18N.articleCd);
+  $("#article-image-url").attr("placeholder", I18N.imageUrl);
+  $("#article-caption-name").text(I18N.articles);
+  $("#add-article").text(I18N.add);
+  $("#edit-article").text(I18N.edit);
+  $("#save-article").text(I18N.save);
+  $("#cancel-article").text(I18N.cancel);
+  $("#add-article-title").text(I18N.addArticleTitle);
+  
+  $("#image-caption-name").text(I18N.images);
+  $("#add-image-title").text(I18N.addImageTitle);
+  $("#image-name").attr("placeholder", I18N.imageName);
+  $("#image-content").attr("placeholder", I18N.imageContent);
+  $("#image-origin-url").attr("placeholder", I18N.imageOriginUrl);
+  $("#image-display-no").attr("placeholder", I18N.displayNo);
+  $("#image-tag").attr("data-placeholder", I18N.chooseTags);
+  $("#image-role-id").attr("data-placeholder", I18N.chooseRoles);
+  $("#upload-text").text(I18N.upload);
+  $("#add-image").text(I18N.add);
+  $("#edit-image").text(I18N.edit);
+  $("#save-image").text(I18N.save);
+  $("#cancel-image").text(I18N.cancel);
+  
+  //$("#").text(I18N.);
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+  } else {
+	$("#menu-login").text(I18N.login);
+  }
+}
+
+//------------------------------ Login ------------------------------
+function showLoginPanelOrLogout() {
+  if ($("#login-out-menu").attr("name") == "login") {
+	$.magnificPopup.open({items: { src: "#login-in-panel" }, type: 'inline', callbacks: {
+	  open: function() {
+	    setTimeout(function() { $("#user-cd").focus(); }, 100);
+	  }	  
+	}});
+  } else {
+	sessionStorage.removeItem(jp.keyRoleIdNames);
+	$("#login-out-menu").html("<i class='fa fa-sign-in fa-fw'></i> " + I18N.login + "</a>");
+	$("#login-out-menu").attr("name","login");
+	$("#website-roles").hide();
+	$("#website-cells").html("");
+	$("#website-role-id").html("");
+	$("#website-form .chosen-select").trigger("chosen:updated");
+	
+	$("#article-roles").hide();
+	$("#article-cells").html("");
+	$("#article-role-id").html("");
+	$("#article-form .chosen-select").trigger("chosen:updated");
+	
+	$("#image-roles").hide();
+	$("#image-cells").html("");
+	$("#image-role-id").html("");
+	$("#image-form .chosen-select").trigger("chosen:updated");
+	
+	jpingRoleIds = "empty";
+	asynTags();
+	asynArticleInfos();
+	asynImageInfos();
+	$("#edit-website-btn").hide();
+	$("#edit-article-btn").hide();
+	$("#edit-image-btn").hide();
+    $("#add-image-btn").hide();
+  }
+}
+function login() {
+  if ($('#login-form').validate().form()) {
+	$("#login-btn").hide();
+	$("#login-processing-icon").show();
+	$("#login-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	  $("#login-btn").show();
+	  $("#login-processing-icon").hide();
+	  if (resp.result=="success") {
+		$("#user-cd").val("");
+		$("#password").val("");
+		sessionStorage.setItem(jp.keyRoleIdNames, resp.data.roleIdNames);
+		jpingRoleOptionsHtml = getRoleOptionsHtml();
+		jpingRoleIds = getRoleIds();
+		asynTags();
+		asynArticleInfos();
+		$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+		$("#login-out-menu").attr("name","logout");
+		$("#website-role-id").html(jpingRoleOptionsHtml);
+		$("#website-roles").show();
+		$("#website-form .chosen-select").trigger("chosen:updated");
+		
+		$("#article-role-id").html(jpingRoleOptionsHtml);
+		$("#article-roles").show();
+		$("#article-form .chosen-select").trigger("chosen:updated");
+		
+		$("#image-role-id").html(jpingRoleOptionsHtml);
+		$("#image-roles").show();
+		$("#image-form .chosen-select").trigger("chosen:updated");
+		//admin and super admin role can edit
+		if ((jpingRoleIds.indexOf("402881844b3fe072014b3fe1aa2e0005")!=-1 || jpingRoleIds.indexOf("402881844c364ba2014c3663f40300fe")!=-1)) {
+	  		$("#edit-website-btn").show();
+	  		$("#edit-article-btn").show();
+	  		$("#edit-image-btn").show();
+	  		$("#add-image-btn").show();
+	  	}
+		$.magnificPopup.close();
+	  } else {
+		$("#login-error-info").html("Password is wrong.");
+	  }
+	}});
+  }
+}
+function changeLanguage(lang) {
+  setCurrentLanguage(lang);
+  setPage(lang);
+  asynTags();
+  asynArticleInfos();
+  asynImageInfos();
+}
+
+function dismiss() {
+  $.magnificPopup.close();
+}
+
+//------------------------------ Website ------------------------------
+function showWebsiteAddPanel() {
+  $("#website-logo").hide();
+  $("#website-logo").attr("src", "");
+  $("#website-uuid").val("");
+  $("#website-name").val("");
+  $("#website-url").val("");
+  $("#website-logo-url").val("");
+  $.magnificPopup.open({items: { src: "#website-panel" }, type: 'inline', modal: true});
+  $("#website-form .chosen-select").chosen({search_contains : false});
+}
+function editWebsites() {
+  if ($("#website-cells .website-edit-btn").is(":visible")) {
+	  $("#website-cells .website-edit-btn").hide();
+	  $("#website-tag-edit-btn").hide();
+  } else {
+	  $("#website-cells .website-edit-btn").show();
+	  $("#website-tag-edit-btn").show();
+  }
+}
+function showWebsiteEditPanel(uuid, websiteName, websiteUrl, websiteLogoUrl, tags, displayNo, roleId) {
+  if (websiteUrl!=null && websiteUrl!="") {
+	  $("#website-logo").show();
+	  $("#website-logo").attr("src", websiteLogoUrl);
+  } else {
+	  $("#website-logo").hide();
+	  $("#website-logo").attr("src", "");
+  }
+  $("#website-uuid").val(uuid);
+  $("#website-name").val(websiteName);
+  $("#website-url").val(websiteUrl);
+  $("#website-logo-url").val(websiteLogoUrl);
+  
+  $("#website-tag").val(tags.split(","));
+  
+  $("#website-display-no").val(displayNo);
+  if (roleId!=null && websiteUrl!="") {
+	  $("#website-role-id").val(roleId.split(",")); 
+  } else {
+	  $("#website-role-id").val(""); 
+  }
+  $.magnificPopup.open({items: { src: "#website-panel" }, type: 'inline', modal: true});
+  $("#website-form .chosen-select").chosen({search_contains : false});
+  $("#website-form .chosen-select").trigger("chosen:updated");
+}
+
+function saveWebsite() {
+  if ($('#website-form').validate().form()) {
+	var websiteTags = $("#website-tag").val();
+	var websiteRoleIds = $("#website-role-id").val();
+	if (websiteTags==null) {
+	  $("#website-tags-error").text(I18N.chooseTagsError);
+	} else {
+	  $("#save-website-btn").hide();
+	  $("#save-website-processing-icon").show();
+	  $("#website-lang").val(currentLanguage);
+	  $("#website-tags").val(websiteTags);
+	  $("#website-role-ids").val(websiteRoleIds);
+	  
+	  $("#website-form").ajaxSubmit({dataType:'json', success : function(resp) {
+		$("#save-website-btn").show();
+		$("#save-website-processing-icon").hide();
+		if (resp.result=="success") {
+		  asynWebsiteInfos();
+		  $("#website-name").val("");
+		  $("#website-url").val("");
+		  $("#website-logo-url").val("");
+		  $("#website-uuid").val("");
+		  $.magnificPopup.close();
+		} else {
+		  $("#save-website-error-info").html("Fail.");
+		}
+	  }});
+	}
+  }
+}
+function asynWebsiteInfos() {
+  var getWebsiteInfosUrl = "http://192.168.1.4:8088/gone/spring/gjpw/websiteInfos/all/tag/" + jpingRoleIds + "/" + currentLanguage + "/default";
+  $.ajax({type: "GET", url: getWebsiteInfosUrl, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		allWebsiteInfos = response.data;
+		setWebsiteByCurrentTag();
+	  }
+	},
+	fail : function() {
+	  $("#website-cells").html("Fail");
+	}
+  });
+}
+function setWebsiteByCurrentTag() {
+  var websitesHtml = "";
+  for (var i=0; i<allWebsiteInfos.length; i++) {
+	var websiteInfo = allWebsiteInfos[i];
+	if (websiteInfo.tags.indexOf(currentWebsiteTag)!=-1) {
+	  websitesHtml += getWebsiteCellHtml(websiteInfo.uuid, websiteInfo.websiteName, websiteInfo.websiteUrl, 
+					websiteInfo.websiteLogoUrl, websiteInfo.tags, websiteInfo.displayNo, websiteInfo.roleIds);
+	}
+  }
+  $("#website-cells").html(websitesHtml);
+}
+function getWebsiteCellHtml(uuid, websiteName, websiteUrl, websiteLogoUrl, tags, displayNo, roleIds) {
+   return "<a href='" + websiteUrl + "' target='_blank' style='color:black;'><div id='" + uuid + "' class='jp-cell'>" + 
+		"  <img src='" + websiteLogoUrl + "' height='20' style='margin-right:5px;'/>" + websiteName + 
+		"</div></a><span class='website-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showWebsiteEditPanel(&#39;" + uuid + "&#39;, &#39;" + websiteName 
+			+ "&#39;, &#39;" + websiteUrl + "&#39;, &#39;" + websiteLogoUrl + "&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds
+			+ "&#39;)'><i class='fa fa-pencil-square-o'></i></span>" + 
+	"";
+}
+
+//------------------------------ Articles ------------------------------
+var articleImageUrls = [];
+var articleImageUrlIndex = 0;
+function showArticleDetail(uuid,title) {
+  $("#article-detail-title").html(title);
+  $("#article-detail-content").html($("#"+uuid+"Content").html());
+  $("#article-detail-panel").css("background-color","#333").css("color","white");
+  $.magnificPopup.open({items: { src: "#article-detail-panel" }, type: 'inline'});
+  $(".mfp-close").css("color","white");
+}
+function showArticleAddPanel() {
+  $("#article-uuid").val("");
+  $("#article-cd").val("");
+  $("#article-title").val("");
+  $("#article-content").val("");
+  $("#article-image-url").val("");
+  $("#article-tag").val("");
+  $("#article-origin-url").val("");
+  $("#article-display-no").val("");
+  $("#article-role-id").val("");
+ 
+  if (isInitArticleContent==true) {
+	  $("#paper").html("");
+  } else {
+	  $("#article-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitArticleContent=true;
+  }
+  
+  $.magnificPopup.open({items: { src: "#article-panel" }, type: 'inline', modal: true});
+  $("#article-form .chosen-select").chosen({search_contains : false}); 
+  $("#article-images").html("");
+  articleImageUrlIndex = 0;
+  articleImageUrls = [];
+}
+
+function editArticles() {
+  if ($("#article-cells .article-edit-btn").is(":visible")) {
+	  $("#article-cells .article-edit-btn").hide();
+	  $("#article-tag-edit-btn").hide();
+  } else {
+	  $("#article-cells .article-edit-btn").show();
+	  $("#article-tag-edit-btn").show();
+  }
+}
+function showArticleEditPanel(uuid,title,imageUrls,articleCd,originUrl,tags,displayNo,roleIds) {
+  articleImageUrlIndex = 0;
+  articleImageUrls = [];
+  if (imageUrls!=null && imageUrls.indexOf("http")==0) {
+	  var imageUrlArr = imageUrls.split(",");
+	  for (var i=0;i<imageUrlArr.length;i++) {
+		var divEl = "<div id='article-image-" + articleImageUrlIndex + "' style='display:inline-block;text-align:center;margin:5px;'>" +
+		  	"<img src='" + imageUrlArr[i] + "' style='height:80px;'/><br/>" +
+		  		"<a href='javascript:deleteArticleImage(" + articleImageUrlIndex + ",&#39;" + imageUrlArr[i] +"&#39;);' style='width:30px;cursor:pointer;color:black;'>" +
+				"<i class='fa fa-times'></i></a>" +  
+			"</div>";
+	  	$("#article-images").html(divEl);
+	  	articleImageUrls.push(imageUrlArr[i]);
+	  	articleImageUrlIndex++;
+	  }
+  } else {
+	  $("#article-images").html("");
+	  articleImageUrls = [];
+	  articleImageUrlIndex = 0;
+  }
+  
+  $("#article-uuid").val(uuid);
+  $("#article-title").val(title);
+  if (articleCd && articleCd!="" && articleCd!="null") {
+	  $("#article-cd").val(articleCd);
+  } else {
+	  $("#article-cd").val("");
+  }
+  if (originUrl && originUrl!="" && originUrl!="null") {
+	  $("#article-origin-url").val(originUrl);
+  } else {
+	  $("#article-origin-url").val("");
+  }
+  
+  $("#article-tag").val(tags.split(","));
+  $("#article-display-no").val(displayNo);
+  if (roleIds!=null && roleIds!="" && roleIds!="null") {
+	  $("#article-role-id").val(roleIds.split(",")); 
+  } else {
+	  $("#article-role-id").val(""); 
+  }
+  $.magnificPopup.open({items: { src: "#article-panel" }, type: 'inline', modal: true});
+  $("#article-form .chosen-select").chosen({search_contains : false});
+  $("#article-form .chosen-select").trigger("chosen:updated");
+  if (isInitArticleContent==true) {
+	  $("#article-content").val($("#"+uuid+"Content").html());
+	  $("#paper").html($("#"+uuid+"Content").html());
+  } else {
+	  $("#article-content").val($("#"+uuid+"Content").html());
+	  $("#article-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitArticleContent=true;
+  }
+}
+function addArticleImageUrl() {
+  var imageUrl = $("#article-image-url").val();
+  if (imageUrl) {
+	  var divEl = "<div id='article-image-" + articleImageUrlIndex + "' style='display:inline-block;text-align:center;margin:5px;'>" +
+		  "<img src='" + imageUrl + "' style='height:80px;'/><br/>" +
+		  "<a href=javascript:deleteArticleImage(" + articleImageUrlIndex + ",'" + imageUrl +"') style='width:30px;cursor:pointer;color:black;'>" +
+			"<i class='fa fa-times'></i></a>" +  
+		"</div>";
+	  $("#article-images").append(divEl);
+	  articleImageUrls.push(imageUrl);
+	  articleImageUrlIndex++;
+  }
+}
+function deleteArticleImage(articleImageUrlIndex, imageUrl) {
+  $("#article-image-" + articleImageUrlIndex).remove();
+  for (var i=0; i<articleImageUrls.length; i++) {
+  	if(articleImageUrls[i] === imageUrl) {
+  		articleImageUrls.splice(i, 1);
+  	}
+  }
+}
+function saveArticle() {
+  if ($('#article-form').validate().form()) {
+	var articleTags = $("#article-tag").val();
+	var articleRoleIds = $("#article-role-id").val();
+	if (articleTags==null) {
+	  $("#article-tags-error").text(I18N.chooseTagsError);
+	} else {
+	  $("#save-article-btn").hide();
+	  $("#save-article-processing-icon").show();
+	  $("#article-lang").val(currentLanguage);
+	  $("#article-tags").val(articleTags);
+	  $("#article-role-ids").val(articleRoleIds);
+	  $("#article-content").val($("#paper").html());
+	  $("#article-image-urls").val(articleImageUrls.toString());
+	  
+	  $("#article-form").ajaxSubmit({dataType:'json', success : function(resp) {
+		$("#save-article-btn").show();
+		$("#save-article-processing-icon").hide();
+		if (resp.result=="success") {
+		  asynArticleInfos();
+		  asynImageInfos();
+		  $.magnificPopup.close();
+		} else {
+		  $("#save-article-error-info").html(I18N.msg_save_fail);
+		}
+	  }});
+	}
+  }
+}
+function asynArticleInfos() {
+  var getArticleInfosUrl = "http://192.168.1.4:8088/gone/spring/gjpw/articles/" + currentArticleTag + "/tag/" + jpingRoleIds + "/" + currentLanguage + "/1/20/default";
+  $.ajax({type: "GET", url: getArticleInfosUrl, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var articles = response.data;
+		var articleHtml = "";
+		
+		for (var i=0; i<articles.length; i++) {
+			var article = articles[i];
+			var content = article.content;
+			var uuid = article.uuid;
+			var articleCd = article.cd;
+			var title = article.title;
+			var imageUrls = article.imageUrls;
+			var tags = article.tags;
+			var displayNo = article.displayNo;
+			var roleIds = article.roleIds;
+			var originUrl = article.originUrl;
+			articleHtml += "<div class='jp-cell-big'>" + 
+				"<div><a href='javascript:showArticleDetail(&#39;" + uuid + "&#39;, &#39;" + title + "&#39;);' style='color:black;'>"  + article.title
+			if (article.imageUrls) {
+				var articleArr = article.imageUrls.split(",");
+				articleHtml += "<img src='" + articleArr[0] + "' style='height:30px;margin-left:10px;'/>"
+			}
+			articleHtml += "</a><span class='article-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showArticleEditPanel(&#39;" + uuid + 
+					"&#39;, &#39;" + title + "&#39;, &#39;" + imageUrls + "&#39;, &#39;" + articleCd + "&#39;, &#39;" + originUrl + "&#39;, &#39;" + tags + 
+					"&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>" + 
+				"</div>" + 
+				"<div id='" + uuid + "Content' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>" + 
+			  "</div>";
+		} 
+		$("#article-cells").html(articleHtml);
+	  }
+	},
+	fail : function() {
+	  $("#article-cells").html(I18N.fail);
+	}
+  });
+}
+
+//------------------------------ Images ------------------------------
+function asynImageInfos() {
+  $("#upload_image_lang").val(currentLanguage);
+  var getArticleInfosUrl = "http://192.168.1.4:8088/gone/spring/gjpw/images/" + currentImageTag + "/tag/" + jpingRoleIds + "/" + currentLanguage + "/1/20/default";
+  $.ajax({type: "GET", url: getArticleInfosUrl, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var images = response.data;
+		var imageHtml = "";
+		
+		for (var i=0; i<images.length; i++) {
+			var image = images[i];
+			
+			var uuid = image.uuid;
+			var name = image.name;
+			var content = image.content;
+			var contentHtml = image.contentHtml;
+			var url = image.url;
+			var tags = image.tags;
+			var displayNo = image.displayNo;
+			var roleIds = image.roleIds;
+			var originUrl = image.originUrl;
+			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;'>";
+			imageHtml += "<a href='" + url + "' title='" + name + "'>";
+			imageHtml += "<img src='" + url + "' style='width:100%;'/>";
+			imageHtml += "</a><br/><span class='image-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showImageEditPanel(&#39;" + uuid + 
+				"&#39;, &#39;" + url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
+				"&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>"+
+				"<div id='" + uuid + "ImageContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
+		} 
+		$("#image-cells").html(imageHtml);
+	  }
+	},
+	fail : function() {
+	  $("#image-cells").html(I18N.fail);
+	}
+  });
+}
+function showImageAddPanel() {
+  $("#image-uuid").val("");
+  $("#image-url").val("");
+  $("#image-name").val("");
+  $("#image-content").val("");
+  $("#image-display").html("");
+  if (isInitImageContent==true) {
+	  $("#paper").html("");
+  } else {
+	  $("#image-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitImageContent=true;
+  }
+  $.magnificPopup.open({items: { src: "#image-panel" }, type: 'inline', modal: true});
+  $("#image-form .chosen-select").chosen({search_contains : false}); 
+}
+function editImages() {
+  if ($("#image-cells .image-edit-btn").is(":visible")) {
+	  $("#image-cells .image-edit-btn").hide();
+	  $("#image-tag-edit-btn").hide();
+  } else {
+	  $("#image-cells .image-edit-btn").show();
+	  $("#image-tag-edit-btn").show();
+  }
+}
+function showImageEditPanel(uuid,url,name,originUrl,tags,displayNo,roleIds) {
+  $("#image-uuid").val(uuid);
+  $("#image-url").val(url);
+  $("#image-name").val(name);
+  var content = $("#"+uuid+"ImageContent").html();
+  $("#image-display-no").val(displayNo);
+  if (content!=null && content!="" && content!="null") {
+	  $("#image-content").val(content);
+  } else {
+	  content = "";
+	  $("#image-content").val(""); 
+  }
+  if (originUrl!=null && originUrl!="" && originUrl!="null") {
+	  $("#image-origin-url").val(originUrl);
+  } else {
+	  $("#image-origin-url").val(""); 
+  }
+  if (tags!=null && tags!="" && tags!="null") {
+	 $("#image-tag").val(tags.split(","));
+  } else {
+	 $("#image-tag").val("");
+  }
+  if (roleIds!=null && roleIds!="" && originUrl!="null") {
+	  $("#image-role-id").val(roleIds.split(",")); 
+  } else {
+	  $("#image-role-id").val("");
+  }
+  
+  var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
+	  "<img src='" + url + "' style='height:80px;'/><br/>" +  
+	"</div>";
+  $("#image-display").html(divEl);
+
+  if (isInitImageContent==true) {
+	  $("#paper").html(content);
+  } else {
+	  $("#image-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitImageContent=true;
+  }
+  $.magnificPopup.open({items: { src: "#image-panel" }, type: 'inline', modal: true});
+  $("#image-form .chosen-select").chosen({search_contains : false});
+  $("#image-form .chosen-select").trigger("chosen:updated");
+}
+
+function saveImage() {
+  if ($('#image-form').validate().form()) {
+	var imageTags = $("#image-tag").val();
+	var imageRoleIds = $("#image-role-id").val();
+	if (imageTags==null) {
+	  $("#image-tags-error").text(I18N.chooseTagsError);
+	} else {
+	  $("#save-image-btn").hide();
+	  $("#save-image-processing-icon").show();
+	  $("#image-lang").val(currentLanguage);
+	  $("#image-tags").val(imageTags);
+	  $("#image-role-ids").val(imageRoleIds);
+	  $("#image-content").val($("#paper").html());
+	  
+	  $("#image-form").ajaxSubmit({dataType:'json', success : function(resp) {
+		$("#save-image-btn").show();
+		$("#save-image-processing-icon").hide();
+		if (resp.result=="success") {
+		  asynImageInfos();
+		  $("#image-content").val("");
+		  $("#image-url").val("");
+		  $("#image-uuid").val("");
+		  $("#image-name").val("");
+		  $("#image-origin-url").val("");
+		  $.magnificPopup.close();
+		} else {
+		  $("#save-image-error-info").html(I18N.msg_save_fail);
+		}
+	  }});
+	}
+  }
+}
+
+
+//--------------------------------------- all tags operation ---------------------------------
+function changeWebsiteTag(tag, index) {
+  $("#website-tag-" + currentWebsiteTagIndex).removeClass("theme-bg-color");
+  $("#website-tag-" + index).addClass("theme-bg-color");
+  currentWebsiteTag = tag;
+  currentWebsiteTagIndex = index;
+  setWebsiteByCurrentTag();
+}
+function changeArticleTag(tag, index) {
+  $("#article-tag-" + currentArticleTagIndex).removeClass("theme-bg-color");
+  $("#article-tag-" + index).addClass("theme-bg-color");
+  currentArticleTag = tag;
+  currentArticleTagIndex = index;
+  asynArticleInfos();
+}
+function changeImageTag(tag, index) {
+  $("#image-tag-" + currentImageTagIndex).removeClass("theme-bg-color");
+  $("#image-tag-" + index).addClass("theme-bg-color");
+  currentImageTag = tag;
+  currentImageTagIndex = index;
+  asynImageInfos();
+}
+
+function asynTags() {
+  $.ajax({type: "GET", url: "http://192.168.1.4:8088/gone/spring/gjpw/tags/all/" + currentLanguage, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var tagCdAndInfos = response.data;
+		//website tags
+		var websiteTagInfo = tagCdAndInfos.websiteTags;
+		var websiteTagUuid = websiteTagInfo.uuid;
+		var websiteTags = websiteTagInfo.category;
+		var webTagArr = websiteTags.split(",");
+		var websiteTagBtnsHtml = "";
+		var websiteTagsOptionHtml = "";
+		currentWebsiteTag = webTagArr[0];
+		currentWebsiteTagIndex = 0;
+		for (var i=0; i<webTagArr.length; i++) {
+			var tag = webTagArr[i];
+			websiteTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+			if (tag == currentWebsiteTag) {
+				websiteTagBtnsHtml += "theme-bg-color";
+			}
+			websiteTagBtnsHtml += "' href='javascript:changeWebsiteTag(&#39;" + tag + "&#39;, " + i + ");' id='website-tag-" + i + "' style='margin:5px;"
+			websiteTagBtnsHtml += "'>" + tag + "</a>";
+			websiteTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
+		}
+		websiteTagBtnsHtml += "<span id='website-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" + websiteTagUuid 
+			+ "&#39;, &#39;" + websiteTagInfo.cd + "&#39;, &#39;" + websiteTags + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+		$("#website-tag-btns").html(websiteTagBtnsHtml);
+		$("#website-tag").html(websiteTagsOptionHtml);
+		$("#website-form .chosen-select").trigger("chosen:updated");
+		asynWebsiteInfos();
+		
+		var articleTags = tagCdAndInfos.articleTags;
+		if (articleTags) {
+			var articleTagUuid = articleTags.uuid;
+			var articleTagArr = articleTags.category.split(",");
+			var articleTagsOptionHtml = "";
+			var articleTagBtnsHtml = "";
+			for (var i=0; i<articleTagArr.length; i++) {
+				var tag = articleTagArr[i];
+				articleTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+				if (tag == currentArticleTag) {
+					articleTagBtnsHtml += "theme-bg-color";
+				}
+				articleTagBtnsHtml += "' href='javascript:changeArticleTag(&#39;" + tag + "&#39;, " + i + ");' id='article-tag-" + i + "' style='margin:5px;"
+				articleTagBtnsHtml += "'>" + tag + "</a>";
+				
+				articleTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
+			}
+			articleTagBtnsHtml += "<span id='article-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" 
+				+ articleTagUuid + "&#39;, &#39;" + articleTags.cd + "&#39;, &#39;" + articleTags.category + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+			$("#article-tag-btns").html(articleTagBtnsHtml);
+			$("#article-tag").html(articleTagsOptionHtml);
+		}
+		
+		var imageTags = tagCdAndInfos.imageTags;
+		if (imageTags) {
+			var imageTagUuid = imageTags.uuid;
+			var imageTagArr = imageTags.category.split(",");
+			var imageTagsOptionHtml = "";
+			var imageTagBtnsHtml = "";
+			for (var i=0; i<imageTagArr.length; i++) {
+				var tag = imageTagArr[i];
+				imageTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+				if (tag == currentImageTag) {
+					imageTagBtnsHtml += "theme-bg-color";
+				}
+				imageTagBtnsHtml += "' href='javascript:changeImageTag(&#39;" + tag + "&#39;, " + i + ");' id='image-tag-" + i + "' style='margin:5px;"
+				imageTagBtnsHtml += "'>" + tag + "</a>";
+				
+				imageTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
+			}
+			imageTagBtnsHtml += "<span id='image-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" 
+				+ imageTagUuid + "&#39;, &#39;" + imageTags.cd + "&#39;, &#39;" + imageTags.category + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+			$("#image-tag-btns").html(imageTagBtnsHtml);
+			$("#image-tag").html(imageTagsOptionHtml);
+		}
+	  }
+	},
+	fail : function() {
+	  $("#website-tag-btns").html("Fail");
+	}
+  });
+}
+function showTagEditPanel(uuid, cd, tags) {
+  if (cd=="websiteTags") {
+	$("#tags-title").html("Website Tags");
+  }
+  $("#tags-uuid").val(uuid);
+  $("#tags").val(tags);
+  
+  $.magnificPopup.open({items: { src: "#tags-panel" }, type: 'inline', modal: true});
+}
+function saveTags() {
+  $("#save-tags-btn").hide();
+  $("#save-tags-processing-icon").show();
+  $("#tags-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	$("#save-tags-btn").show();
+	$("#save-tags-processing-icon").hide();
+	if (resp.result=="success") {
+	  asynTags();
+	  $.magnificPopup.close();
+	} else {
+	  $("#save-tags-error-info").html("Fail.");
+	}
+  }});
+}
+
+//--------------------------------------- Processing ---------------------------------
+function showProcessingPanel() {
+  $.magnificPopup.open({items: { src: "#processing-panel" }, type: 'inline', modal:true});
+}
+var currentBgColor = "white";
+var currentColor = "black";
+function changeBackground(elId){
+  if (currentBgColor=="white") {
+	  currentBgColor = "#333"; 
+	  currentColor = "white";
+  } else {
+	  currentBgColor = "white"; 
+	  currentColor = "black";
+  }
+  $("#" + elId).css("background-color",currentBgColor).css("color",currentColor);
+  $(".mfp-close").css("color",currentColor);
+}
+
+$(document).ready(function(){
+  //-------------------------- Init : magnificPopup, asyn tags,  ----------------------------
+  $('.popup-with-form').magnificPopup();
+  asynTags();
+  asynArticleInfos();
+  asynImageInfos();
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#website-role-id").html(jpingRoleOptionsHtml);
+	$("#article-role-id").html(jpingRoleOptionsHtml);
+	$("#image-role-id").html(jpingRoleOptionsHtml);
+	$("#website-roles").show();
+	$("#article-roles").show();
+	$("#image-roles").show();
+	$("#login-out-menu").attr("name","logout");
+	if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
+  		$("#edit-website-btn").show();
+  		$("#edit-article-btn").show();
+  		$("#edit-image-btn").show();
+  		$("#add-image-btn").show();
+  	}
+  }
+  //-------------------------- Login -----------------------------
+  $('#login-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      userCd: {required: true},
+      password: {required: true}
+  	},
+  	messages: {
+  	  userCd: {required: "Please enter user name or mobile number or email."},
+  	  password: {required: "Please enter password."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.parent()); error.css('color', 'red').css("margin-left","1px");},
+  });
+  $("#user-cd,#password").focus(function() {
+	  $("#login-error-info").html("");
+  });
+  
+  //-------------------------- Website ---------------------------
+  $("#website-caption").click(function() {
+	if ($("#website-tag-btns").is(":visible")) {
+	  $("#website-tag-btns").hide();
+	} else {
+	  $("#website-tag-btns").show();
+	}
+  });
+  $('#website-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      websiteName: {required: true, maxlength:100},
+      websiteUrl: {required: true, maxlength:256},
+      websiteLogoUrl: {maxlength:256}
+  	},
+  	messages: {
+  	  websiteName: {required: "Please enter website name."},
+  	  websiteUrl: {required: "Please enter url."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.closest('.form-control'));error.css('color', 'red');},
+    submitHandler: function (form) {form.submit();}
+  });
+  $("#website-tag").change(function() {
+	if ($(this).val()==null) {
+		$("#website-tags-error").text(I18N.chooseTagsError);
+	} else {
+		$("#website-tags-error").text("");
+	} 
+  });
+  $('#upload-website-logo-btn').fileupload({
+	maxChunkSize: 10000000, // 10 MB
+    dataType: 'json',
+    done: function (e, data) {
+      if (data.result.result == "success") {
+    	$("#website-logo").show();
+    	$("#website-logo-url").val(data.result.saveUrl);
+    	$("#website-logo").attr("src", data.result.saveUrl);
+      } else {
+    	if (data.result.saveUrl!=null && data.result.saveUrl.indexOf("http")!=-1) {
+    	  $("#website-logo").show();
+    	  $("#website-logo-url").val(data.result.saveUrl);
+          $("#website-logo").attr("src", data.result.saveUrl);
+    	}
+    	alert(data.result.result);
+      }
+    }
+  });
+  $("#website-name,#website-url,#website-tag,#website-logo-url,#website-role-id").focus(function() {
+	  $("#save-website-error-info").html("");
+  });
+  
+//-------------------------- Articles ---------------------------
+  $("#article-caption").click(function() {
+	if ($("#article-tag-btns").is(":visible")) {
+	  $("#article-tag-btns").hide();
+	} else {
+	  $("#article-tag-btns").show();
+	}
+  });
+  $('#article-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      title: {required: true, maxlength:100},
+      content: {required: true},
+      originUrl: {maxlength:256}
+  	},
+  	messages: {
+  	  title: {required: "Please enter article title."},
+  	  content: {required: "Please enter article content."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.closest('.form-control'));error.css('color', 'red');},
+    submitHandler: function (form) {form.submit();}
+  });
+  $('#upload-article-image-btn').fileupload({
+	maxChunkSize: 10000000, // 10 MB
+    dataType: 'json',
+    done: function (e, data) {
+      $("#article-image-url").val(data.result.saveUrl);
+      if (data.result.result == "success") {
+      	 addArticleImageUrl();
+      } else {
+    	 addArticleImageUrl();
+    	 alert(data.result.result);
+      }
+    }
+  });
+  $("#article-title,#article-content,#article-tag,#article-image-url,#article-role-id").focus(function() {
+	$("#save-article-error-info").html("");
+	$("#article-tags-error").html("");
+  });
+  
+//-------------------------- Images --------------------------- 
+  $("#image-caption").click(function() {
+	if ($("#image-tag-btns").is(":visible")) {
+	  $("#image-tag-btns").hide();
+	} else {
+	  $("#image-tag-btns").show();
+	}
+  });
+  $('.popup-gallery').magnificPopup({
+	delegate: 'a',
+	type: 'image',
+	tLoading: 'Loading image #%curr%...',
+	mainClass: 'mfp-img-mobile',
+	gallery: {
+		enabled: true,
+		navigateByImgClick: true,
+		preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+	},
+	image: {
+		tError: 'The image could not be loaded.'
+	}
+  });
+  $('#image-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+  	  url: {required: true, maxlength:256},
+      title: {required: true, maxlength:100},
+      content: {maxlength:512},
+      originUrl: {maxlength:256}
+  	},
+  	messages: {
+  	  url: {required: "Please enter image url or upload the image."},
+  	  title: {required: "Please enter image name."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.closest('.form-control'));error.css('color', 'red');},
+    submitHandler: function (form) {form.submit();}
+  });
+  $('#upload-image-save-db-btn').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+      if (data.result.result == "success") {
+    	var imageHtml = "<div class='jp-cell'>";
+		imageHtml += "<a href='" + data.result.saveUrl + "' title='" + data.result.fileName + "'>";
+		imageHtml += "<img src='" + data.result.saveUrl + "' style='width:90%;margin-left:10px;'/>";
+		imageHtml += "</a></div>";
+		$("#image-cells").append(imageHtml);
+      } else {
+    	alert(data.result.result);
+      }
+    }
+  });
+  $('#upload-image-btn').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+      if (data.result.result == "success") {
+    	$("#image-url").val(data.result.saveUrl);
+    	$("#image-name").val(data.result.fileName);
+        var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
+		  "<img src='" + data.result.saveUrl + "' style='height:80px;'/><br/>" +  
+		"</div>";
+	    $("#image-display").html(divEl);
+      } else {
+    	alert(data.result.result);
+      }
+    }
+  });
+  
+  $("#image-name,#image-content,#image-tag,#image-url,#image-role-id").focus(function() {
+	$("#save-image-error-info").html("");
+	$("#image-tags-error").html("");
+  });
+});
+</script>

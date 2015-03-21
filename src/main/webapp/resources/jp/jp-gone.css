@@ -1,0 +1,213 @@
+@charset 'UTF-8';
+/*
+ * jp style : theme color(009688), dark theme color(00796B), black color(#333)
+ *  
+ *
+ * Copyright (c) 2014 Gan Jianping. All rights reserved
+ */
+ 
+/*Open Sans font from http://font.googleapis.com/css?family=Open+Sans:300,400,700,800*/
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url('font/OpenSans-Light.woff') format('woff');
+}
+@font-face {font-family: 'Open Sans'; font-style: normal; font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('font/OpenSans-Light.woff') format('woff');
+}
+@font-face {font-family: 'Open Sans'; font-style: normal; font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url('font/OpenSans-Bold.woff') format('woff');
+}
+@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 800;
+  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url('font/OpenSans-Extrabold.woff') format('woff');
+}
+
+html, body, input, select, textarea, button, code, kbd, pre, samp, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .carousel-control .icon-prev,
+	.carousel-control .icon-next {font-family: 'Open Sans', sans-serif;}
+html, body, input, select, textarea, button {line-height: 1.5; font-weight: 400; /*300,400,700,800*/;}
+
+.font-light {font-weight: 300;}
+.font-bold {font-weight: 700;}
+.font-extra-bold {font-weight: 800;}
+
+.jp-mt5 {margin-top:5px;} .jp-mt10 {margin-top:10px;} .jp-mt15 {margin-top:15px;} .jp-mt20 {margin-top:20px;} .jp-mt30 {margin-top:30px;} .jp-mt-30 {margin-top:-30px;}
+.jp-mb5 {margin-bottom:5px;} .jp-mb10 {margin-bottom:10px;} .jp-mb15 {margin-bottom:15px;} .jp-mb20 {margin-bottom:20px;} .jp-mb30 {margin-bottom:30px;}
+.jp-ml5 {margin-left:5px;} .jp-ml10 {margin-left:10px;} .jp-ml15 {margin-left:15px;} .jp-ml20 {margin-left:20px;} .jp-ml30 {margin-left:30px;}
+.jp-mr5 {margin-right:5px;} .jp-mr10 {margin-right:10px;} .jp-mr15 {margin-right:15px;} .jp-mr20 {margin-right:20px;} .jp-mr30 {margin-right:30px;}
+.jp-red {color:red;}
+.jp-bg-red {background-color:"red";}
+.jp-theme-color {color:#009688;}
+.jp-theme-dark-color {color:#009688;}
+.jp-black {color:#333;}
+.jp-hide {display: none;}
+.jp-clearfix {clear:both;}
+.jp-bold {font-weight: bold;}
+.jp-underline {text-decoration:underline;}
+.jp-red {color: red;}
+.jp-normal {font-weight: normal;}
+.jp-tc {text-align:center}
+.jp-tr {text-align:right}
+.jp-tl {text-align:left}
+.jp-fl {float:left;}
+.jp-fr {float:right;}
+
+body {background-color:#ececec;}
+.jp-title {font-size:20px;margin-top:20px;margin-bottom:10px;color:#000;margin-left:10px;}
+.jp-box {background-color:#fff; color:black; border-radius: 2px; width:100%; min-height:200px;font-size:17px;}
+.jp-box-big {background-color:#fff; color:black; border-radius: 2px; width:100%; min-height:1000px;font-size:17px;}
+.jp-cell {display:inline-block;width:25%;padding:10px 10px 10px 10px;vertical-align:middle;text-align:left; border:1px solid #f9f9f9;}
+.jp-cell:hover {background-color: #f3f3f5; text-decoration: none;}
+.jp-cell-big {display:inline-block;padding:15px 10px 15px 10px;vertical-align:middle;text-align:left; border:1px solid #f9f9f9;}
+.jp-cell-big:hover {background-color: #f3f3f5; text-decoration: none;}
+.theme-bg-color {background-color:#009688;color:#fff;border-color:white;};
+
+/* ------------------------------------------- image -------------------------------------------------------*/
+.jp-ic-cn {width:35px; background:url('image/ic_flag_cn.png');}
+.jp-ic-en {width:35px; background:url('image/ic_flag_us.png');}
+
+/* -------------------------------------------------- CUSTOMIZE THE NAVBAR-------------------------------------------------- */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {position: absolute; top: 0; right: 0; left: 0; z-index: 20;}
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {padding-right: 0; padding-left: 0;}
+.navbar-wrapper .navbar {padding-right: 15px;padding-left: 15px;}
+.navbar-wrapper .navbar .container {width: auto;}
+.navbar {min-height: 40px;}
+.navbar-brand {height:40px; padding:7px 5px; font-size:25px;}
+.navbar-toggle {padding:5px 5px}
+
+/* -------------------------------------------------- CUSTOMIZE THE CAROUSEL -------------------------------------------------- */
+/* Carousel base class */
+.carousel {margin-top:40px; height: 200px; }
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {z-index: 10;}
+/* Declare heights because of positioning of img element */
+.carousel .item {height: 200px; background-color: #777;}
+.carousel-inner > .item > img {position: absolute; top: 0; left: 0; min-width: 100%; height: 200px;}
+.carousel-control {opacity:.0}
+.carousel-control:hover, .carousel-control:focus {opacity:.1}
+
+/* ------------------------------------------- overwrite magnific-popup -------------------------------------------------- */
+.white-popup-block { background:#FFF;padding:10px 15px;text-align:left;max-width:1280px;margin:5px auto;position:relative; }
+.mfp-iframe-holder .mfp-content {max-width:1280px;}
+.mfp-title {background-color:#333;padding:8px;}
+
+/* ------------------------------------------- overwrite chosen -------------------------------------------------- */
+.chosen-container-multi .chosen-choices {padding:6px;border:1px solid #ccc;border-radius:4px;
+	transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;color:#555;}
+
+/* ------------------------------------------- overwrite henry -------------------------------------------------- */
+#paper {height:300px}
+#toolbar a {margin-top:-3px;}
+/* ------------------------------------------- overwrite bootstrap -------------------------------------------------------*/
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {border-color:#009688}
+.navbar-inverse {background-color:#009688; border-color:#00796B;  border-width:0px;}
+.navbar-inverse .navbar-brand {color:#fff}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {background-color:#00796B}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {background-color:#00796B;}
+.navbar-inverse .navbar-nav>li>a {color:#fff;}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {background-color:#00796B;}
+.navbar-inverse .navbar-toggle {border-color:#00796B;}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {background-color:#00796B;}
+.navbar .container {background-color:#009688;}
+.dropdown-menu {background-color:#fff;}
+
+.navbar {margin-bottom:0px;}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+	background-color:#009688;color:#fff;border-color:white;
+}
+.btn-primary {background-color:#009688;border-color:#00796B}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+	background-color:#00796B;border-color:#00796B;
+}
+
+/*------------------------- RESPONSIVE CSS -------------------------------------------------- */
+@media (min-width: 320px) {
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 90px;}
+  .carousel-caption {display:none;}
+  .carousel-caption h1 {font-size: 25px;margin-bottom: 2px;}
+  .carousel-caption p {margin-bottom: -15px; font-size: 14px;}
+  .carousel-indicators {bottom : -5px;}
+  .container {padding-right: 1px; padding-left: 1px;}
+  .navbar-nav>li>a {padding-top:10px;padding-bottom:10px;}
+  .navbar-brand {padding:8px 10px; font-size:18px;}
+  .jp-cell {width:50%;}
+  .jp-cell-big {width:100%;}
+  #paper {height:300px}
+}
+@media (min-width: 420px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 120px;}
+}
+@media (min-width: 568px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 160px;}
+  .carousel-caption h1 {font-size: 25px;margin-bottom: 5px;}
+  .carousel-caption p {margin-bottom: -10px;}
+  .carousel-indicators {bottom : -5px;}
+  .jp-cell {width:33.3%;}
+  .jp-cell-big {width:50%;}
+  #paper {height:400px}
+}
+@media (min-width: 768px) {
+  /* BootStrap */
+  .container {width:99%;}
+  
+  /* Navbar positioning foo */
+  .navbar-wrapper {margin-top: 20px;}
+  .navbar-wrapper .container {padding-right: 15px; padding-left: 15px;}
+  .navbar-wrapper .navbar {padding-right: 0; padding-left: 0;}
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {border-radius: 4px;}
+  /* Bump up size of carousel content */
+  .carousel-caption p {margin-bottom: 20px; font-size: 21px; line-height: 1.4;}
+  .featurette-heading {font-size: 50px;}
+  
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 210px;}
+  .carousel-caption h1 {font-size: 26px;margin-bottom: 5px;}
+  .carousel-caption p {font-size: 16px;margin-bottom: 0px;}
+  .carousel-indicators {bottom : 5px;}
+  .jp-cell {width:25%;}
+  #paper {height:500px}
+  
+}
+@media (min-width: 1024px) {
+  .carousel-caption {display:block;}
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 250px;}
+  .jp-cell {width:20%;}
+  .jp-cell-big {width:33%;}
+}
+@media (min-width: 1200px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 300px;}	
+  #paper {height:600px}
+}
+@media (min-width: 1400px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 360px;}
+  .jp-cell {width:16.6%;}	
+}
+@media (min-width: 1600px) {
+  .carousel, .carousel .item, .carousel-inner > .item > img  {height: 400px;}
+  .jp-cell {width:14.2%;}
+}
+@media (min-width: 1920px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img {font-size: 30px;height: 500px}
+  .carousel-caption h1 {font-size: 30px;}
+  .carousel-caption p {font-size: 18px;}
+  .jp-cell {width:12.5%;}
+  .jp-cell-big {width:25%;}
+}
+@media (min-width: 2560px) {
+  /* Carousel base class */
+  .carousel, .carousel .item, .carousel-inner > .item > img {font-size: 30px;margin-bottom: 5px;height: 550px}
+}
+
+@media (min-height: 50px) {
+  .mfp-title {max-height:20px;overflow:scroll;}
+}
+@media (min-height: 500px) {
+  .mfp-title {max-height:10000px;}
+}
+

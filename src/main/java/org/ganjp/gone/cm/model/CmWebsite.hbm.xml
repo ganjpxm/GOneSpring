@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="org.ganjp.gone.cm.model.CmWebsite" table="cm_website">
+<id name="websiteId" column="website_id" type="java.lang.String" unsaved-value="">
+<generator class="uuid"/>
+</id>
+<property name="websiteCd" type="java.lang.String" column="website_cd"/>
+<property name="websiteName" type="java.lang.String" column="website_name"/>
+<property name="websiteUrl" type="java.lang.String" column="website_url"/>
+<property name="logoUrl" type="java.lang.String" column="logo_url"/>
+<property name="tags" type="java.lang.String" column="tags"/>
+<property name="roleIds" type="java.lang.String" column="role_ids"/>
+<property name="description" type="java.lang.String" column="description"/>
+<property name="displayNo" type="java.lang.Integer" column="display_no"/>
+<property name="lang" type="java.lang.String" column="lang"/>
+<property name="operatorId" type="java.lang.String" column="operator_id"/>
+<property name="operatorName" type="java.lang.String" column="operator_name"/>
+<property name="createDateTime" type="java.sql.Timestamp" column="create_date_time"/>
+<property name="modifyTimestamp" type="java.sql.Timestamp" column="modify_timestamp"/>
+<property name="dataStatus" type="java.lang.String" column="data_status"/>
+<property name="sendStatus" type="java.lang.String" column="send_status"/>
+<property name="receiveDateTime" type="java.sql.Timestamp" column="receive_date_time"/>
+<property name="sendDateTime" type="java.sql.Timestamp" column="send_date_time"/>
+</class>
+</hibernate-mapping>

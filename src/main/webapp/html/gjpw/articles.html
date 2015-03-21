@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Personal,Software,Hardeware">
+  <meta name="author" content="Gan Jianping">
+  <link rel="icon" href="../../resource/image/ic_jp_circle.png">
+  <title id="title">JPing</title>
+
+  <link rel="stylesheet" href="../../resource/framework/jquery-ui/v1.11/jquery-ui.css">
+  <link rel="stylesheet" href="../../resource/framework/bootstrap/v3.2/bootstrap.css">
+  <link rel="stylesheet" href="../../resource/framework/henry/v3.0/style.css">
+  <link rel="stylesheet" href="../../resource/css/font-awesome/v4.2/font-awesome.css">
+  <link rel="stylesheet" href="../../resource/component/chosen/v1.1/chosen.css">
+  <link rel="stylesheet" href="../../resource/component/fileupload/v5.41/fileupload.css">
+  <link rel="stylesheet" href="../../resource/component/magnific-popup/v0.9/magnific-popup.css">
+  <link rel="stylesheet" href="../../resource/framework/jp/jp.css">
+</head>
+<body>
+  <!-- ***************************************************** Menu ******************************************************* -->
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-extra-bold" href="home.html">&nbsp;&nbsp;&nbsp;<span id="brand-name"></span>&nbsp;&nbsp;&nbsp;</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="font-size:16px;">
+              <li class="active" style="display:none;"><a href="#"><i class="fa fa-home fa-fw"></i><span id="menu-home"></span></a></li>
+              <li><a href="websites.html"><i class="fa fa-globe fa-fw"></i> <span id="menu-websites"></span></a></li>
+              <li class="active"><a href="#"><i class="fa fa-book fa-fw"></i> <span id="menu-articles"></span></a></li>
+              <li><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-volume-up fa-fw"></i> <span id="menu-audios"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
+              <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
+              <!-- <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right"  style="font-size:16px;">
+              <li>
+              	<a id="login-out-menu" name="login" href="javascript:showLoginPanelOrLogout();" >
+              		<i class="fa fa-sign-in fa-fw"></i> <span id="menu-login"></span>
+              	</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                	<img id="img-language" style="height:18px;"> <span class="caret"></span> 
+                </a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li>
+	                  <a id="login-out-menu" name="login" href="javascript:changeLanguage('zh_CN');" >
+	              		<img src="../../resource/image/ic_flag_cn.png" alt="中文" style="height:18px;"> 中文
+	              	  </a>
+	              	</li>
+	                <li>
+	              	<a id="login-out-menu" name="login" href="javascript:changeLanguage('en_SG');" > 
+	              		<img src="../../resource/image/ic_flag_us.png" alt="English" style="height:18px;"> English
+	              	</a>
+	              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- ***************************************************** Content ******************************************************* -->
+  <div>
+ 	<div class="container">
+	  <div style="margin-top:50px;">
+	    <div>
+		    <div class="input-group">
+			  <span id="article-tags-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-tags"></i></span>
+			  <span id="search-condition-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-filter"></i></span>
+			  <input id="keywords" name="keywords" type="text" class="form-control" value="" />
+			  <span id="search-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-search"></i></span>
+			  <span id="operation-btn" class="input-group-addon" style="cursor:pointer;"><span id="totalNumber" class="badge" style="color:white;background-color:#1abc9c;"></span></span>
+			</div>
+		</div>
+	  </div>
+	  <div id="search-condition-div" class="row" style="display:none;margin:5px 0px;">
+	  		<div id='role-ids-div' class="col-md-3" style="display:none;padding:2px;">
+				<select id="role-ids" name="roleIds" class="form-control"></select>
+			</div>
+			<div class="col-md-3" style="padding:2px;">
+				<select id="field" name="field" class="form-control">
+				  <option value="all" >All</option>
+				  <option value="tag" >Tag</option>
+				  <option value="title">Title</option>
+				  <option value="content">Content</option>
+				   <option value="articleCd">ID</option>
+				  <option value="author">Author</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="search-lang" name="lang" class="form-control">
+				  <option value="all" >All</option>
+				  <option value="en_SG">English</option>
+				  <option value="zh_CN">中文</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="order-by" name="orderBy" class="form-control">
+				  <option value="displayNo asc" >Display No. &uarr;</option>
+				  <option value="createDateTime desc">Create Datetime &darr;</option>
+				  <option value="modifyTimestamp desc">Modify Datetime &darr;</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="page-size" name="pageSize" class="form-control">
+				  <option value="50"> 50 </option>
+				  <option value="200"> 200 </option>
+				  <option value="500"> 500 </option>
+				  <option value="1000"> 1000 </option>
+				  <option value="10000"> 10000 </option>
+				  <option value="100000"> 100000 </option>						
+				</select>
+			</div>
+	  </div>
+	  <div id="article-tag-btns" style="display:none;"></div>
+	  <div style="clear:both;"></div>
+	  <div id="article-operate-btns" style="display:none;margin-top:10px;">
+	  	 <a id="edit-article-btn" href="javascript:editArticles();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="margin:4px;">
+	  	 	<i class="fa fa-edit"></i> <span id="edit-article"></span></a>
+	  	 <a href="javascript:showArticleAddPanel();" class="btn btn-primary btn-xs" role="button" style="float:right;margin:4px;">
+	  	 	<i class="fa fa-plus"></i> <span id="add-article"></span></a>
+	  </div>
+	  <div style="clear:both;"></div>
+	  <div class="jp-box-big" style="margin-top:5px;">
+	    <div id="article-cells" style="display:block;"> 
+		  <!-- <div class="jp-cell"><img src="../../resource/article/ic_logo_google.png" height="20"> <a href='http://www.google.com'>Google</a></div> -->
+		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <hr class="featurette-divider">
+  <footer>
+    <div style="background-color:#1abc9c; text-align:center;color:white;padding:20px;margin-top:-30px;">
+        <p>Email : ganjpxm@gmail.com</p>
+    	<p>&copy; 2014 Gan Jianping &middot;</p>
+    </div>
+  </footer>
+
+  <!-- ******************************************* magnific-popup Panel ************************************************** -->
+  <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
+    <form id="login-form" action="http://www.ganjianping.com:8080/jping/web/login" method="post">
+	  <h3 id="login-title" class="jp-tc"></h3>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+		<input id="user-cd" name="userCd" class="form-control placeholder-no-fix" autocomplete="off" placeholder="" tabindex="1"/>
+	  </div>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		<input id="password" name="password" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="" tabindex="2" />
+	  </div>
+	  <div id="login-error-info" class="jp-red jp-tc"></div>
+	  <div id="login-btn" class="jp-mt30 jp-mb30">  
+		<a href="javascript:login();" class="btn btn-primary" style="height:40px;width:100%;" role="button" tabindex="3"><i class="fa fa-sign-in"></i> <span id="btn-login"></span></a>        
+	  </div>
+	  <div id="login-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+	</form>    
+  </div>
+  
+  <div id="article-panel" class="white-popup-block mfp-hide">
+    <form id="article-form" action="http://www.ganjianping.com:8080/jping/web/article/save" method="post">
+      <input id="article-lang" name="lang" type="hidden" value="en_SG"/>
+      <input id="article-uuid" name="uuid" type="hidden"/>
+      <input id="article-tags" name="tags" type="hidden"/>
+      <input id="article-role-ids" name="roleIds" type="hidden"/>
+      <input id="article-image-urls" name="imageUrls" type="hidden"/>
+	  <h3 style="text-align:center;"><img id="article-logo" src='' style='height:30px;margin-right:5px;'/> <span id="add-article-title"></span> </h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <div style="margin-top:5px;">
+	  	<input id="article-title" name="title" class="form-control" type="text" placeholder="">
+	  </div>
+	  <div style="margin-top:10px;">
+	  	<textarea id="article-content" name="content" class="form-control" rows="10" cols="70"></textarea>
+	  </div>
+	  <div class="form-group" style="margin-top:10px;">
+	    <div class="input-group">
+	      <input id="article-image-url" name="imageUrl" class="form-control" type="text" placeholder=""/>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	&nbsp;&nbsp;<a href="javascript:addArticleImageUrl();" style="color:black;"><i class="fa fa-plus-circle fa-lg"></a></i>&nbsp;&nbsp;
+	      </div>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
+			  <input type="hidden" name="folder" value="images"/>
+			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
+				<i class="fa fa-cloud-upload fa-lg"></i>
+			  </button>
+			  <input id="upload-article-image-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/jping/web/uploadFile" multiple></input>
+			</label>
+	      </div>
+	    </div>
+	  </div>
+	  <div style="margin-top:10px;">
+	    <select id="article-tag" name="articleTag" data-placeholder="" class="form-control chosen-select" multiple></select>
+      </div>
+      <div id="article-tags-error" style="color:red;margin-top:5px;margin-bottom:5px;"></div>
+	  <input id="article-cd" name="articleCd" class="form-control" type="text" placeholder="" style="margin-top:10px;"/>
+	  <input id="article-origin-url" name="originUrl" class="form-control" type="text" placeholder="" style="margin-top:10px;"/>
+	  <input id="article-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;" tabindex="5">
+	  <div id="article-roles" class="jp-mt15 jp-hide">
+	  <select id="article-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+      </div>
+	</form>
+	<div id="article-images" style="margin-top:10px;">
+	</div>
+	<div id="save-article-error-info" class="jp-red jp-tc"></div>
+	<div id="save-article-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	  <a href="javascript:dismiss();" class="btn btn-default" style="width:100px;" role="button"><i class="fa fa-remove"></i> <span id="cancel-article"></span></a> 
+	  <a href="javascript:saveArticle();" class="btn btn-primary" style="width:200px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-article"></span></a>     
+	</div>
+	<div id="save-article-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  <div id="article-detail-panel" class="white-popup-block mfp-hide">
+    <h3 id="article-detail-title" style="text-align:center;" ></h3>
+    <div style="float:right;"><a href="javascript:changeBackground('article-detail-panel');"><i class="fa fa-square"></i></a></div>
+	<div id="article-detail-content" style="margin-top:10px;">
+	 
+	</div>
+	<div style="text-align:right;"><a href="javascript:changeBackground('article-detail-panel');"><i class="fa fa-square"></i></a></div>
+  </div>
+  
+  <div id="tags-panel" class="mfp-hide white-popup-block">
+    <form id="tags-form" action="http://www.ganjianping.com:8080/jping/web/tags/save" method="post"> 
+	  <input id="tags-uuid" name="uuid" type="hidden"/>
+	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <textarea id="two-level-tags" name="twoLevelTags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
+	</form>   
+	<div id="save-tags-error-info" class="jp-red jp-tc"></div> 
+	<div id="save-tags-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	    <a href="javascript:saveTags();" class="btn btn-primary" style="width:250px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-tags"></span></a>   
+	</div>
+	<div id="save-tags-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="processing-panel" class="mfp-hide white-popup-block" style="max-width:60px;background-color:#1abc9c;opacity:0.65;border-radius:4px;">
+    <!-- <div style="float:right;margin-top:-10px;margin-right:-5px;font-size:10px;cursor:pointer;" onclick="closeProcessingPanel();"><i class="fa fa-times"></i></div> -->
+    <div><i class="fa fa-spinner fa-spin fa-3x" style="text-align:center;color:white;"></i></div>
+  </div>
+</body>
+<script src="../../resource/js/jquery/jquery-1.11.1.js"></script>
+<script src="../../resource/framework/jquery-ui/v1.11/jquery-ui.js"></script>
+<script src="../../resource/framework/bootstrap/v3.2/bootstrap.js"></script>
+<script src="../../resource/framework/henry/v3.0/henry.js"></script>
+<script src="../../resource/framework/henry/v3.0/tools.js"></script>
+<script src="../../resource/framework/henry/v3.0/lang/en.js"></script>
+<script src="../../resource/component/chosen/v1.1/jquery.chosen.js"></script>
+<script src="../../resource/component/fileupload/v5.41/jquery.fileupload.js"></script>
+<script src="../../resource/component/magnific-popup/v0.9/jquery.magnific-popup.js"></script>
+<script src="../../resource/js/jquery/jquery.form-3.51.js"></script>
+<script src="../../resource/js/jquery/jquery.validate-1.13.js"></script>
+<script src="../../resource/js/jquery/jquery.postmessage-transport-1.1.1.js"></script>
+<script src="../../resource/framework/jp/jp.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../resource/js/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="../../resource/js/html5shiv.min.js"></script>
+  <script src="../../resource/js/respond.min.js"></script>
+<![endif]--> 
+<!--[if gte IE 8]><script src="../../resource/js/jquery/jquery.xdr-transport-1.1.3.js"></script></script><![endif]-->
+</html>
+
+<script type="text/javascript">
+var docWidth = $(document).width();
+var currentArticleTag = "all";
+var currentArticleTagIndex = "100000";
+var totalNumber = 0;
+
+var isInitArticleContent = false;
+var isInitImageContent = false;
+// --------------------------------------------------- init Page ---------------------------------------------
+setPage(currentLanguage);
+function setPage(lang) {
+  if (lang == "zh_CN") {
+	loadJs("i18nZhCnJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/image/ic_flag_cn.png");
+  } else {
+	loadJs("i18nEnSgJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/image/ic_flag_us.png");
+  }
+  var loadI18nTimeout = setInterval(function () {
+	if (I18N) {
+	  if ((currentLanguage=="en_SG"&&I18N.home=="Home") || (currentLanguage=="zh_CN"&&I18N.home=="首页")) {
+	    setTextInPage();
+	    clearTimeout(loadI18nTimeout);
+	  }
+	}
+  }, 100);
+}
+function setTextInPage() {
+  $("#title").text(I18N.brandName);
+  $("#brand-name").text(I18N.brandName);
+  $("#menu-home").text(I18N.home);
+  $("#menu-websites").text(I18N.websites);
+  $("#menu-articles").text(I18N.articles);
+  $("#menu-images").text(I18N.images);
+  $("#menu-audios").text(I18N.audios);
+  $("#menu-videos").text(I18N.videos);
+  $("#menu-download").text(I18N.download);
+  $("#btn-login").text(I18N.login);
+  
+  $("#login-title").text(I18N.loginTitle);
+  $("#user-cd").attr("placeholder", I18N.loginWay); 
+  $("#password").attr("placeholder", I18N.password);
+  
+  $("#save-tags").text(I18N.save);
+  
+  $("#article-title").attr("placeholder", I18N.articleTitle);
+  $("#article-content").attr("placeholder", I18N.articleContent);
+  $("#article-origin-url").attr("placeholder", I18N.articleOriginUrl);
+  $("#article-tag").attr("data-placeholder", I18N.chooseTags);
+  $("#article-display-no").attr("placeholder", I18N.displayNo);
+  $("#article-role-id").attr("data-placeholder", I18N.chooseRoles);
+  $("#article-cd").attr("placeholder", I18N.articleCd);
+  $("#article-image-url").attr("placeholder", I18N.imageUrl);
+  $("#article-caption-name").text(I18N.articles);
+  $("#add-article").text(I18N.add);
+  $("#edit-article").text(I18N.edit);
+  $("#save-article").text(I18N.save);
+  $("#cancel-article").text(I18N.cancel);
+  $("#add-article-title").text(I18N.addArticleTitle);
+  
+  //$("#").text(I18N.);
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+  } else {
+	$("#menu-login").text(I18N.login);
+  }
+}
+
+//------------------------------ Login ------------------------------
+function showLoginPanelOrLogout() {
+  if ($("#login-out-menu").attr("name") == "login") {
+	$.magnificPopup.open({items: { src: "#login-in-panel" }, type: 'inline', callbacks: {
+	  open: function() {
+	    setTimeout(function() { $("#user-cd").focus(); }, 100);
+	  }	  
+	}});
+  } else {
+	sessionStorage.removeItem(jp.keyRoleIdNames);
+	$("#login-out-menu").html("<i class='fa fa-sign-in fa-fw'></i> " + I18N.login + "</a>");
+	$("#login-out-menu").attr("name","login");
+	$("#article-roles").hide();
+	$("#article-cells").html("");
+	$("#article-role-id").html("");
+	$("#role-ids").html("");
+	$("#role-ids-div").hide();
+	$("#article-form .chosen-select").trigger("chosen:updated");
+	
+	jpingRoleIds = "empty";
+	asynArticleInfos();
+	$("#edit-article-btn").hide();
+  }
+}
+function login() {
+  if ($('#login-form').validate().form()) {
+	$("#login-btn").hide();
+	$("#login-processing-icon").show();
+	$("#login-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	  $("#login-btn").show();
+	  $("#login-processing-icon").hide();
+	  if (resp.result=="success") {
+		$("#user-cd").val("");
+		$("#password").val("");
+		sessionStorage.setItem(jp.keyRoleIdNames, resp.data.roleIdNames);
+		jpingRoleOptionsHtml = getRoleOptionsHtml();
+		jpingRoleIds = getRoleIds();
+		asynArticleInfos();
+		$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+		$("#login-out-menu").attr("name","logout");
+		$("#article-role-id").html(jpingRoleOptionsHtml);
+		$("#article-roles").show();
+		$("#role-ids").html(jpingRoleOptionsHtml);
+		$("#role-ids-div").show();
+		$("#article-form .chosen-select").trigger("chosen:updated");
+		
+		if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
+	  		$("#edit-article-btn").show();
+	  	}
+		$.magnificPopup.close();
+	  } else {
+		$("#login-error-info").html("Password is wrong.");
+	  }
+	}});
+  }
+}
+function changeLanguage(lang) {
+  setCurrentLanguage(lang);
+  setPage(lang);
+  asynArticleInfos();
+}
+
+function dismiss() {
+  $.magnificPopup.close();
+}
+
+//--------------------------------------- search ----------------------------------
+function filter(el) {
+  var value = $(el).val().toLowerCase();
+  totalNumber = 0;
+  $("#article-cells .jp-cell-big").each(function(index) {
+	var filter = $(this).attr("filter");
+	if (filter) {
+		filter = filter.toLowerCase();
+	} else {
+		filter = "";
+	}
+	
+	var valueArr = value.split("&");
+	var isContain = true;
+	for (var i=0; i < valueArr.length; i++) {
+		if (valueArr[i]!=null && valueArr[i]!="") {
+			if (valueArr[i].indexOf("|")!=-1) {
+				var orValueArr = valueArr[i].split("|");
+				var isContainWithOr = false;
+				for (var k=0; k < orValueArr.length; k++) {
+					if (orValueArr[k]!=null && orValueArr[k]!="" && filter.indexOf(orValueArr[k])!=-1) {
+						isContainWithOr = true;
+						break;
+					}
+				}
+				if (isContainWithOr==false) {
+					isContain = false;
+					break;
+				}
+			} else {
+				if (valueArr[i].indexOf("!=")!=-1 || valueArr[i].indexOf("<>")!=-1) {
+					var notValue = valueArr[i].substring(2);
+					if (notValue=="" || filter.indexOf(notValue) == -1) {
+						isContain = true;
+					} else {
+						isContain = false;
+					}
+					if (isContain == false) {
+						break;
+					}
+				} else {
+					if (filter.indexOf(valueArr[i]) == -1) {
+						isContain = false;
+						break;
+					}	
+				}
+			}
+		}
+	}
+	
+	if (isContain==false) {
+		$(this).hide();
+	} else {
+		totalNumber++;
+		$(this).show();
+	}
+  });
+  $("#totalNumber").text(totalNumber);
+}
+function search(pageNo) {
+  var keywords = $("#keywords").val();
+  var field = $("#field").val();
+  var lang = $("#search-lang").val();
+  var roleIds = $("#role-ids").val();
+  if (roleIds) {
+	  roleIds = "only" + roleIds;
+  } else {
+	  roleIds = jpingRoleIds;
+  }
+  var pageSize = $("#page-size").val();
+  if (!keywords) {
+	  keywords = "all";
+  }
+  var orderBy = $("#order-by").val();
+  getArticleInfos(keywords, field, roleIds, lang, pageNo, pageSize, orderBy);
+  asynTags();
+} 
+
+//------------------------------ Articles ------------------------------
+function asynArticleInfos() {
+  $("#page-size").val(200);
+  $("#order-by").val("modifyTimestamp desc");
+  $("#field").val("tag");
+  $("#search-lang").val(currentLanguage);
+  getArticleInfos(currentArticleTag,"tag",jpingRoleIds,currentLanguage,1,200,'modifyTimestamp desc');	
+  asynTags();
+}
+function getArticleInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
+  $("#article-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
+  var getArticleInfosUrl = "http://www.ganjianping.com:8080/jping/web/articles/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
+  $.ajax({type: "GET", url: getArticleInfosUrl, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var articles = response.data;
+		var articleHtml = "";
+		totalNumber = 0;
+		for (var i=0; i<articles.length; i++) {
+			var article = articles[i];
+			var content = article.content;
+			var uuid = article.uuid;
+			var articleCd = article.cd;
+			var title = article.title;
+			var imageUrls = article.imageUrls;
+			var tags = article.tags;
+			var displayNo = article.displayNo;
+			var roleIds = article.roleIds;
+			var originUrl = article.originUrl;
+			var lang = article.lang;
+			articleHtml += "<div class='jp-cell-big' filter='" + tags + articleCd + title + "'>" +
+				"<div><a href='javascript:showArticleDetail(&#39;" + uuid + "&#39;, &#39;" + title + "&#39;);' style='color:black;'>"  + article.title
+			if (article.imageUrls) {
+				var articleArr = article.imageUrls.split(",");
+				articleHtml += "<img src='" + articleArr[0] + "' style='height:30px;margin-left:10px;'/>"
+			}
+			articleHtml += "</a><span class='article-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showArticleEditPanel(&#39;" + uuid + 
+					"&#39;, &#39;" + title + "&#39;, &#39;" + imageUrls + "&#39;, &#39;" + articleCd + "&#39;, &#39;" + originUrl + "&#39;, &#39;" + tags + 
+					"&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>" + 
+				"</div>" + 
+				"<div id='" + uuid + "Content' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>" + 
+			  "</div>";
+			totalNumber++;
+		} 
+		$("#totalNumber").text(totalNumber);
+		$("#article-cells").html(articleHtml);
+	  }
+	},
+	fail : function() {
+	  $("#article-cells").html(I18N.fail);
+	}
+  });
+}
+var articleImageUrls = [];
+var articleImageUrlIndex = 0;
+function showArticleDetail(uuid,title) {
+  $("#article-detail-title").html(title);
+  $("#article-detail-content").html($("#"+uuid+"Content").html());
+  $("#article-detail-panel").css("background-color","#333").css("color","white");
+  $.magnificPopup.open({items: { src: "#article-detail-panel" }, type: 'inline'});
+  $(".mfp-close").css("color","white");
+}
+function showArticleAddPanel() {
+  $("#article-uuid").val("");
+  $("#article-cd").val("");
+  $("#article-title").val("");
+  $("#article-content").val("");
+  $("#article-image-url").val("");
+  $("#article-tag").val("");
+  $("#article-origin-url").val("");
+  $("#article-display-no").val("");
+  $("#article-role-id").val("");
+  $("#search-lang").val(currentLanguage);
+  if (isInitArticleContent==true) {
+	  $("#paper").html("");
+  } else {
+	  $("#article-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitArticleContent=true;
+  }
+  
+  $.magnificPopup.open({items: { src: "#article-panel" }, type: 'inline', modal: true});
+  $("#article-form .chosen-select").chosen({search_contains : false}); 
+  $("#article-images").html("");
+  articleImageUrlIndex = 0;
+  articleImageUrls = [];
+}
+
+function editArticles() {
+  if ($("#article-cells .article-edit-btn").is(":visible")) {
+	  $("#article-cells .article-edit-btn").hide();
+	  $("#article-tag-edit-btn").hide();
+  } else {
+	  $("#article-cells .article-edit-btn").show();
+	  $("#article-tag-edit-btn").show();
+  }
+}
+function showArticleEditPanel(uuid,title,imageUrls,articleCd,originUrl,tags,displayNo,roleIds,lang) {
+  articleImageUrlIndex = 0;
+  articleImageUrls = [];
+  if (imageUrls!=null && imageUrls.indexOf("http")==0) {
+	  var imageUrlArr = imageUrls.split(",");
+	  for (var i=0;i<imageUrlArr.length;i++) {
+		var divEl = "<div id='article-image-" + articleImageUrlIndex + "' style='display:inline-block;text-align:center;margin:5px;'>" +
+		  	"<img src='" + imageUrlArr[i] + "' style='height:80px;'/><br/>" +
+		  		"<a href='javascript:deleteArticleImage(" + articleImageUrlIndex + ",&#39;" + imageUrlArr[i] +"&#39;);' style='width:30px;cursor:pointer;color:black;'>" +
+				"<i class='fa fa-times'></i></a>" +  
+			"</div>";
+	  	$("#article-images").html(divEl);
+	  	articleImageUrls.push(imageUrlArr[i]);
+	  	articleImageUrlIndex++;
+	  }
+  } else {
+	  $("#article-images").html("");
+	  articleImageUrls = [];
+	  articleImageUrlIndex = 0;
+  }
+  
+  $("#article-lang").val(lang);
+  $("#article-uuid").val(uuid);
+  $("#article-title").val(title);
+  if (articleCd && articleCd!="" && articleCd!="null") {
+	  $("#article-cd").val(articleCd);
+  } else {
+	  $("#article-cd").val("");
+  }
+  if (originUrl && originUrl!="" && originUrl!="null") {
+	  $("#article-origin-url").val(originUrl);
+  } else {
+	  $("#article-origin-url").val("");
+  }
+  
+  $("#article-tag").val(tags.split(","));
+  $("#article-display-no").val(displayNo);
+  if (roleIds!=null && roleIds!="" && roleIds!="null") {
+	  $("#article-role-id").val(roleIds.split(",")); 
+  } else {
+	  $("#article-role-id").val(""); 
+  }
+  $.magnificPopup.open({items: { src: "#article-panel" }, type: 'inline', modal: true});
+  $("#article-form .chosen-select").chosen({search_contains : false});
+  $("#article-form .chosen-select").trigger("chosen:updated");
+  if (isInitArticleContent==true) {
+	  $("#article-content").val($("#"+uuid+"Content").html());
+	  $("#paper").html($("#"+uuid+"Content").html());
+  } else {
+	  $("#article-content").val($("#"+uuid+"Content").html());
+	  $("#article-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitArticleContent=true;
+  }
+}
+function addArticleImageUrl() {
+  var imageUrl = $("#article-image-url").val();
+  if (imageUrl) {
+	  var divEl = "<div id='article-image-" + articleImageUrlIndex + "' style='display:inline-block;text-align:center;margin:5px;'>" +
+		  "<img src='" + imageUrl + "' style='height:80px;'/><br/>" +
+		  "<a href=javascript:deleteArticleImage(" + articleImageUrlIndex + ",'" + imageUrl +"') style='width:30px;cursor:pointer;color:black;'>" +
+			"<i class='fa fa-times'></i></a>" +  
+		"</div>";
+	  $("#article-images").append(divEl);
+	  articleImageUrls.push(imageUrl);
+	  articleImageUrlIndex++;
+  }
+}
+function deleteArticleImage(articleImageUrlIndex, imageUrl) {
+  $("#article-image-" + articleImageUrlIndex).remove();
+  for (var i=0; i<articleImageUrls.length; i++) {
+  	if(articleImageUrls[i] === imageUrl) {
+  		articleImageUrls.splice(i, 1);
+  	}
+  }
+}
+function saveArticle() {
+  if ($('#article-form').validate().form()) {
+	var articleTags = $("#article-tag").val();
+	var articleRoleIds = $("#article-role-id").val();
+	if (articleTags==null) {
+	  $("#article-tags-error").text(I18N.chooseTagsError);
+	} else {
+	  $("#save-article-btn").hide();
+	  $("#save-article-processing-icon").show();
+	  $("#article-tags").val(articleTags);
+	  $("#article-role-ids").val(articleRoleIds);
+	  $("#article-content").val($("#paper").html());
+	  $("#article-image-urls").val(articleImageUrls.toString());
+	  
+	  $("#article-form").ajaxSubmit({dataType:'json', success : function(resp) {
+		$("#save-article-btn").show();
+		$("#save-article-processing-icon").hide();
+		if (resp.result=="success") {
+		  search(1);
+		  $.magnificPopup.close();
+		} else {
+		  $("#save-article-error-info").html(I18N.msg_save_fail);
+		}
+	  }});
+	}
+  }
+}
+
+//--------------------------------------- all tags operation ---------------------------------
+function changeArticleTag(tag, index) {
+/*   var keywords = $("#keywords").val();
+  if ($("#article-tag-" + index).hasClass("theme-bg-color")) {
+	$("#article-tag-" + index).removeClass("theme-bg-color");
+	$("#keywords").val(keywords.replace("&"+tag,"").replace(tag+"&","").replace(tag,""));
+  } else {
+	$("#article-tag-" + index).addClass("theme-bg-color");
+	if (keywords!="") keywords+="&";
+	keywords += tag;
+	$("#keywords").val(keywords);
+  }
+  filter("#keywords"); */
+  if (currentArticleTagIndex!=100000) {
+	  $("#article-tag-"+currentArticleTagIndex).removeClass("theme-bg-color");
+  }
+  if (currentArticleTagIndex!=100000 && currentArticleTagIndex==index) {
+	  $("#keywords").val("");
+	  currentArticleTag = "";
+	  currentArticleTagIndex = 100000;
+  } else {
+	  currentArticleTag = tag;
+	  currentArticleTagIndex = index;
+	  $("#article-tag-" + index).addClass("theme-bg-color");
+	  $("#keywords").val(tag);
+  }
+  filter("#keywords");
+}
+	
+function asynTags() {
+  var lang = $("#search-lang").val();
+  $.ajax({type: "GET", url: "http://www.ganjianping.com:8080/jping/web/tags/all/" + lang, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var tagCdAndInfos = response.data;
+		//article tags
+		var articleTagBtnsHtml = "";
+		var articleTagsOptionHtml = "";
+		
+		if (lang=="all") {
+			var articleTagInfo1;
+			var articleTagInfo2;
+			if (currentLanguage=="zh_CN") {
+				articleTagInfo1 = tagCdAndInfos.articleTagszh_CN;
+				articleTagInfo2 = tagCdAndInfos.articleTagsen_SG;
+			} else {
+				articleTagInfo1 = tagCdAndInfos.articleTagsen_SG;
+				articleTagInfo2 = tagCdAndInfos.articleTagszh_CN;
+			}
+			articleTagBtnsHtml = getArticleTagBtnsHtml(articleTagInfo1);
+			articleTagsOptionHtml = getArticleTagsOptionHtml(articleTagInfo1);
+			articleTagsOptionHtml += getArticleTagsOptionHtml(articleTagInfo2);
+		} else {
+			var articleTagInfo = tagCdAndInfos.articleTags;
+			articleTagBtnsHtml = getArticleTagBtnsHtml(articleTagInfo);
+			articleTagsOptionHtml = getArticleTagsOptionHtml(articleTagInfo);
+		}
+		$("#article-tag-btns").html(articleTagBtnsHtml);
+		$("#article-tag").html(articleTagsOptionHtml);
+		$("#article-form .chosen-select").trigger("chosen:updated");
+	  }
+	},
+	fail : function() {
+	  $("#article-tag-btns").html("Fail");
+	}
+  });
+}
+function getArticleTagBtnsHtml(articleTagInfo) {
+	var articleTagUuid = articleTagInfo.uuid;
+	var articleFirstSecondLevelTags = articleTagInfo.description.split(";");
+	var articleTagBtnsHtml = "";
+	for (var i=0; i<articleFirstSecondLevelTags.length; i++) {
+		var articleFirstSecondLevelTagWithColon = articleFirstSecondLevelTags[i];
+		if (articleFirstSecondLevelTagWithColon!="") {
+			var articleFirstSecondLevelTagArr = articleFirstSecondLevelTagWithColon.split(":")
+			var firstLevelTag = articleFirstSecondLevelTagArr[0];
+			if (articleTagBtnsHtml!="") articleTagBtnsHtml += "&nbsp;&nbsp;";
+			articleTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+			if (firstLevelTag == currentArticleTag) {
+				articleTagBtnsHtml += "theme-bg-color";
+			}
+			articleTagBtnsHtml += "' href='javascript:changeArticleTag(&#39;" + firstLevelTag + "&#39;, " + i + ");' id='article-tag-" + i + "' style='margin:5px;"
+			articleTagBtnsHtml += "' style='margin-right:5px;'><i class='fa fa-tag fa-fw'></i>&nbsp;" + firstLevelTag + "</a>";
+			
+			if (articleFirstSecondLevelTagArr.length>=2) {
+				var secondLevelTagArr = articleFirstSecondLevelTagArr[1].split(",");
+			    articleTagBtnsHtml += ":";
+				for (var j=0; j<secondLevelTagArr.length; j++) {
+					var tag = secondLevelTagArr[j];
+					articleTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+					if (tag == currentArticleTag) {
+						articleTagBtnsHtml += "theme-bg-color";
+					}
+					articleTagBtnsHtml += "' href='javascript:changeArticleTag(&#39;" + tag + "&#39;,&#39;" + i + '-' + j + "&#39;);' id='article-tag-" + i + "-" + j + "' style='margin:5px;"
+					articleTagBtnsHtml += "'>" + tag + "</a>";
+					
+				}
+			}
+			
+		}
+	}
+	articleTagBtnsHtml += "<br/><span id='article-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" + articleTagUuid 
+		+ "&#39;, &#39;" + articleTagInfo.cd + "&#39;, &#39;" + articleTagInfo.description + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+	return articleTagBtnsHtml;
+}
+function getArticleTagsOptionHtml(articleTagInfo) {
+	var articleTagUuid = articleTagInfo.uuid;
+	var articleFirstSecondLevelTags = articleTagInfo.description.split(";");
+	var articleTagsOptionHtml = "";
+	for (var i=0; i<articleFirstSecondLevelTags.length; i++) {
+		var articleFirstSecondLevelTagWithColon = articleFirstSecondLevelTags[i];
+		if (articleFirstSecondLevelTagWithColon!="") {
+			var articleFirstSecondLevelTagArr = articleFirstSecondLevelTagWithColon.split(":")
+			var firstLevelTag = articleFirstSecondLevelTagArr[0];
+			articleTagsOptionHtml += "<option value='" + firstLevelTag + "' style='font-weight:bold;'>" + firstLevelTag + "</option>";
+			
+			if (articleFirstSecondLevelTagArr.length>=2) {
+				var secondLevelTagArr = articleFirstSecondLevelTagArr[1].split(",");
+			    for (var j=0; j<secondLevelTagArr.length; j++) {
+					var tag = secondLevelTagArr[j];
+					articleTagsOptionHtml += "<option value='" + tag + "' style='margin-left:10px'>  " + tag + "</option>";
+				}
+			}
+			
+		}
+	}
+	return articleTagsOptionHtml;
+}
+function showTagEditPanel(uuid, cd, tags) {
+  if (cd=="websiteTags") {
+	$("#tags-title").html("Website Tags");
+  }
+  $("#tags-uuid").val(uuid);
+  $("#two-level-tags").val(tags);
+  
+  $.magnificPopup.open({items: { src: "#tags-panel" }, type: 'inline', modal: true});
+}
+function saveTags() {
+  $("#save-tags-btn").hide();
+  $("#save-tags-processing-icon").show();
+  $("#tags-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	$("#save-tags-btn").show();
+	$("#save-tags-processing-icon").hide();
+	if (resp.result=="success") {
+	  asynTags();
+	  $.magnificPopup.close();
+	} else {
+	  $("#save-tags-error-info").html("Fail.");
+	}
+  }});
+}
+
+//--------------------------------------- Processing ---------------------------------
+function showProcessingPanel() {
+  $.magnificPopup.open({items: { src: "#processing-panel" }, type: 'inline', modal:true});
+}
+var currentBgColor = "white";
+var currentColor = "black";
+function changeBackground(elId){
+  if (currentBgColor=="white") {
+	  currentBgColor = "#333"; 
+	  currentColor = "white";
+  } else {
+	  currentBgColor = "white"; 
+	  currentColor = "black";
+  }
+  $("#" + elId).css("background-color",currentBgColor).css("color",currentColor);
+  $(".mfp-close").css("color",currentColor);
+}
+
+$(document).ready(function(){
+  //-------------------------- Init : magnificPopup, asyn tags,  ----------------------------
+  $('.popup-with-form').magnificPopup();
+  asynArticleInfos();
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#article-role-id").html(jpingRoleOptionsHtml);
+	$("#article-roles").show();
+	$("#role-ids").html(jpingRoleOptionsHtml);
+	$("#role-ids-div").show();
+	$("#login-out-menu").attr("name","logout");
+	if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
+  		$("#edit-article-btn").show();
+  	}
+  }
+  //-------------------------- Login -----------------------------
+  $('#login-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      userCd: {required: true},
+      password: {required: true}
+  	},
+  	messages: {
+  	  userCd: {required: "Please enter user name or mobile number or email."},
+  	  password: {required: "Please enter password."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.parent()); error.css('color', 'red').css("margin-left","1px");},
+  });
+  $("#user-cd,#password").focus(function() {
+	  $("#login-error-info").html("");
+  });
+  
+//------------------------ Search ------------------------------
+  $("#article-tags-btn").click(function() {
+	if ($("#article-tag-btns").is(":visible")) {
+	  $("#article-tag-btns").hide();
+	  $("#article-tags-btn").css("background-color","#eee").css("color","#333");
+	} else {
+	  $("#article-tag-btns").show();
+	  $("#article-tags-btn").css("background-color","#1abc9c").css("color","#fff");
+	}
+  });
+  $("#search-condition-btn").click(function() {
+	  if ($("#search-condition-div").is(":visible")) {
+		  $("#search-condition-div").hide();
+		  $("#search-condition-btn").css("background-color","#eee").css("color","#333");
+	  } else {
+		  $("#search-condition-div").show();
+		  $("#search-condition-btn").css("background-color","#1abc9c").css("color","#fff");
+	  }
+  });
+  $("#operation-btn").click(function() {
+	  if ($("#article-operate-btns").is(":visible")) {
+		  $("#article-operate-btns").hide();
+		  $("#operation-btn").css("background-color","#eee").css("color","#333");
+	  } else {
+		  $("#article-operate-btns").show();
+		  $("#operation-btn").css("background-color","#1abc9c").css("color","#fff");
+	  }
+  });
+  $("#search-btn").click(function() {
+	  search(1);
+  })
+  $("#keywords").keyup(function( event ) {
+    if ( event.which == 13 ) {
+	    event.preventDefault();
+	} else {
+		filter(this);
+	}
+  });
+  $("#role-ids,#order-by,#search-lang,#page-size,#field").change(function() {
+	  search(1);
+  });
+//-------------------------- Articles ---------------------------
+  $("#article-caption").click(function() {
+	if ($("#article-tag-btns").is(":visible")) {
+	  $("#article-tag-btns").hide();
+	} else {
+	  $("#article-tag-btns").show();
+	}
+  });
+  $('#article-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      title: {required: true, maxlength:100},
+      content: {required: true},
+      originUrl: {maxlength:256}
+  	},
+  	messages: {
+  	  title: {required: "Please enter article title."},
+  	  content: {required: "Please enter article content."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.closest('.form-control'));error.css('color', 'red');},
+    submitHandler: function (form) {form.submit();}
+  });
+  $('#upload-article-image-btn').fileupload({
+	maxChunkSize: 10000000, // 10 MB
+    dataType: 'json',
+    done: function (e, data) {
+      $("#article-image-url").val(data.result.saveUrl);
+      if (data.result.result == "success") {
+      	 addArticleImageUrl();
+      } else {
+    	 addArticleImageUrl();
+    	 alert(data.result.result);
+      }
+    }
+  });
+  $("#article-title,#article-content,#article-tag,#article-image-url,#article-role-id").focus(function() {
+	$("#save-article-error-info").html("");
+	$("#article-tags-error").html("");
+  });
+
+});
+</script>

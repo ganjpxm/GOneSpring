@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS Module Demo</title>
+  <script src="../../../resource/js/angular/v1.2/angular.js"></script>
+  <script src="../../../resource/js/angular/v1.2/angular-route.js"></script>
+  <script src="../../../resource/framework/jp/jpa.js"></script>
+</head>
+<body ng-app="jp-app">
+  <div ng-controller="DemoUserController">
+    <h1>Using Filters with controller in a Module</h1>
+    Name : <input type="text" ng-model="userInfo" />
+    <ul>
+      <li ng-repeat="user in users | filter:userInfo | orderBy:'name'">
+      	{{ user.name | uppercase }} - {{ user.mobile | lowercase }} ({{ user.email }})
+      </li>
+    </ul>
+  </div>
+  
+  <div>
+    <!-- Placeholder for views -->
+    <div ng-view=""></div>
+  </div>
+</body>
+</html>
