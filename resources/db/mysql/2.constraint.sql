@@ -5,8 +5,8 @@ ALTER TABLE am_role ADD UNIQUE `role_cd_lang_index`(`role_cd`, `lang`);
 ALTER TABLE am_org ADD UNIQUE  `org_cd_lang_index`(`org_cd`, `lang`);
 ALTER TABLE am_menu ADD UNIQUE `menu_cd_lang_index`(`menu_cd`, `lang`);
 ALTER TABLE am_subsystem ADD UNIQUE `subsystem_cd_lang_index`(`subsystem_cd`, `lang`);
-ALTER TABLE am_config ADD UNIQUE `config_cd_lang_index`(`config_cd`, `lang`);
-ALTER TABLE am_param ADD UNIQUE `config_cd_lang_index`(`param_cd`, `lang`);
+ALTER TABLE bm_config ADD UNIQUE `config_cd_lang_index`(`config_cd`, `lang`);
+ALTER TABLE bm_param ADD UNIQUE `config_cd_lang_index`(`param_cd`, `lang`);
 ALTER TABLE cm_image ADD UNIQUE `image_name_index`(`image_name`, `lang`);
 
 ALTER TABLE am_role_subsystem ADD UNIQUE `subsystem_id_role_id_index`(`subsystem_id`, `role_id`);
