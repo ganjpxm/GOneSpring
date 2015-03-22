@@ -18,7 +18,7 @@ I18N = {
     
     carouselTitle1: "Gan Jianping",
     carouselContent1: "The website is a personal website that work on desktop, laptop, tablet and smartphone.",
-    carouselTitle2: "Webs",
+    carouselTitle2: "Websites",
     carouselContent2: "The website provide many website urls that include news, online shopping and software etc.",
     carouselTitle3: "Mobile Apps",
     carouselContent3: "The website provide many apps that include iOS, Android and windows phone etc.",
