@@ -35,7 +35,29 @@ public class GjmpController extends BaseController {
 			String subsystemName = request.getParameter("subsystemName");
 			if (StringUtil.hasText(subsystemName)) amUserLogin.setCurrentSubsystemName(subsystemName);
 		}
-		return "gjpmp/home";
+		return "gjmp/home";
+	}
+	
+	// ------------------------------- Go to page -----------------------------------------------
+	@RequestMapping(value="/website", method=RequestMethod.GET)
+	public String goToWebsitePage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "gjmp/website";
+	}
+	@RequestMapping(value="/article", method=RequestMethod.GET)
+	public String goToArticlePage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "gjmp/article";
+	}
+	@RequestMapping(value="/image", method=RequestMethod.GET)
+	public String goToImagePage(HttpServletRequest request) {
+		setPageInfo(request);
+		return "gjmp/image";
+	}
+	
+	private void setPageInfo(HttpServletRequest request) {
+		request.setAttribute("pageNo", StringUtil.isEmpty(request.getParameter("pageNo"))?1:request.getParameter("pageNo"));
+		request.setAttribute("pageSize",  StringUtil.isEmpty(request.getParameter("pageSize"))?100:request.getParameter("pageSize"));
 	}
 	
 }

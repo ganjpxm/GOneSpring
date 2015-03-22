@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.ganjp.gservlet.sample.servlet.v31.nonblocking;
+package org.ganjp.gone.demo.servlet.v31.nonblocking;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

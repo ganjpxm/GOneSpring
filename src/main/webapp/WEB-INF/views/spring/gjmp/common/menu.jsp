@@ -36,11 +36,23 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/device.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/mmp/subsystem'/>"><i class="fa fa-mobile fa-fw"></i> Device</a>
+        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/website.jsp')}">class="active"</c:if>>
+        	<a href="<c:url value='/spring/gjmp/website'/>"><i class="fa fa-globe fa-fw"></i> Websites</a>
         </li>
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/role.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/mmp/role'/>"><i class='fa fa-user-secret fa-fw'></i> Location</a></li>
+        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/article.jsp')}">class="active"</c:if>>
+        	<a href="<c:url value='/spring/gjmp/article'/>"><i class="fa fa-book fa-fw"></i> Articles</a>
+        </li>
+        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/image.jsp')}">class="active"</c:if>>
+        	<a href="<c:url value='/spring/gjmp/image'/>"><i class="fa fa-picture-o fa-fw"></i> Images</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+		    <li><a href="<c:url value='/spring/cm/website'/>" target="_blank"> Websites</a></li>
+		    <li><a href="<c:url value='/spring/cm/article'/>" target="_blank"> Articles</a></li>
+		    <li><a href="<c:url value='/spring/cm/image'/>" target="_blank"> Images</a></li>
+          </ul>
+        </li>
         <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>	
       </ul>
     </div>

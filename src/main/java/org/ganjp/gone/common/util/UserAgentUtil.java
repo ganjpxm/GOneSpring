@@ -1,4 +1,4 @@
-package org.ganjp.obs.core.web.util;
+package org.ganjp.gone.common.util;
 
 import java.util.HashMap;
 import java.util.Map;

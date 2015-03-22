@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package org.ganjp.gservlet.sample.servlet.v31.nonblocking;
+package org.ganjp.gone.demo.servlet.v31.nonblocking;
 
 import java.io.IOException;
 import java.io.PrintWriter;
