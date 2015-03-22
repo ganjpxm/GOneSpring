@@ -68,6 +68,7 @@ I18N = {
 	view: "查看",
 	fail: "失败",
 	upload: "上传",
+	more: "更多",
 	
 	msg_save_sucess: "保存成功",
 	msg_save_fail: "保存失败",

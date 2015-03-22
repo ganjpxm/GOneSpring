@@ -156,16 +156,14 @@ public class GjpwController extends BaseController {
 		try {
 			String uuid = request.getParameter("uuid");
 			String tags = request.getParameter("tags");
-			String twoLevelTags = request.getParameter("twoLevelTags");
-			if (StringUtil.hasText(uuid) && uuid.length()==32 && (StringUtil.hasText(tags) || StringUtil.hasText(twoLevelTags))) {
+			if (StringUtil.hasText(uuid) && uuid.length()==32 && StringUtil.hasText(tags)) {
 				BmConfig bmConfig = bmConfigService.findOne(uuid);
 				bmConfig.setModifyTimestamp(DateUtil.getNowTimstamp());
-				if (StringUtil.hasText(twoLevelTags)) {
-					bmConfig.setConfigValue(twoLevelTags);
+				if (StringUtil.hasText(tags)) {
+					bmConfig.setConfigValue(tags);
 				}
 				bmConfigService.update(bmConfig);
 			}
-			
 			map.put("result", "success");
 		} catch (Exception ex) {
 			log.error(ex.getMessage());
@@ -247,6 +245,8 @@ public class GjpwController extends BaseController {
 			String roleIds = request.getParameter("roleIds");
 			if (StringUtil.hasText(roleIds)) {
 				cmWebsite.setRoleIds(roleIds);
+			} else {
+				cmWebsite.setRoleIds(null);
 			}
 			if (isNew) {
 				cmWebsiteService.create(cmWebsite);
@@ -378,18 +378,18 @@ public class GjpwController extends BaseController {
 						}
 						if (StringUtil.hasText(roleIds)) cmImage.setRoleIds(roleIds);
 						if (Const.LANGUAGE_ZH_CN.equals(lang)) {
-							cmImage.setTags("博文");
+							cmImage.setTags("其他,博文");
 						} else {
-							cmImage.setTags("Article");
+							cmImage.setTags("Other,Article");
 						}
 						cmImageService.create(cmImage);
 					} else {
 						for (CmImage cmImage :  cmImages) {
 							if (StringUtil.hasText(roleIds)) cmImage.setRoleIds(roleIds);
 							if (Const.LANGUAGE_ZH_CN.equals(lang)) {
-								cmImage.setTags("博文");
+								cmImage.setTags("其他,博文");
 							} else {
-								cmImage.setTags("Article");
+								cmImage.setTags("Other,Article");
 							}
 							cmImageService.update(cmImage);
 						}
@@ -543,15 +543,17 @@ public class GjpwController extends BaseController {
 				if (new File(saveFullPath).exists()) {
 					map.put("result", fileFullName + " has been exist!");
 				} else {
-					if (fileFullName.endsWith("png") || fileFullName.endsWith("jpg")) {
+					if (fileFullName.endsWith("png") || fileFullName.endsWith("jpg") || fileFullName.endsWith("jpeg")) { 
 						CmImage cmImage = new CmImage();
-						String imageName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-						imageName = imageName.replaceAll("-", " ");
-						imageName = imageName.replaceAll("_", " ");
-						cmImage.setImageName(imageName);
+						cmImage.setImageName(fileName);
 						cmImage.setImageUrl(saveUrl);
 						cmImage.setLang(lang);
 						cmImage.setDisplayNo(9999);
+						if (Const.LANGUAGE_ZH_CN.equals(lang)) {
+							cmImage.setTags("其他");
+						} else {
+							cmImage.setTags("Other");
+						}
 						cmImageService.create(cmImage);
 					}
 					FileUtil.copy(file.getInputStream(), new File(saveFullPath));

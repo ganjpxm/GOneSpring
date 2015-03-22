@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="description" content="Personal,Software,Hardeware">
   <meta name="author" content="Gan Jianping">
-  <link rel="icon" href="../../resource/image/ic_jp_circle.png">
-  <title id="title">JPing</title>
-
-  <link rel="stylesheet" href="../../resource/framework/jquery-ui/v1.11/jquery-ui.css">
-  <link rel="stylesheet" href="../../resource/framework/bootstrap/v3.2/bootstrap.css">
-  <link rel="stylesheet" href="../../resource/framework/henry/v3.0/style.css">
-  <link rel="stylesheet" href="../../resource/css/font-awesome/v4.2/font-awesome.css">
-  <link rel="stylesheet" href="../../resource/component/chosen/v1.1/chosen.css">
-  <link rel="stylesheet" href="../../resource/component/fileupload/v5.41/fileupload.css">
-  <link rel="stylesheet" href="../../resource/component/magnific-popup/v0.9/magnific-popup.css">
-  <link rel="stylesheet" href="../../resource/framework/jp/jp.css">
+  <link rel="icon" href="../../resources/jp/image/favicon.png">
+  <title>Gan Jianping Article</title>
+  <link rel="stylesheet" href="../../resources/jqueryui/1.11.2/jquery-ui.css">
+  <link rel="stylesheet" href="../../resources/bootstrap/v3.3.2/css/bootstrap.css">
+  <link rel="stylesheet" href="../../resources/other/style-metronic.css">
+  <link rel="stylesheet" href="../../resources/henry/v3.0/style.css">
+  <link rel="stylesheet" href="../../resources/font-awesome/v4.3.0/css/font-awesome.css">
+  <link rel="stylesheet" href="../../resources/chosen/v1.1/chosen.css">
+  <link rel="stylesheet" href="../../resources/fileupload/v5.41/fileupload.css">
+  <link rel="stylesheet" href="../../resources/magnific-popup/v0.9/magnific-popup.css">
+  <link rel="stylesheet" href="../../resources/jp/jp-gone.css">
 </head>
 <body>
   <!-- ***************************************************** Menu ******************************************************* -->
@@ -40,19 +40,15 @@
               <li><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
               <li><a href="#contact"><i class="fa fa-volume-up fa-fw"></i> <span id="menu-audios"></span></a></li>
               <li><a href="#contact"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
-              <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
-              <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <span class="caret"></span></a>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="menu-more"></span> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="http://192.168.1.4:8088/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
+                  <!-- <li class="dropdown-header">Nav header</li> -->
                 </ul>
-              </li> -->
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right"  style="font-size:16px;">
               <li>
@@ -67,12 +63,12 @@
 	              <ul class="dropdown-menu" role="menu">
 	                <li>
 	                  <a id="login-out-menu" name="login" href="javascript:changeLanguage('zh_CN');" >
-	              		<img src="../../resource/image/ic_flag_cn.png" alt="中文" style="height:18px;"> 中文
+	              		<img src="../../resources/jp/image/ic_flag_cn.png" alt="中文" style="height:18px;"> 中文
 	              	  </a>
 	              	</li>
 	                <li>
 	              	<a id="login-out-menu" name="login" href="javascript:changeLanguage('en_SG');" > 
-	              		<img src="../../resource/image/ic_flag_us.png" alt="English" style="height:18px;"> English
+	              		<img src="../../resources/jp/image/ic_flag_us.png" alt="English" style="height:18px;"> English
 	              	</a>
 	              </li>
                 </ul>
@@ -89,10 +85,10 @@
 	  <div style="margin-top:50px;">
 	    <div>
 		    <div class="input-group">
-			  <span id="article-tags-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-tags"></i></span>
-			  <span id="search-condition-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-filter"></i></span>
+			  <span id="article-tags-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-tags" style="color:black;"></i></span>
+			  <span id="search-condition-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-filter" style="color:black;"></i></span>
 			  <input id="keywords" name="keywords" type="text" class="form-control" value="" />
-			  <span id="search-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-search"></i></span>
+			  <span id="search-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-search" style="color:black;"></i></span>
 			  <span id="operation-btn" class="input-group-addon" style="cursor:pointer;"><span id="totalNumber" class="badge" style="color:white;background-color:#1abc9c;"></span></span>
 			</div>
 		</div>
@@ -147,7 +143,6 @@
 	  <div style="clear:both;"></div>
 	  <div class="jp-box-big" style="margin-top:5px;">
 	    <div id="article-cells" style="display:block;"> 
-		  <!-- <div class="jp-cell"><img src="../../resource/article/ic_logo_google.png" height="20"> <a href='http://www.google.com'>Google</a></div> -->
 		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
 		</div>
 	  </div>
@@ -156,7 +151,7 @@
   
   <hr class="featurette-divider">
   <footer>
-    <div style="background-color:#1abc9c; text-align:center;color:white;padding:20px;margin-top:-30px;">
+    <div style="background-color:#00796B; text-align:center;color:white;padding:20px;margin-top:-30px;">
         <p>Email : ganjpxm@gmail.com</p>
     	<p>&copy; 2014 Gan Jianping &middot;</p>
     </div>
@@ -164,7 +159,8 @@
 
   <!-- ******************************************* magnific-popup Panel ************************************************** -->
   <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
-    <form id="login-form" action="http://www.ganjianping.com:8080/jping/web/login" method="post">
+    <form id="login-form" action="http://192.168.1.4:8088/gone/spring/gjpw/login" method="post">
+      <input name="subsystemId" type="hidden" value='402881844c364ba2014c3659098d006c'/>
 	  <h3 id="login-title" class="jp-tc"></h3>
 	  <div class="input-group jp-mt30">
 		<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -183,7 +179,7 @@
   </div>
   
   <div id="article-panel" class="white-popup-block mfp-hide">
-    <form id="article-form" action="http://www.ganjianping.com:8080/jping/web/article/save" method="post">
+    <form id="article-form" action="http://192.168.1.4:8088/gone/spring/gjpw/article/save" method="post">
       <input id="article-lang" name="lang" type="hidden" value="en_SG"/>
       <input id="article-uuid" name="uuid" type="hidden"/>
       <input id="article-tags" name="tags" type="hidden"/>
@@ -209,7 +205,7 @@
 			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
 				<i class="fa fa-cloud-upload fa-lg"></i>
 			  </button>
-			  <input id="upload-article-image-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/jping/web/uploadFile" multiple></input>
+			  <input id="upload-article-image-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
 			</label>
 	      </div>
 	    </div>
@@ -244,7 +240,7 @@
   </div>
   
   <div id="tags-panel" class="mfp-hide white-popup-block">
-    <form id="tags-form" action="http://www.ganjianping.com:8080/jping/web/tags/save" method="post"> 
+    <form id="tags-form" action="http://192.168.1.4:8088/gone/spring/gjpw/tags/save" method="post"> 
 	  <input id="tags-uuid" name="uuid" type="hidden"/>
 	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
@@ -262,28 +258,26 @@
     <div><i class="fa fa-spinner fa-spin fa-3x" style="text-align:center;color:white;"></i></div>
   </div>
 </body>
-<script src="../../resource/js/jquery/jquery-1.11.1.js"></script>
-<script src="../../resource/framework/jquery-ui/v1.11/jquery-ui.js"></script>
-<script src="../../resource/framework/bootstrap/v3.2/bootstrap.js"></script>
-<script src="../../resource/framework/henry/v3.0/henry.js"></script>
-<script src="../../resource/framework/henry/v3.0/tools.js"></script>
-<script src="../../resource/framework/henry/v3.0/lang/en.js"></script>
-<script src="../../resource/component/chosen/v1.1/jquery.chosen.js"></script>
-<script src="../../resource/component/fileupload/v5.41/jquery.fileupload.js"></script>
-<script src="../../resource/component/magnific-popup/v0.9/jquery.magnific-popup.js"></script>
-<script src="../../resource/js/jquery/jquery.form-3.51.js"></script>
-<script src="../../resource/js/jquery/jquery.validate-1.13.js"></script>
-<script src="../../resource/js/jquery/jquery.postmessage-transport-1.1.1.js"></script>
-<script src="../../resource/framework/jp/jp.js"></script>
+<script src="../../resources/jquery/jquery-1.11.1.js"></script>
+<script src="../../resources/jqueryui/1.11.2/jquery-ui.js"></script>
+<script src="../../resources/bootstrap/v3.3.2/js/bootstrap.js"></script>
+<script src="../../resources/henry/v3.0/henry.js"></script>
+<script src="../../resources/henry/v3.0/tools.js"></script>
+<script src="../../resources/henry/v3.0/lang/en.js"></script>
+<script src="../../resources/chosen/v1.1/jquery.chosen.js"></script>
+<script src="../../resources/fileupload/v5.41/jquery.fileupload.js"></script>
+<script src="../../resources/magnific-popup/v0.9/jquery.magnific-popup.js"></script>
+<script src="../../resources/jqueryform/jquery.form-3.51.js"></script>
+<script src="../../resources/jqueryvalidation/1.13.1/jquery.validate.js"></script>
+<script src="../../resources/jp/jp-gone.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../resource/js/ie10-viewport-bug-workaround.js"></script>
+<script src="../../resources/other/ie10-viewport-bug-workaround.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-  <script src="../../resource/js/html5shiv.min.js"></script>
-  <script src="../../resource/js/respond.min.js"></script>
+  <script src="../../resources/other/html5shiv.min.js"></script>
+  <script src="../../resources/other/respond.min.js"></script>
 <![endif]--> 
-<!--[if gte IE 8]><script src="../../resource/js/jquery/jquery.xdr-transport-1.1.3.js"></script></script><![endif]-->
 </html>
 
 <script type="text/javascript">
@@ -299,10 +293,10 @@ setPage(currentLanguage);
 function setPage(lang) {
   if (lang == "zh_CN") {
 	loadJs("i18nZhCnJs");
-	$("#img-language").attr("src", jp.resourceRoot + "/image/ic_flag_cn.png");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_cn.png");
   } else {
 	loadJs("i18nEnSgJs");
-	$("#img-language").attr("src", jp.resourceRoot + "/image/ic_flag_us.png");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_us.png");
   }
   var loadI18nTimeout = setInterval(function () {
 	if (I18N) {
@@ -322,6 +316,7 @@ function setTextInPage() {
   $("#menu-images").text(I18N.images);
   $("#menu-audios").text(I18N.audios);
   $("#menu-videos").text(I18N.videos);
+  $("#menu-more").text(I18N.more);
   $("#menu-download").text(I18N.download);
   $("#btn-login").text(I18N.login);
   
@@ -400,9 +395,7 @@ function login() {
 		$("#role-ids-div").show();
 		$("#article-form .chosen-select").trigger("chosen:updated");
 		
-		if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
-	  		$("#edit-article-btn").show();
-	  	}
+		showEditBtns();
 		$.magnificPopup.close();
 	  } else {
 		$("#login-error-info").html("Password is wrong.");
@@ -509,7 +502,7 @@ function asynArticleInfos() {
 }
 function getArticleInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
   $("#article-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
-  var getArticleInfosUrl = "http://www.ganjianping.com:8080/jping/web/articles/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
+  var getArticleInfosUrl = "http://192.168.1.4:8088/gone/spring/gjpw/articles/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
   $.ajax({type: "GET", url: getArticleInfosUrl, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
@@ -730,7 +723,7 @@ function changeArticleTag(tag, index) {
 	
 function asynTags() {
   var lang = $("#search-lang").val();
-  $.ajax({type: "GET", url: "http://www.ganjianping.com:8080/jping/web/tags/all/" + lang, async: true,
+  $.ajax({type: "GET", url: "http://192.168.1.4:8088/gone/spring/gjpw/tags/all/" + lang, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
 		var tagCdAndInfos = response.data;
@@ -768,7 +761,7 @@ function asynTags() {
 }
 function getArticleTagBtnsHtml(articleTagInfo) {
 	var articleTagUuid = articleTagInfo.uuid;
-	var articleFirstSecondLevelTags = articleTagInfo.description.split(";");
+	var articleFirstSecondLevelTags = articleTagInfo.value.split(";");
 	var articleTagBtnsHtml = "";
 	for (var i=0; i<articleFirstSecondLevelTags.length; i++) {
 		var articleFirstSecondLevelTagWithColon = articleFirstSecondLevelTags[i];
@@ -801,12 +794,12 @@ function getArticleTagBtnsHtml(articleTagInfo) {
 		}
 	}
 	articleTagBtnsHtml += "<br/><span id='article-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" + articleTagUuid 
-		+ "&#39;, &#39;" + articleTagInfo.cd + "&#39;, &#39;" + articleTagInfo.description + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+		+ "&#39;, &#39;" + articleTagInfo.cd + "&#39;, &#39;" + articleTagInfo.value + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
 	return articleTagBtnsHtml;
 }
 function getArticleTagsOptionHtml(articleTagInfo) {
 	var articleTagUuid = articleTagInfo.uuid;
-	var articleFirstSecondLevelTags = articleTagInfo.description.split(";");
+	var articleFirstSecondLevelTags = articleTagInfo.value.split(";");
 	var articleTagsOptionHtml = "";
 	for (var i=0; i<articleFirstSecondLevelTags.length; i++) {
 		var articleFirstSecondLevelTagWithColon = articleFirstSecondLevelTags[i];
@@ -869,6 +862,13 @@ function changeBackground(elId){
   $(".mfp-close").css("color",currentColor);
 }
 
+function showEditBtns() {
+  //admin and super admin role can edit
+  if ((jpingRoleIds.indexOf("402881844b3fe072014b3fe1aa2e0005")!=-1 || jpingRoleIds.indexOf("402881844c364ba2014c3663f40300fe")!=-1)) {
+	$("#edit-article-btn").show();
+  }
+}
+
 $(document).ready(function(){
   //-------------------------- Init : magnificPopup, asyn tags,  ----------------------------
   $('.popup-with-form').magnificPopup();
@@ -879,9 +879,7 @@ $(document).ready(function(){
 	$("#role-ids").html(jpingRoleOptionsHtml);
 	$("#role-ids-div").show();
 	$("#login-out-menu").attr("name","logout");
-	if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
-  		$("#edit-article-btn").show();
-  	}
+	showEditBtns();
   }
   //-------------------------- Login -----------------------------
   $('#login-form').validate({

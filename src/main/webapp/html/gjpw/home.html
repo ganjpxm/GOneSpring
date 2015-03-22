@@ -8,9 +8,9 @@
   <meta name="author" content="Gan Jianping">
   <link rel="icon" href="../../resources/jp/image/favicon.png">
   <title>Gan Jianping Personal Website</title>
-
   <link rel="stylesheet" href="../../resources/jqueryui/1.11.2/jquery-ui.css">
   <link rel="stylesheet" href="../../resources/bootstrap/v3.3.2/css/bootstrap.css">
+  <link rel="stylesheet" href="../../resources/other/style-metronic.css">
   <link rel="stylesheet" href="../../resources/henry/v3.0/style.css">
   <link rel="stylesheet" href="../../resources/font-awesome/v4.3.0/css/font-awesome.css">
   <link rel="stylesheet" href="../../resources/chosen/v1.1/chosen.css">
@@ -40,19 +40,15 @@
               <li><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
               <li><a href="#contact"><i class="fa fa-volume-up fa-fw"></i> <span id="menu-audios"></span></a></li>
               <li><a href="#contact"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
-              <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
-              <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <span class="caret"></span></a>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="menu-more"></span> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="http://192.168.1.4:8088/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
+                  <!-- <li class="dropdown-header">Nav header</li> -->
                 </ul>
-              </li> -->
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right"  style="font-size:16px;">
               <li>
@@ -180,7 +176,7 @@
 	  	 	<i class="fa fa-edit"></i> <span id="edit-image"></span></a>
 	  	 <a id="add-image-btn" href="javascript:showImageAddPanel();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="float:right;margin:4px;">
 	  	 	<i class="fa fa-plus"></i> <span id="add-image"></span></a>
-	  	 <label class="fileinput-button mt5" style="float:right;margin:4px;">
+	  	 <label class="fileinput-button mt5" style="float:right;margin:2px;">
 		   <form method="post">
 		     <input type="hidden" name="folder" value="images"/>
 		     <input type="hidden" id="upload_image_lang" name="lang" />
@@ -224,7 +220,6 @@
   </div>
   <div id="website-panel" class="white-popup-block mfp-hide" style="max-width:650px;">
     <form id="website-form" action="http://192.168.1.4:8088/gone/spring/gjpw/websiteInfo/save" method="post">
-      <input id="website-lang" name="lang" type="hidden" value="en_SG"/>
       <input id="website-uuid" name="uuid" type="hidden"/>
       <input id="website-tags" name="websiteTags" type="hidden"/>
       <input id="website-role-ids" name="roleIds" type="hidden"/>
@@ -253,6 +248,7 @@
 	  <input id="website-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;" tabindex="5">
 	  <div id="website-roles" class="jp-mt15 jp-hide">
 	  <select id="website-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+	  <input id="website-lang" name="lang" class="form-control" type="text" placeholder="" tabindex="7" style="margin-top:10px;">
       </div>
 	</form>
 	<div id="save-website-error-info" class="jp-red jp-tc"></div>
@@ -270,7 +266,7 @@
       <input id="article-tags" name="tags" type="hidden"/>
       <input id="article-role-ids" name="roleIds" type="hidden"/>
       <input id="article-image-urls" name="imageUrls" type="hidden"/>
-	  <h3 style="text-align:center;"><img id="article-logo" src='' style='height:30px;margin-right:5px;'/> <span id="add-article-title"></span> </h3>
+	  <h3 style="text-align:center;"><span id="add-article-title"></span> </h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
 	  <div style="margin-top:5px;">
 	  	<input id="article-title" name="title" class="form-control" type="text" placeholder="">
@@ -454,6 +450,7 @@ function setTextInPage() {
   $("#menu-images").text(I18N.images);
   $("#menu-audios").text(I18N.audios);
   $("#menu-videos").text(I18N.videos);
+  $("#menu-more").text(I18N.more);
   $("#menu-download").text(I18N.download);
   $("#btn-login").text(I18N.login);
   
@@ -586,13 +583,7 @@ function login() {
 		$("#image-role-id").html(jpingRoleOptionsHtml);
 		$("#image-roles").show();
 		$("#image-form .chosen-select").trigger("chosen:updated");
-		//admin and super admin role can edit
-		if ((jpingRoleIds.indexOf("402881844b3fe072014b3fe1aa2e0005")!=-1 || jpingRoleIds.indexOf("402881844c364ba2014c3663f40300fe")!=-1)) {
-	  		$("#edit-website-btn").show();
-	  		$("#edit-article-btn").show();
-	  		$("#edit-image-btn").show();
-	  		$("#add-image-btn").show();
-	  	}
+		showEditBtns();
 		$.magnificPopup.close();
 	  } else {
 		$("#login-error-info").html("Password is wrong.");
@@ -622,6 +613,9 @@ function showWebsiteAddPanel() {
   $("#website-logo-url").val("");
   $.magnificPopup.open({items: { src: "#website-panel" }, type: 'inline', modal: true});
   $("#website-form .chosen-select").chosen({search_contains : false});
+  $("#website-role-id").val(""); 
+  $("#website-logo").hide();
+  $("#website-lang").val(currentLanguage);
 }
 function editWebsites() {
   if ($("#website-cells .website-edit-btn").is(":visible")) {
@@ -633,7 +627,7 @@ function editWebsites() {
   }
 }
 function showWebsiteEditPanel(uuid, websiteName, websiteUrl, websiteLogoUrl, tags, displayNo, roleId) {
-  if (websiteUrl!=null && websiteUrl!="") {
+  if (websiteLogoUrl && websiteLogoUrl.indexOf("http")!=-1) {
 	  $("#website-logo").show();
 	  $("#website-logo").attr("src", websiteLogoUrl);
   } else {
@@ -646,6 +640,7 @@ function showWebsiteEditPanel(uuid, websiteName, websiteUrl, websiteLogoUrl, tag
   $("#website-logo-url").val(websiteLogoUrl);
   
   $("#website-tag").val(tags.split(","));
+  $("#website-lang").val(currentLanguage);
   
   $("#website-display-no").val(displayNo);
   if (roleId!=null && websiteUrl!="") {
@@ -667,7 +662,6 @@ function saveWebsite() {
 	} else {
 	  $("#save-website-btn").hide();
 	  $("#save-website-processing-icon").show();
-	  $("#website-lang").val(currentLanguage);
 	  $("#website-tags").val(websiteTags);
 	  $("#website-role-ids").val(websiteRoleIds);
 	  
@@ -714,8 +708,13 @@ function setWebsiteByCurrentTag() {
   $("#website-cells").html(websitesHtml);
 }
 function getWebsiteCellHtml(uuid, websiteName, websiteUrl, websiteLogoUrl, tags, displayNo, roleIds) {
-   return "<a href='" + websiteUrl + "' target='_blank' style='color:black;'><div id='" + uuid + "' class='jp-cell'>" + 
-		"  <img src='" + websiteLogoUrl + "' height='20' style='margin-right:5px;'/>" + websiteName + 
+	var imgHtml = "";
+	if (websiteLogoUrl && websiteLogoUrl.indexOf("http")!=-1) {
+		imgHtml = "<img src='" + websiteLogoUrl + "' height='20' style='margin-right:5px;'/>";
+	} else {
+		imgHtml += "<i class='fa fa-link'></i> ";
+	}
+    return "<a href='" + websiteUrl + "' target='_blank' style='color:black;'><div id='" + uuid + "' class='jp-cell'>" + imgHtml + websiteName + 
 		"</div></a><span class='website-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showWebsiteEditPanel(&#39;" + uuid + "&#39;, &#39;" + websiteName 
 			+ "&#39;, &#39;" + websiteUrl + "&#39;, &#39;" + websiteLogoUrl + "&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds
 			+ "&#39;)'><i class='fa fa-pencil-square-o'></i></span>" + 
@@ -1102,7 +1101,7 @@ function asynTags() {
 			websiteTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
 		}
 		websiteTagBtnsHtml += "<span id='website-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" + websiteTagUuid 
-			+ "&#39;, &#39;" + websiteTagInfo.cd + "&#39;, &#39;" + websiteTags + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+			+ "&#39;, &#39;" + websiteTagInfo.cd + "&#39;, &#39;" + websiteTagInfo.value + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
 		$("#website-tag-btns").html(websiteTagBtnsHtml);
 		$("#website-tag").html(websiteTagsOptionHtml);
 		$("#website-form .chosen-select").trigger("chosen:updated");
@@ -1126,7 +1125,7 @@ function asynTags() {
 				articleTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
 			}
 			articleTagBtnsHtml += "<span id='article-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" 
-				+ articleTagUuid + "&#39;, &#39;" + articleTags.cd + "&#39;, &#39;" + articleTags.category + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+				+ articleTagUuid + "&#39;, &#39;" + articleTags.cd + "&#39;, &#39;" + articleTags.value + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
 			$("#article-tag-btns").html(articleTagBtnsHtml);
 			$("#article-tag").html(articleTagsOptionHtml);
 		}
@@ -1149,7 +1148,7 @@ function asynTags() {
 				imageTagsOptionHtml += "<option value='" + tag + "'>" + tag + "</option>";
 			}
 			imageTagBtnsHtml += "<span id='image-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" 
-				+ imageTagUuid + "&#39;, &#39;" + imageTags.cd + "&#39;, &#39;" + imageTags.category + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+				+ imageTagUuid + "&#39;, &#39;" + imageTags.cd + "&#39;, &#39;" + imageTags.value + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
 			$("#image-tag-btns").html(imageTagBtnsHtml);
 			$("#image-tag").html(imageTagsOptionHtml);
 		}
@@ -1202,6 +1201,16 @@ function changeBackground(elId){
   $(".mfp-close").css("color",currentColor);
 }
 
+function showEditBtns() {
+  //admin and super admin role can edit
+  if ((jpingRoleIds.indexOf("402881844b3fe072014b3fe1aa2e0005")!=-1 || jpingRoleIds.indexOf("402881844c364ba2014c3663f40300fe")!=-1)) {
+	$("#edit-website-btn").show();
+	$("#edit-article-btn").show();
+	$("#edit-image-btn").show();
+	$("#add-image-btn").show();
+  }
+}
+	
 $(document).ready(function(){
   //-------------------------- Init : magnificPopup, asyn tags,  ----------------------------
   $('.popup-with-form').magnificPopup();
@@ -1216,12 +1225,7 @@ $(document).ready(function(){
 	$("#article-roles").show();
 	$("#image-roles").show();
 	$("#login-out-menu").attr("name","logout");
-	if ((jpingRoleIds.indexOf("4028d98139636d9d01396370224d0006")!=-1 || jpingRoleIds.indexOf("4028d98139943adc0139943e5fa60040")!=-1)) {
-  		$("#edit-website-btn").show();
-  		$("#edit-article-btn").show();
-  		$("#edit-image-btn").show();
-  		$("#add-image-btn").show();
-  	}
+	showEditBtns()
   }
   //-------------------------- Login -----------------------------
   $('#login-form').validate({
