@@ -180,7 +180,6 @@
   
   <div id="article-panel" class="white-popup-block mfp-hide">
     <form id="article-form" action="https://1.lt.sg/gone/spring/gjpw/article/save" method="post">
-      <input id="article-lang" name="lang" type="hidden" value="en_SG"/>
       <input id="article-uuid" name="uuid" type="hidden"/>
       <input id="article-tags" name="tags" type="hidden"/>
       <input id="article-role-ids" name="roleIds" type="hidden"/>
@@ -220,6 +219,7 @@
 	  <div id="article-roles" class="jp-mt15 jp-hide">
 	  <select id="article-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
       </div>
+      <input id="article-lang" name="lang" class="form-control" type="text" placeholder="" tabindex="7" style="margin-top:10px;">
 	</form>
 	<div id="article-images" style="margin-top:10px;">
 	</div>
@@ -244,7 +244,7 @@
 	  <input id="tags-uuid" name="uuid" type="hidden"/>
 	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
-	  <textarea id="two-level-tags" name="twoLevelTags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
+	  <textarea id="tags" name="tags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
 	</form>   
 	<div id="save-tags-error-info" class="jp-red jp-tc"></div> 
 	<div id="save-tags-btn" style="height:60px;margin-top:20px;text-align:center;"> 
@@ -564,6 +564,7 @@ function showArticleAddPanel() {
   $("#article-display-no").val("");
   $("#article-role-id").val("");
   $("#search-lang").val(currentLanguage);
+  $("#article-lang").val(currentLanguage);
   if (isInitArticleContent==true) {
 	  $("#paper").html("");
   } else {
@@ -825,7 +826,7 @@ function showTagEditPanel(uuid, cd, tags) {
 	$("#tags-title").html("Website Tags");
   }
   $("#tags-uuid").val(uuid);
-  $("#two-level-tags").val(tags);
+  $("#tags").val(tags);
   
   $.magnificPopup.open({items: { src: "#tags-panel" }, type: 'inline', modal: true});
 }

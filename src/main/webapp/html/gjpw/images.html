@@ -189,7 +189,6 @@
   
   <div id="image-panel" class="white-popup-block mfp-hide" style="max-width:800px;">
     <form id="image-form" action="https://1.lt.sg/gone/spring/gjpw/image/save" method="post">
-      <input id="image-lang" name="lang" type="hidden" value="en_SG"/>
       <input id="image-uuid" name="uuid" type="hidden"/>
       <input id="image-tags" name="tags" type="hidden"/>
       <input id="image-role-ids" name="roleIds" type="hidden"/>
@@ -227,6 +226,7 @@
 	  <div style="margin-top:10px;">
 	  	<textarea id="image-content" name="content" class="form-control" rows="5" cols="70"></textarea>
 	  </div>
+	  <input id="image-lang" name="lang" class="form-control" type="text" placeholder="" style="margin-top:10px;">
 	</form>
 	<div id="save-image-error-info" class="jp-red jp-tc"></div>
 	<div id="save-image-btn" style="height:60px;margin-top:20px;text-align:center;"> 
@@ -241,7 +241,7 @@
 	  <input id="tags-uuid" name="uuid" type="hidden"/>
 	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
-	  <textarea id="two-level-tags" name="twoLevelTags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
+	  <textarea id="tags" name="tags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
 	</form>   
 	<div id="save-tags-error-info" class="jp-red jp-tc"></div> 
 	<div id="save-tags-btn" style="height:60px;margin-top:20px;text-align:center;"> 
@@ -767,7 +767,7 @@ function showTagEditPanel(uuid, cd, tags) {
 	$("#tags-title").html("Image Tags");
   }
   $("#tags-uuid").val(uuid);
-  $("#two-level-tags").val(tags);
+  $("#tags").val(tags);
   
   $.magnificPopup.open({items: { src: "#tags-panel" }, type: 'inline', modal: true});
 }
