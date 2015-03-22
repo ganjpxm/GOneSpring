@@ -145,7 +145,7 @@
 
   <!-- ******************************************* magnific-popup Panel ************************************************** -->
   <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
-    <form id="login-form" action="http://192.168.1.4:8088/gone/spring/gjpw/login" method="post">
+    <form id="login-form" action="https://1.lt.sg/gone/spring/gjpw/login" method="post">
       <input name="subsystemId" type="hidden" value='402881844c364ba2014c3659098d006c'/>
 	  <h3 id="login-title" class="jp-tc"></h3>
 	  <div class="input-group jp-mt30">
@@ -164,7 +164,7 @@
 	</form>    
   </div>
   <div id="website-panel" class="white-popup-block mfp-hide" style="max-width:650px;">
-    <form id="website-form" action="http://192.168.1.4:8088/gone/spring/gjpw/websiteInfo/save" method="post">
+    <form id="website-form" action="https://1.lt.sg/gone/spring/gjpw/websiteInfo/save" method="post">
       <input id="website-lang" name="lang" type="hidden" value="en_SG"/>
       <input id="website-uuid" name="uuid" type="hidden"/>
       <input id="website-tags" name="websiteTags" type="hidden"/>
@@ -186,7 +186,7 @@
 			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
 				<i class="fa fa-cloud-upload"></i>
 			  </button>
-			  <input id="upload-website-logo-btn" type="file" name="file" data-url="http://192.168.1.4:8088/gone/spring/gjpw/uploadFile" multiple></input>
+			  <input id="upload-website-logo-btn" type="file" name="file" data-url="https://1.lt.sg/gone/spring/gjpw/uploadFile" multiple></input>
 			</label>
 	      </div>
 	    </div>
@@ -205,7 +205,7 @@
   </div>
   
   <div id="tags-panel" class="mfp-hide white-popup-block">
-    <form id="tags-form" action="http://192.168.1.4:8088/gone/spring/gjpw/tags/save" method="post"> 
+    <form id="tags-form" action="https://1.lt.sg/gone/spring/gjpw/tags/save" method="post"> 
 	  <input id="tags-uuid" name="uuid" type="hidden"/>
 	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
@@ -460,7 +460,7 @@ function asynWebsiteInfos() {
 
 function getWebsiteInfos(keywords,field,roleIds,lang,orderBy) {
   $("#website-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
-  var getWebsiteInfosUrl = "http://192.168.1.4:8088/gone/spring/gjpw/websiteInfos/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + orderBy;
+  var getWebsiteInfosUrl = "https://1.lt.sg/gone/spring/gjpw/websiteInfos/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + orderBy;
   $.ajax({type: "GET", url: getWebsiteInfosUrl, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
@@ -594,7 +594,7 @@ function changeWebsiteTag(tag, index) {
 
 function asynTags() {
   var lang = $("#search-lang").val();
-  $.ajax({type: "GET", url: "http://192.168.1.4:8088/gone/spring/gjpw/tags/all/" + lang, async: true,
+  $.ajax({type: "GET", url: "https://1.lt.sg/gone/spring/gjpw/tags/all/" + lang, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
 		var tagCdAndInfos = response.data;
