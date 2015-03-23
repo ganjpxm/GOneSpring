@@ -491,10 +491,10 @@ function getWebsiteCellHtml(uuid, websiteName, websiteUrl, websiteLogoUrl, tags,
   } else {
 	imgHtml += "<i class='fa fa-link'></i> ";
   }	
-  return "<a href='" + websiteUrl + "' target='_blank' style='color:black;'><div id='" + uuid + "' class='jp-cell' filter='" + tags + websiteName + "'>" + imgHtml + websiteName + 
-		"</div></a><span class='website-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showWebsiteEditPanel(&#39;" + uuid 
+  return "<div id='" + uuid + "' class='jp-cell' filter='" + tags + websiteName + "'><a href='" + websiteUrl + "' target='_blank' style='color:black;'>" + imgHtml + websiteName + 
+		"</a><span class='website-edit-btn' style='cursor:pointer;float:right;margin-left:10px;display:none;' onclick='showWebsiteEditPanel(&#39;" + uuid 
 			+ "&#39;, &#39;" + websiteName + "&#39;, &#39;" + websiteUrl + "&#39;, &#39;" + websiteLogoUrl + "&#39;, &#39;" + tags + "&#39;, &#39;" 
-			+ displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+			+ displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>";
 }
 //------------------------------ Website ------------------------------
 function showWebsiteAddPanel() {
@@ -581,8 +581,8 @@ function changeWebsiteTag(tag, index) {
   }
   if (currentWebsiteTagIndex!=100000 && currentWebsiteTagIndex==index) {
 	  $("#keywords").val("");
-	  currentArticleTag = "";
-	  currentArticleTagIndex = 100000;
+	  currentWebsiteTag = "";
+	  currentWebsiteTagIndex = 100000;
   } else {
 	  currentWebsiteTag = tag;
 	  currentWebsiteTagIndex = index;
