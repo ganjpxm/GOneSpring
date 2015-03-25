@@ -523,6 +523,9 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 			var roleIds = image.roleIds;
 			var originUrl = image.originUrl;
 			var lang = image.lang;
+			if (url && url.indexOf("http")==-1) {
+				url = "https://1.lt.sg/gone" + url;
+			}
 			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;' filter='" + tags + name + title + "'>";
 			imageHtml += "<a href='" + url + "' title='" + contentHtml + "'>";
 			imageHtml += "<img src='" + url + "' style='width:100%;'/>";
