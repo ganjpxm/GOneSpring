@@ -533,7 +533,7 @@ public class GjpwController extends BaseController {
 			if (file.getSize() > 200000000) {
 				map.put("result", fileFullName + " size is more than 200M");
 			} else {
-				String saveUrl = super.getBasePath(request) + "/resources/upload/"+folder+"/" + fileFullName;
+				String saveUrl = "/resources/upload/"+folder+"/" + fileFullName;
 				fileName = fileName.substring(0, fileName.indexOf("."));
 				fileName = fileName.replace("_Colors", "").replace("_1280_800", "").replace("_0", "").replace("_1", "").replace("_2", "").replace("_3", "").replace("_4", "").replace("_5", "").replace("_6", "")
 						.replace("_7", "").replace("_8", "").replace("_9", "").replace("_", " ");
@@ -544,17 +544,21 @@ public class GjpwController extends BaseController {
 					map.put("result", fileFullName + " has been exist!");
 				} else {
 					if (fileFullName.endsWith("png") || fileFullName.endsWith("jpg") || fileFullName.endsWith("jpeg")) { 
-						CmImage cmImage = new CmImage();
-						cmImage.setImageName(fileName);
-						cmImage.setImageUrl(saveUrl);
-						cmImage.setLang(lang);
-						cmImage.setDisplayNo(9999);
-						if (Const.LANGUAGE_ZH_CN.equals(lang)) {
-							cmImage.setTags("其他");
-						} else {
-							cmImage.setTags("Other");
+						
+						String save = request.getParameter("save");
+						if (!(StringUtil.hasText(save) && "no".equalsIgnoreCase(save))) {
+							CmImage cmImage = new CmImage();
+							cmImage.setImageName(fileName);
+							cmImage.setImageUrl(saveUrl);
+							cmImage.setLang(lang);
+							cmImage.setDisplayNo(9999);
+							if (Const.LANGUAGE_ZH_CN.equals(lang)) {
+								cmImage.setTags("其他");
+							} else {
+								cmImage.setTags("Other");
+							}
+							cmImageService.create(cmImage);
 						}
-						cmImageService.create(cmImage);
 					}
 					FileUtil.copy(file.getInputStream(), new File(saveFullPath));
 				}
