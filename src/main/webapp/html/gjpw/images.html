@@ -192,7 +192,6 @@
       <input id="image-uuid" name="uuid" type="hidden"/>
       <input id="image-tags" name="tags" type="hidden"/>
       <input id="image-role-ids" name="roleIds" type="hidden"/>
-      <input id="image-name" name="name" type="hidden"/>
 	  <h3 style="text-align:center;"><span id="add-image-title"></span></h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
 	  <div class="form-group" style="margin-top:10px;">
@@ -201,6 +200,7 @@
 	      <div class="input-group-addon" style="padding:2px;">
 	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
 			  <input type="hidden" name="folder" value="images"/>
+			  <input type="hidden" name="save" value="no"/>
 			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
 				<i class="fa fa-cloud-upload fa-lg"></i>
 			  </button>
@@ -211,7 +211,7 @@
 	  </div>
 	  <div id="image-display" style="margin-top:10px;"></div>
 	  <div style="margin-top:5px;">
-	  	<input id="image-title" name="title" class="form-control" type="text" placeholder="">
+	  	<input id="image-name" name="name" class="form-control" type="text" placeholder="">
 	  </div>
 	  <div style="margin-top:10px;">
 	    <select id="image-tag" name="imageTag" data-placeholder="" class="form-control chosen-select" multiple>
@@ -324,7 +324,7 @@ function setTextInPage() {
   $("#save-tags").text(I18N.save);
   
   $("#add-image-title").text(I18N.addImageTitle);
-  $("#image-title").attr("placeholder", I18N.imageTitle);
+  $("#image-name").attr("placeholder", I18N.imageTitle);
   $("#image-content").attr("placeholder", I18N.imageContent);
   $("#image-origin-url").attr("placeholder", I18N.imageOriginUrl);
   $("#image-display-no").attr("placeholder", I18N.displayNo);
@@ -514,7 +514,6 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 			
 			var uuid = image.uuid;
 			var name = image.name;
-			var title = image.title;
 			var content = image.content;
 			var contentHtml = image.contentHtml;
 			var url = image.url;
@@ -526,11 +525,11 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 			if (url && url.indexOf("http")==-1) {
 				url = "https://1.lt.sg/gone" + url;
 			}
-			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;' filter='" + tags + name + title + "'>";
+			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;' filter='" + tags + name + "'>";
 			imageHtml += "<a href='" + url + "' title='" + contentHtml + "'>";
 			imageHtml += "<img src='" + url + "' style='width:100%;'/>";
 			imageHtml += "</a><br/><span class='image-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showImageEditPanel(&#39;" + uuid + 
-				"&#39;, &#39;" + url + "&#39;, &#39;" + name + "&#39;, &#39;" + title + "&#39;, &#39;" + originUrl + 
+				"&#39;, &#39;" + url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
 				"&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>"+
 				"<div id='" + uuid + "ImageContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
 			totalNumber++;
@@ -548,7 +547,6 @@ function showImageAddPanel() {
   $("#image-uuid").val("");
   $("#image-url").val("");
   $("#image-name").val("");
-  $("#image-title").val("");
   $("#image-content").val("");
   $("#image-display").html("");
   $("#image-lang").val(currentLanguage);
@@ -571,12 +569,11 @@ function editImages() {
 	  $("#image-tag-edit-btn").show();
   }
 }
-function showImageEditPanel(uuid,url,name,title,originUrl,tags,displayNo,roleIds,lang) {
+function showImageEditPanel(uuid,url,name,originUrl,tags,displayNo,roleIds,lang) {
   $("#image-lang").val(lang);
   $("#image-uuid").val(uuid);
   $("#image-url").val(url);
   $("#image-name").val(name);
-  $("#image-title").val(title);
   var content = $("#"+uuid+"ImageContent").html();
   $("#image-display-no").val(displayNo);
   if (content!=null && content!="" && content!="null") {
@@ -600,7 +597,9 @@ function showImageEditPanel(uuid,url,name,title,originUrl,tags,displayNo,roleIds
   } else {
 	  $("#image-role-id").val("");
   }
-  
+  if (url && url.indexOf("http")==-1) {
+	  url = "https://1.lt.sg/gone" + url;
+  }
   var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
 	  "<img src='" + url + "' style='height:80px;'/><br/>" +  
 	"</div>";
@@ -634,7 +633,6 @@ function saveImage() {
 	  $("#image-form").ajaxSubmit({dataType:'json', success : function(resp) {
 		if (resp.result=="success") {
 		  search(1);
-		  $("#image-title").val("");
 		  $("#image-content").val("");
 		  $("#image-url").val("");
 		  $("#image-uuid").val("");
@@ -926,9 +924,13 @@ $(document).ready(function(){
     dataType: 'json',
     done: function (e, data) {
       if (data.result.result == "success") {
+    	  var saveUrl = data.result.saveUrl;
+      	if (saveUrl && saveUrl.indexOf("http")==-1) {
+      		saveUrl = "https://1.lt.sg/gone" + saveUrl;
+  		}
     	var imageHtml = "<div class='jp-cell'>";
-		imageHtml += "<a href='" + data.result.saveUrl + "' title='" + data.result.fileName + "'>";
-		imageHtml += "<img src='" + data.result.saveUrl + "' style='width:90%;margin-left:10px;'/>";
+		imageHtml += "<a href='" + saveUrl + "' title='" + data.result.fileName + "'>";
+		imageHtml += "<img src='" + saveUrl + "' style='width:90%;margin-left:10px;'/>";
 		imageHtml += "</a></div>";
 		$("#image-cells").append(imageHtml);
       } else {
@@ -941,10 +943,13 @@ $(document).ready(function(){
     done: function (e, data) {
       if (data.result.result == "success") {
     	$("#image-url").val(data.result.saveUrl);
-    	$("#image-name").val(data.result.fileFullName);
-    	$("#image-title").val(data.result.fileName);
+    	$("#image-name").val(data.result.fileName);
+    	var saveUrl = data.result.saveUrl;
+    	if (saveUrl && saveUrl.indexOf("http")==-1) {
+    		saveUrl = "https://1.lt.sg/gone" + saveUrl;
+		}
         var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
-		  "<img src='" + data.result.saveUrl + "' style='height:80px;'/><br/>" +  
+		  "<img src='" + saveUrl + "' style='height:80px;'/><br/>" +  
 		"</div>";
 	    $("#image-display").html(divEl);
       } else {
@@ -953,7 +958,7 @@ $(document).ready(function(){
     }
   });
   
-  $("#image-title,#image-content,#image-tag,#image-url,#image-role-id").focus(function() {
+  $("#image-name,#image-content,#image-tag,#image-url,#image-role-id").focus(function() {
 	$("#save-image-error-info").html("");
 	$("#image-tags-error").html("");
   });
