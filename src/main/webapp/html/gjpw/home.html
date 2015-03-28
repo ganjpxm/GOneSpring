@@ -936,11 +936,14 @@ function asynImageInfos() {
 			var roleIds = image.roleIds;
 			var originUrl = image.originUrl;
 			var lang = image.lang;
+			if (url && url.indexOf("http")==-1) {
+				url = "https://1.lt.sg/gone" + url;
+			}
 			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;'>";
-			imageHtml += "<a href='" + url + "' title='" + name + "'>";
+			imageHtml += "<a href='" + url + "' title='" + contentHtml + "'>";
 			imageHtml += "<img src='" + url + "' style='width:100%;'/>";
 			imageHtml += "</a><br/><span class='image-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showImageEditPanel(&#39;" + uuid + 
-				"&#39;, &#39;" + url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
+				"&#39;, &#39;" + image.url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
 				"&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>"+
 				"<div id='" + uuid + "ImageContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
 		} 
@@ -1007,6 +1010,9 @@ function showImageEditPanel(uuid,url,name,originUrl,tags,displayNo,roleIds,lang)
 	  $("#image-role-id").val("");
   }
   
+  if (url && url.indexOf("http")==-1) {
+	url = "https://1.lt.sg/gone" + url;
+  }
   var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
 	  "<img src='" + url + "' style='height:80px;'/><br/>" +  
 	"</div>";

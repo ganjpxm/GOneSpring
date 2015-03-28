@@ -529,7 +529,7 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 			imageHtml += "<a href='" + url + "' title='" + contentHtml + "'>";
 			imageHtml += "<img src='" + url + "' style='width:100%;'/>";
 			imageHtml += "</a><br/><span class='image-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showImageEditPanel(&#39;" + uuid + 
-				"&#39;, &#39;" + url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
+				"&#39;, &#39;" + image.url + "&#39;, &#39;" + name + "&#39;, &#39;" + originUrl + 
 				"&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>"+
 				"<div id='" + uuid + "ImageContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
 			totalNumber++;
