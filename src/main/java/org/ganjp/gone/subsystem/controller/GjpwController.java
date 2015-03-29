@@ -282,9 +282,9 @@ public class GjpwController extends BaseController {
 		map.put("result", "fail");
 		try {
 			keywords = new String(keywords.getBytes("ISO-8859-1"), "UTF-8");
-			Page<CmArticle> cmArticles = cmArticleService.getCmArticlePage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
+			Page<CmArticle> cmArticlePage = cmArticleService.getCmArticlePage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
 			List<Map<String,String>> articles = new ArrayList<Map<String,String>>();
-			for (CmArticle cmArticle : cmArticles.getResult()) {
+			for (CmArticle cmArticle : cmArticlePage.getResult()) {
 				Map<String,String> articleMap = new LinkedHashMap<String,String>();
 				articleMap.put("uuid", cmArticle.getArticleId());
 				articleMap.put("cd", cmArticle.getArticleCd());
@@ -298,6 +298,7 @@ public class GjpwController extends BaseController {
 				articleMap.put("lang", cmArticle.getLang());
 				articles.add(articleMap);
 			}
+			this.setPageInfo(cmArticlePage.getTotalPages(), cmArticlePage.getTotalCount(), pageNo, pageSize, map);
 			map.put("data", articles);
 			map.put("result", "success");
 		} catch (Exception e) {
@@ -426,9 +427,9 @@ public class GjpwController extends BaseController {
 		map.put("result", "fail");
 		try {
 			keywords = new String(keywords.getBytes("ISO-8859-1"), "UTF-8");
-			Page<CmImage> cmImages = cmImageService.getCmImagePage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
+			Page<CmImage> cmImagePage = cmImageService.getCmImagePage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
 			List<Map<String,String>> articles = new ArrayList<Map<String,String>>();
-			for (CmImage cmImage : cmImages.getResult()) {
+			for (CmImage cmImage : cmImagePage.getResult()) {
 				Map<String,String> articleMap = new LinkedHashMap<String,String>();
 				articleMap.put("uuid", cmImage.getImageId());
 				articleMap.put("name", cmImage.getImageName());
@@ -442,6 +443,7 @@ public class GjpwController extends BaseController {
 				articleMap.put("lang", cmImage.getLang());
 				articles.add(articleMap);
 			}
+			this.setPageInfo(cmImagePage.getTotalPages(), cmImagePage.getTotalCount(), pageNo, pageSize, map);
 			map.put("data", articles);
 			map.put("result", "success");
 		} catch (Exception e) {
@@ -510,6 +512,38 @@ public class GjpwController extends BaseController {
 			log.error(ex.getMessage());
 		}
 		return map;
+	}
+	
+	private void setPageInfo(long totalPages, long totalCount, long pageNo, long pageSize, Map<String,Object> map) {
+		long nextPageNo = pageNo;
+		long prePageNo = pageNo-1;
+		long showCount = pageNo * pageSize;
+		if (totalPages<=pageNo) {
+			nextPageNo = 0;
+			showCount = totalCount;
+		} else {
+			nextPageNo++;
+		}
+		if (prePageNo<1) {
+			prePageNo = 1;
+		}
+		long beginPageNo = 1;
+		long endPageNo = totalPages;
+		if (pageNo+9<endPageNo) {
+			endPageNo = pageNo + 9;
+		}
+		if (endPageNo-beginPageNo>9) {
+			beginPageNo = endPageNo - 10;
+		}
+		map.put("nextPageNo", nextPageNo);
+		map.put("pageNo", pageNo);
+		map.put("pageSize", pageSize);
+		map.put("totalCount", totalCount);
+		map.put("showCount", showCount);
+		map.put("totalPages", totalPages);
+		map.put("prePageNo", prePageNo);
+		map.put("beginPageNo", beginPageNo);
+		map.put("endPageNo", endPageNo);
 	}
 	
 	/**---------------------------------------------------- File upload -----------------------------------------------------*/

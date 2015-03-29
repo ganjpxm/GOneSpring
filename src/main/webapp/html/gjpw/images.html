@@ -157,7 +157,10 @@
 	  </div>
 	</div>
   </div>
-  
+  <div class="panel-footer" style="text-align:center;">
+	<ul id="pagination" class="pagination" style="margin-top:1px;margin-bottom:1px;">
+	</ul>
+  </div>
   <hr class="featurette-divider">
   <footer>
     <div style="background-color:#00796B; text-align:center;color:white;padding:20px;margin-top:-30px;">
@@ -486,6 +489,9 @@ function search(pageNo) {
   if (!keywords) {
 	  keywords = "all";
   }
+  if (pageSize==null) {
+	  
+  }
   var orderBy = $("#order-by").val();
   getImageInfos(keywords, field, roleIds, lang, pageNo, pageSize, orderBy);
   asynTags();
@@ -493,11 +499,11 @@ function search(pageNo) {
 //------------------------------ Images ------------------------------
 function asynImageInfos() {
   $("#upload_image_lang").val(currentLanguage);
-  $("#page-size").val(200);
+  $("#page-size").val(50);
   $("#order-by").val("modifyTimestamp desc");
   $("#field").val("tag");
   $("#search-lang").val(currentLanguage);
-  getImageInfos(currentImageTag,"tag",jpingRoleIds,currentLanguage,1,200,'modifyTimestamp desc');
+  getImageInfos(currentImageTag,"tag",jpingRoleIds,currentLanguage,1,$("#page-size").val(),'modifyTimestamp desc');
   asynTags();
 }
 function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
@@ -534,8 +540,30 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 				"<div id='" + uuid + "ImageContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
 			totalNumber++;
 		}
+		
+		totalNumber = response.totalCount;
 		$("#totalNumber").text(totalNumber);
 		$("#image-cells").html(imageHtml);
+		var beginPageNo = response.beginPageNo - 0;
+		var endPageNo = response.endPageNo - 0;
+		var pageNo = response.pageNo - 0;
+		if (beginPageNo != endPageNo) {
+			var pageHtml = "<li><a href='javascript:search(" + beginPageNo + ");'>&lt;&lt;</a></li>";
+			pageHtml += "<li><a href='javascript:search(" + response.prePageNo + ");'>&lt;</a></li>";
+			for (var i=1; i<=endPageNo; i++) {
+				pageHtml += "<li><a href='javascript:search(" + i + ");' "; 
+				if (i==pageNo) {
+					pageHtml += "style='background-color:#00796B;color:white;'";
+				}
+				pageHtml += ">" + i + "</a></li>";	
+			}
+			pageHtml += "<li><a href='javascript:search(" + response.nextPageNo + ");'>&gt;</a></li>";
+			pageHtml += "<li><a href='javascript:search(" + endPageNo + ");'>&gt;&gt;</a></li>";
+			
+			$("#pagination").html(pageHtml);
+		} else {
+			$("#pagination").hide();
+		}
 	  }
 	},
 	fail : function() {
@@ -543,6 +571,7 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 	}
   });
 }
+
 function showImageAddPanel() {
   $("#image-uuid").val("");
   $("#image-url").val("");
@@ -968,7 +997,7 @@ $(document).ready(function(){
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-49817046-2', 'auto');
 ga('send', 'pageview');
