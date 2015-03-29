@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
                   <li class="divider"></li>
-                  <li><a href="https://1.lt.sg/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
+                  <li><a href="http://www.ganjianping.com:8080/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
                   <!-- <li class="dropdown-header">Nav header</li> -->
                 </ul>
               </li>
@@ -145,7 +145,7 @@
 		     <button type="button" class="btn btn-primary btn-xs" style="margin-right:10px;">
 			   <span class="glyphicon glyphicon-upload"></span> <span id="upload-text"></span>
 			 </button>
-		     <input id="upload-image-save-db-btn" type="file" name="file" data-url="https://1.lt.sg/gone/spring/gjpw/uploadFile" multiple></input>
+		     <input id="upload-image-save-db-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/gone/spring/gjpw/uploadFile" multiple></input>
 		   </form>
 		 </label>
 	  </div>
@@ -168,7 +168,7 @@
 
   <!-- ******************************************* magnific-popup Panel ************************************************** -->
   <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
-    <form id="login-form" action="https://1.lt.sg/gone/spring/gjpw/login" method="post">
+    <form id="login-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/login" method="post">
       <input name="subsystemId" type="hidden" value='402881844c364ba2014c3659098d006c'/>
 	  <h3 id="login-title" class="jp-tc"></h3>
 	  <div class="input-group jp-mt30">
@@ -188,7 +188,7 @@
   </div>
   
   <div id="image-panel" class="white-popup-block mfp-hide" style="max-width:800px;">
-    <form id="image-form" action="https://1.lt.sg/gone/spring/gjpw/image/save" method="post">
+    <form id="image-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/image/save" method="post">
       <input id="image-uuid" name="uuid" type="hidden"/>
       <input id="image-tags" name="tags" type="hidden"/>
       <input id="image-role-ids" name="roleIds" type="hidden"/>
@@ -204,7 +204,7 @@
 			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
 				<i class="fa fa-cloud-upload fa-lg"></i>
 			  </button>
-			  <input id="upload-image-btn" type="file" name="file" data-url="https://1.lt.sg/gone/spring/gjpw/uploadFile" multiple></input>
+			  <input id="upload-image-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/gone/spring/gjpw/uploadFile" multiple></input>
 			</label>
 	      </div>
 	    </div>
@@ -237,7 +237,7 @@
   </div>
   
   <div id="tags-panel" class="mfp-hide white-popup-block">
-    <form id="tags-form" action="https://1.lt.sg/gone/spring/gjpw/tags/save" method="post"> 
+    <form id="tags-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/tags/save" method="post"> 
 	  <input id="tags-uuid" name="uuid" type="hidden"/>
 	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
 	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
@@ -502,7 +502,7 @@ function asynImageInfos() {
 }
 function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
   $("#image-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
-  var getImageInfosUrl = "https://1.lt.sg/gone/spring/gjpw/images/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
+  var getImageInfosUrl = "http://www.ganjianping.com:8080/gone/spring/gjpw/images/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
   $.ajax({type: "GET", url: getImageInfosUrl, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
@@ -523,7 +523,7 @@ function getImageInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
 			var originUrl = image.originUrl;
 			var lang = image.lang;
 			if (url && url.indexOf("http")==-1) {
-				url = "https://1.lt.sg/gone" + url;
+				url = "http://www.ganjianping.com:8080/gone" + url;
 			}
 			imageHtml += "<div class='jp-cell' style='padding:1px 0px;padding-right:0px;' filter='" + tags + name + "'>";
 			imageHtml += "<a href='" + url + "' title='" + contentHtml + "'>";
@@ -598,7 +598,7 @@ function showImageEditPanel(uuid,url,name,originUrl,tags,displayNo,roleIds,lang)
 	  $("#image-role-id").val("");
   }
   if (url && url.indexOf("http")==-1) {
-	  url = "https://1.lt.sg/gone" + url;
+	  url = "http://www.ganjianping.com:8080/gone" + url;
   }
   var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
 	  "<img src='" + url + "' style='height:80px;'/><br/>" +  
@@ -666,7 +666,7 @@ function changeImageTag(tag, index) {
 
 function asynTags() {
   var lang = $("#search-lang").val();
-  $.ajax({type: "GET", url: "https://1.lt.sg/gone/spring/gjpw/tags/all/" + lang, async: true,
+  $.ajax({type: "GET", url: "http://www.ganjianping.com:8080/gone/spring/gjpw/tags/all/" + lang, async: true,
 	success : function(response) {
 	  if (response.result=="success") {
 		var tagCdAndInfos = response.data;
@@ -926,7 +926,7 @@ $(document).ready(function(){
       if (data.result.result == "success") {
     	  var saveUrl = data.result.saveUrl;
       	if (saveUrl && saveUrl.indexOf("http")==-1) {
-      		saveUrl = "https://1.lt.sg/gone" + saveUrl;
+      		saveUrl = "http://www.ganjianping.com:8080/gone" + saveUrl;
   		}
     	var imageHtml = "<div class='jp-cell'>";
 		imageHtml += "<a href='" + saveUrl + "' title='" + data.result.fileName + "'>";
@@ -946,7 +946,7 @@ $(document).ready(function(){
     	$("#image-name").val(data.result.fileName);
     	var saveUrl = data.result.saveUrl;
     	if (saveUrl && saveUrl.indexOf("http")==-1) {
-    		saveUrl = "https://1.lt.sg/gone" + saveUrl;
+    		saveUrl = "http://www.ganjianping.com:8080/gone" + saveUrl;
 		}
         var divEl = "<div id='image' style='display:inline-block;text-align:center;margin:5px;'>" +
 		  "<img src='" + saveUrl + "' style='height:80px;'/><br/>" +  
@@ -964,4 +964,12 @@ $(document).ready(function(){
   });
   
 });
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49817046-2', 'auto');
+ga('send', 'pageview');
 </script>
