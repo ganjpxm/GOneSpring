@@ -121,7 +121,7 @@
 			</div>
 			<div class="col-md-2" style="padding:2px;">
 				<select id="page-size" name="pageSize" class="form-control">
-				  <option value="50"> 50 </option>
+				  <option value="50" selected> 50 </option>
 				  <option value="200"> 200 </option>
 				  <option value="500"> 500 </option>
 				  <option value="1000"> 1000 </option>
@@ -499,7 +499,6 @@ function search(pageNo) {
 //------------------------------ Images ------------------------------
 function asynImageInfos() {
   $("#upload_image_lang").val(currentLanguage);
-  $("#page-size").val(50);
   $("#order-by").val("modifyTimestamp desc");
   $("#field").val("tag");
   $("#search-lang").val(currentLanguage);
