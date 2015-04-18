@@ -47,6 +47,13 @@ I18N = {
     imageContent: "Description",
     imageOriginUrl: "Origin Url",
     
+    addVideoTitle: "Video",
+    videoName: "Name",
+    videoContent: "Description",
+    
+    addFileTitle: "File",
+    fileName: "Name",
+    
 	login: "Login",
 	logout: "Logout",
 	save: "Save",

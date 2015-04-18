@@ -36,14 +36,14 @@
             <ul class="nav navbar-nav" style="font-size:16px;">
               <li><a href="websites.html"><i class="fa fa-globe fa-fw"></i> <span id="menu-websites"></span></a></li>
               <li><a href="articles.html"><i class="fa fa-book fa-fw"></i> <span id="menu-articles"></span></a></li>
-              <li class="active"><a href="#"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
-              <li><a href="#contact"><i class="fa fa-volume-up fa-fw"></i> <span id="menu-audios"></span></a></li>
-              <li><a href="#contact"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
+              <li class="active"><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
+              <li><a href="videos.html"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
+              <li><a href="files.html"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="menu-more"></span> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#contact"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
-                  <li class="divider"></li>
+                  <!-- <li class="divider"></li> -->
+                  <li><a href="http://www.ganjianping.com:8080/gone/spring/gdemo" target="_blank"><i class="fa fa-link fa-fw"></i> GDemo</a></li>
                   <li><a href="http://www.ganjianping.com:8080/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
                   <!-- <li class="dropdown-header">Nav header</li> -->
                 </ul>
@@ -140,7 +140,7 @@
 	  	 <label class="fileinput-button mt5" style="float:right;margin-top:3px;">
 		   <form method="post">
 		     <input type="hidden" name="folder" value="images"/>
-		     <input type="hidden" name="saveToDB" value="yes"/>
+		     <input type="hidden" name="save" value="yes"/>
 		     <input type="hidden" id="upload_image_lang" name="lang" value="images"/>
 		     <button type="button" class="btn btn-primary btn-xs" style="margin-right:10px;">
 			   <span class="glyphicon glyphicon-upload"></span> <span id="upload-text"></span>
@@ -314,7 +314,6 @@ function setTextInPage() {
   $("#menu-websites").text(I18N.websites);
   $("#menu-articles").text(I18N.articles);
   $("#menu-images").text(I18N.images);
-  $("#menu-audios").text(I18N.audios);
   $("#menu-videos").text(I18N.videos);
   $("#menu-more").text(I18N.more);
   $("#menu-download").text(I18N.download);
@@ -620,7 +619,7 @@ function showImageEditPanel(uuid,url,name,originUrl,tags,displayNo,roleIds,lang)
   } else {
 	 $("#image-tag").val("");
   }
-  if (roleIds!=null && roleIds!="" && originUrl!="null") {
+  if (roleIds!=null && roleIds!="" && roleIds!="null") {
 	  $("#image-role-id").val(roleIds.split(",")); 
   } else {
 	  $("#image-role-id").val("");

@@ -48,9 +48,19 @@
           	<i class="fa fa-cog fa-fw"></i> Setting <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="<c:url value='/spring/smp/config'/>">System Parameter</a>
-            </li>
+            <li><a href="<c:url value='/spring/smp/config'/>">System Parameter</a></li>
+            <li style="padding:10px;color:gray;">Json Data</li>
+            <li><a href="<c:url value='/spring/cm/websitePage/1/5'/>" target="_blank">Websites</a></li>
+            <li style="padding:10px;color:gray;">Web Page</li>
+            <li><a href="<c:url value='/spring/am/subsystem?pageNo=1&pageSize=50'/>" target="_blank">Subsystem</a></li>
+            <li><a href="<c:url value='/spring/am/role?pageNo=1&pageSize=50'/>" target="_blank">Role</a></li>
+            <li><a href="<c:url value='/spring/am/user?pageNo=1&pageSize=50'/>" target="_blank">User</a></li>
+            <li><a href="<c:url value='/spring/bm/config?pageNo=1&pageSize=50'/>" target="_blank">Config</a></li>
+            <li><a href="<c:url value='/spring/cm/website?pageNo=1&pageSize=50'/>" target="_blank">Website</a></li>
+            <li><a href="<c:url value='/spring/cm/article?pageNo=1&pageSize=50'/>" target="_blank">Article</a></li>
+            <li><a href="<c:url value='/spring/cm/image?pageNo=1&pageSize=50'/>" target="_blank">Image</a></li>
+            <li><a href="<c:url value='/spring/cm/video?pageNo=1&pageSize=50'/>" target="_blank">Video</a></li>
+            <li><a href="<c:url value='/spring/cm/file?pageNo=1&pageSize=50'/>" target="_blank">File</a></li>
           </ul>
         </li>
         <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>

@@ -16,6 +16,7 @@
 <body style="margin:10px 20px;">
   <h1 style="text-align:center;">Welcome to GOne Platform</h1>
   <a href="<c:url value='/spring/login'/>" target="_blank">GOne Login</a><br/>
-  <a href="<c:url value='/html/gjpw/home.html'/>" target="_blank">Gan Jianping Personal Website</a>
+  <a href="<c:url value='/html/gjpw/home.html'/>" target="_blank">Gan Jianping Personal Website</a><br/>
+  <a href="<c:url value='/spring/gdemo'/>" target="_blank">GDemo Website</a><br/>
 </body>
 </html>

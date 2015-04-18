@@ -47,6 +47,13 @@ I18N = {
     imageContent: "描述",
     imageOriginUrl: "来源之处",
     
+    addVideoTitle: "视频",
+    videoName: "名称",
+    videoContent: "描述",
+    
+    addFileTitle: "文件",
+    fileName: "名称",
+    
     login: "登录",
     logout: "退出",
     save: "保存",
