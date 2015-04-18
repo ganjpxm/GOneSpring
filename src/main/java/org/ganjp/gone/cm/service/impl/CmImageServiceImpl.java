@@ -103,6 +103,8 @@ public class CmImageServiceImpl extends AbstractService<CmImage> implements CmIm
 			final int pageSize, String ownRoleIds, String orderBy) {
 		return dao.getCmImagePage(keywords, field, lang, startDate, endDate, pageNo, pageSize, ownRoleIds, orderBy);
 	}
+	
+	
     @Override
     protected Operations<CmImage> getDao() {
         return dao;

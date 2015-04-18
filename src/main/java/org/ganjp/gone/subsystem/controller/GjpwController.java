@@ -30,10 +30,14 @@ import org.ganjp.gone.am.service.AmUserService;
 import org.ganjp.gone.bm.model.BmConfig;
 import org.ganjp.gone.bm.service.BmConfigService;
 import org.ganjp.gone.cm.model.CmArticle;
+import org.ganjp.gone.cm.model.CmFile;
 import org.ganjp.gone.cm.model.CmImage;
+import org.ganjp.gone.cm.model.CmVideo;
 import org.ganjp.gone.cm.model.CmWebsite;
 import org.ganjp.gone.cm.service.CmArticleService;
+import org.ganjp.gone.cm.service.CmFileService;
 import org.ganjp.gone.cm.service.CmImageService;
+import org.ganjp.gone.cm.service.CmVideoService;
 import org.ganjp.gone.cm.service.CmWebsiteService;
 import org.ganjp.gone.common.controller.BaseController;
 import org.ganjp.gone.common.model.Page;
@@ -514,6 +518,192 @@ public class GjpwController extends BaseController {
 		return map;
 	}
 	
+	/** -----------------------------------------------------Video for get and save ---------------------------------------------*/
+	@RequestMapping(value = "/videos/{keywords}/{field}/{roleIds}/{lang}/{pageNo}/{pageSize}/{orderBy}", method = RequestMethod.GET)
+	public @ResponseBody Map<String,Object> getMapWithDataVideos(@PathVariable String keywords, @PathVariable String field, @PathVariable String roleIds,
+				@PathVariable String lang, @PathVariable Integer pageNo, @PathVariable Integer pageSize, @PathVariable String orderBy, 
+				HttpServletRequest request, HttpServletResponse response) {
+		super.setCORS(response);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result", "fail");
+		try {
+			keywords = new String(keywords.getBytes("ISO-8859-1"), "UTF-8");
+			Page<CmVideo> cmVideoPage = cmVideoService.getCmVideoPage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
+			List<Map<String,String>> articles = new ArrayList<Map<String,String>>();
+			for (CmVideo cmVideo : cmVideoPage.getResult()) {
+				Map<String,String> articleMap = new LinkedHashMap<String,String>();
+				articleMap.put("uuid", cmVideo.getVideoId());
+				articleMap.put("name", cmVideo.getVideoName());
+				articleMap.put("content", cmVideo.getDescription());
+				articleMap.put("contentHtml", StringUtil.convertForHtml(cmVideo.getDescription()));
+				articleMap.put("url", cmVideo.getVideoUrl());
+				articleMap.put("tags", cmVideo.getTags());
+				articleMap.put("displayNo", StringUtil.toString(cmVideo.getDisplayNo()));
+				articleMap.put("roleIds", cmVideo.getRoleIds());
+				articleMap.put("lang", cmVideo.getLang());
+				articles.add(articleMap);
+			}
+			this.setPageInfo(cmVideoPage.getTotalPages(), cmVideoPage.getTotalCount(), pageNo, pageSize, map);
+			map.put("data", articles);
+			map.put("result", "success");
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+        return map;
+	}
+	@RequestMapping(value = "/video/save", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> saveVideo(HttpServletRequest request, HttpServletResponse response) {
+		super.setCORS(response);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result", "fail");
+		try {
+			String uuid = request.getParameter("uuid");
+			CmVideo cmVideo = null;
+			boolean isNew = false;
+			if (StringUtil.hasText(uuid) && uuid.length()==32) {
+				cmVideo = cmVideoService.findOne(uuid);
+				cmVideo.setModifyTimestamp(DateUtil.getNowTimstamp());
+			} else {
+				cmVideo = new CmVideo();
+				isNew = true;
+			}
+			cmVideo.setVideoName(request.getParameter("name"));
+			cmVideo.setDescription(request.getParameter("content"));
+			cmVideo.setVideoUrl(request.getParameter("url"));
+			cmVideo.setLang(request.getParameter("lang"));
+			
+			String tags = request.getParameter("tags");
+			if (StringUtil.hasText(tags)) {
+				cmVideo.setTags(tags);
+			} else {
+				cmVideo.setTags(null);
+			}
+			String roleIds = request.getParameter("roleIds");
+			if (StringUtil.hasText(roleIds)) {
+				cmVideo.setRoleIds(roleIds);
+			} else {
+				cmVideo.setRoleIds(null);
+			}
+			
+			int displayNo = StringUtil.hasText(request.getParameter("displayNo"))?Integer.parseInt(request.getParameter("displayNo")):9999;
+			cmVideo.setDisplayNo(displayNo);
+			
+			if (isNew) {
+				cmVideoService.create(cmVideo);
+			} else {
+				cmVideoService.update(cmVideo);
+			}
+			
+			Map<String,String> articleMap = new LinkedHashMap<String,String>();
+			articleMap.put("uuid", cmVideo.getVideoId());
+			articleMap.put("name", cmVideo.getVideoName());
+			articleMap.put("content", cmVideo.getDescription());
+			articleMap.put("url", cmVideo.getVideoUrl());
+			articleMap.put("tags", cmVideo.getTags());
+			articleMap.put("displayNo", StringUtil.toString(cmVideo.getDisplayNo()));
+			articleMap.put("roleIds", cmVideo.getRoleIds());
+			
+			map.put("data", articleMap);
+			map.put("result", "success");
+		} catch (Exception ex) {
+			log.error(ex.getMessage());
+		}
+		return map;
+	}
+	
+	/** -----------------------------------------------------File for get and save ---------------------------------------------*/
+	@RequestMapping(value = "/files/{keywords}/{field}/{roleIds}/{lang}/{pageNo}/{pageSize}/{orderBy}", method = RequestMethod.GET)
+	public @ResponseBody Map<String,Object> getMapWithDataFiles(@PathVariable String keywords, @PathVariable String field, @PathVariable String roleIds,
+				@PathVariable String lang, @PathVariable Integer pageNo, @PathVariable Integer pageSize, @PathVariable String orderBy, 
+				HttpServletRequest request, HttpServletResponse response) {
+		super.setCORS(response);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result", "fail");
+		try {
+			keywords = new String(keywords.getBytes("ISO-8859-1"), "UTF-8");
+			Page<CmFile> cmFilePage = cmFileService.getCmFilePage(keywords, field, lang, "", "", pageNo, pageSize, roleIds, orderBy);
+			List<Map<String,String>> articles = new ArrayList<Map<String,String>>();
+			for (CmFile cmFile : cmFilePage.getResult()) {
+				Map<String,String> articleMap = new LinkedHashMap<String,String>();
+				articleMap.put("uuid", cmFile.getFileId());
+				articleMap.put("name", cmFile.getFileName());
+				articleMap.put("url", cmFile.getFileUrl());
+				articleMap.put("tags", cmFile.getTags());
+				articleMap.put("displayNo", StringUtil.toString(cmFile.getDisplayNo()));
+				articleMap.put("roleIds", cmFile.getRoleIds());
+				articleMap.put("lang", cmFile.getLang());
+				articles.add(articleMap);
+			}
+			this.setPageInfo(cmFilePage.getTotalPages(), cmFilePage.getTotalCount(), pageNo, pageSize, map);
+			map.put("data", articles);
+			map.put("result", "success");
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+        return map;
+	}
+	@RequestMapping(value = "/file/save", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> saveFile(HttpServletRequest request, HttpServletResponse response) {
+		super.setCORS(response);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("result", "fail");
+		try {
+			String uuid = request.getParameter("uuid");
+			CmFile cmFile = null;
+			boolean isNew = false;
+			if (StringUtil.hasText(uuid) && uuid.length()==32) {
+				cmFile = cmFileService.findOne(uuid);
+				cmFile.setModifyTimestamp(DateUtil.getNowTimstamp());
+			} else {
+				cmFile = new CmFile();
+				isNew = true;
+			}
+			cmFile.setFileName(request.getParameter("name"));
+			cmFile.setFileUrl(request.getParameter("url"));
+			cmFile.setLang(request.getParameter("lang"));
+			
+			String tags = request.getParameter("tags");
+			if (StringUtil.hasText(tags)) {
+				cmFile.setTags(tags);
+			} else {
+				cmFile.setTags(null);
+			}
+			String roleIds = request.getParameter("roleIds");
+			if (StringUtil.hasText(roleIds)) {
+				cmFile.setRoleIds(roleIds);
+			} else {
+				cmFile.setRoleIds(null);
+			}
+			
+			int displayNo = StringUtil.hasText(request.getParameter("displayNo"))?Integer.parseInt(request.getParameter("displayNo")):9999;
+			cmFile.setDisplayNo(displayNo);
+			
+			if (isNew) {
+				cmFileService.create(cmFile);
+			} else {
+				cmFileService.update(cmFile);
+			}
+			
+			Map<String,String> articleMap = new LinkedHashMap<String,String>();
+			articleMap.put("uuid", cmFile.getFileId());
+			articleMap.put("name", cmFile.getFileName());
+			articleMap.put("url", cmFile.getFileUrl());
+			articleMap.put("tags", cmFile.getTags());
+			articleMap.put("displayNo", StringUtil.toString(cmFile.getDisplayNo()));
+			articleMap.put("roleIds", cmFile.getRoleIds());
+			
+			map.put("data", articleMap);
+			map.put("result", "success");
+		} catch (Exception ex) {
+			log.error(ex.getMessage());
+		}
+		return map;
+	}
+	
 	private void setPageInfo(long totalPages, long totalCount, long pageNo, long pageSize, Map<String,Object> map) {
 		long nextPageNo = pageNo;
 		long prePageNo = pageNo-1;
@@ -553,6 +743,7 @@ public class GjpwController extends BaseController {
 		
 		String folder = request.getParameter("folder");
 		String lang = request.getParameter("lang");
+		String save = request.getParameter("save");
 		String fileFullName = "";
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("result", "success");
@@ -564,8 +755,8 @@ public class GjpwController extends BaseController {
 				fileFullName = fileName;
 			}
 			String saveFullPath = FileUtil.getPath(request.getRealPath(""), "resources", "upload", folder, fileFullName);
-			if (file.getSize() > 200000000) {
-				map.put("result", fileFullName + " size is more than 200M");
+			if (file.getSize() > 2000000000) {
+				map.put("result", fileFullName + " size is more than 2000M");
 			} else {
 				String saveUrl = "/resources/upload/"+folder+"/" + fileFullName;
 				fileName = fileName.substring(0, fileName.indexOf("."));
@@ -577,10 +768,8 @@ public class GjpwController extends BaseController {
 				if (new File(saveFullPath).exists()) {
 					map.put("result", fileFullName + " has been exist!");
 				} else {
-					if (fileFullName.endsWith("png") || fileFullName.endsWith("jpg") || fileFullName.endsWith("jpeg")) { 
-						
-						String save = request.getParameter("save");
-						if (!(StringUtil.hasText(save) && "no".equalsIgnoreCase(save))) {
+					if ("images".equalsIgnoreCase(folder)) {
+						if (StringUtil.hasText(save) && "yes".equalsIgnoreCase(save)) {
 							CmImage cmImage = new CmImage();
 							cmImage.setImageName(fileName);
 							cmImage.setImageUrl(saveUrl);
@@ -592,6 +781,34 @@ public class GjpwController extends BaseController {
 								cmImage.setTags("Other");
 							}
 							cmImageService.create(cmImage);
+						}
+					} else if ("videos".equalsIgnoreCase(folder)) {
+						if (StringUtil.hasText(save) && "yes".equalsIgnoreCase(save)) {
+							CmVideo cmVideo = new CmVideo();
+							cmVideo.setVideoName(fileName);
+							cmVideo.setVideoUrl(saveUrl);
+							cmVideo.setLang(lang);
+							cmVideo.setDisplayNo(9999);
+							if (Const.LANGUAGE_ZH_CN.equals(lang)) {
+								cmVideo.setTags("其他");
+							} else {
+								cmVideo.setTags("Other");
+							}
+							cmVideoService.create(cmVideo);
+						}
+					} else if ("files".equalsIgnoreCase(folder)) {
+						if (StringUtil.hasText(save) && "yes".equalsIgnoreCase(save)) {
+							CmFile cmFile = new CmFile();
+							cmFile.setFileName(fileName);
+							cmFile.setFileUrl(saveUrl);
+							cmFile.setLang(lang);
+							cmFile.setDisplayNo(9999);
+							if (Const.LANGUAGE_ZH_CN.equals(lang)) {
+								cmFile.setTags("其他");
+							} else {
+								cmFile.setTags("Other");
+							}
+							cmFileService.create(cmFile);
 						}
 					}
 					FileUtil.copy(file.getInputStream(), new File(saveFullPath));
@@ -626,6 +843,12 @@ public class GjpwController extends BaseController {
 	
 	@Autowired
 	private CmWebsiteService cmWebsiteService;
+	
+	@Autowired
+	private CmVideoService cmVideoService;
+	
+	@Autowired
+	private CmFileService cmFileService;
 	
 	@Autowired
 	private AmService amService;
