@@ -11,10 +11,10 @@
         <span class="icon-bar"></span>
       </button>
       <c:if test="${user==null}">
-        <a class="navbar-brand" href="#">GDemo Manage Platform</a>
+        <a class="navbar-brand" href="<c:url value='/spring/gdemo'/>">GDemo</a>
       </c:if>
       <c:if test="${user!=null && fn:length(user.subsystemIds)==32}">
-        <a class="navbar-brand" href="#">${user.currentSubsystemName}</a>
+        <a class="navbar-brand" href="<c:url value='/spring/gdemo'/>">${user.currentSubsystemName}</a>
       </c:if>
       <c:if test="${user!=null && fn:length(user.subsystemIds)>32}">
         <ul class="nav navbar-nav">
@@ -36,10 +36,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li <c:if test="${fn:endsWith(pageContext.request.requestURI, '/map.jsp')}">class="active"</c:if>>
-        	<a href="<c:url value='/spring/mmp/subsystem'/>"><i class="fa fa-life-ring fa-fw"></i> Map</a>
+        <li class="dropdown <c:if test="${fn:endsWith(pageContext.request.requestURI, '/html5/basic.jsp')}">active</c:if>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-html5"></i> HTML5 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<c:url value='/spring/gdemo/html5/basic'/>">&nbsp;&nbsp;Basic</a></li>    
+          </ul>
         </li>
-        <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        <li class="dropdown <c:if test="${fn:endsWith(pageContext.request.requestURI, '/angularjs/basic.jsp')}">active</c:if>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Angular JS <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <!-- <li style="padding:10px;color:gray;"></li> -->
+            <li><a href="<c:url value='/spring/gdemo/angularjs/basic'/>">&nbsp;&nbsp;Basic</a></li>    
+          </ul>
+        </li>
+        <c:if test="${user!=null}">
+          <li><a href="<c:url value='/spring/logout'/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        </c:if>
       </ul>
     </div>
   </div>
