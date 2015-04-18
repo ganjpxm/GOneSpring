@@ -23,3 +23,7 @@ drop table if exists am_user_subsystem;
 drop table if exists bm_config;
 
 drop table if exists bm_param;
+
+drop table if exists cm_file;
+
+drop table if exists cm_video;

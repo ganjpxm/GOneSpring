@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="org.ganjp.gone.cm.model.CmFile" table="cm_file">
+<id name="fileId" column="file_id" type="java.lang.String" unsaved-value="">
+<generator class="uuid"/>
+</id>
+<property name="fileCd" type="java.lang.String" column="file_cd"/>
+<property name="fileName" type="java.lang.String" column="file_name"/>
+<property name="fileUrl" type="java.lang.String" column="file_url"/>
+<property name="tags" type="java.lang.String" column="tags"/>
+<property name="roleIds" type="java.lang.String" column="role_ids"/>
+<property name="lang" type="java.lang.String" column="lang"/>
+<property name="operatorId" type="java.lang.String" column="operator_id"/>
+<property name="operatorName" type="java.lang.String" column="operator_name"/>
+<property name="dataStatus" type="java.lang.String" column="data_status"/>
+<property name="createDateTime" type="java.sql.Timestamp" column="create_date_time"/>
+<property name="modifyTimestamp" type="java.sql.Timestamp" column="modify_timestamp"/>
+<property name="displayNo" type="java.lang.Integer" column="display_no"/>
+<property name="sendStatus" type="java.lang.String" column="send_status"/>
+<property name="sendDateTime" type="java.sql.Timestamp" column="send_date_time"/>
+<property name="receiveDateTime" type="java.sql.Timestamp" column="receive_date_time"/>
+</class>
+</hibernate-mapping>

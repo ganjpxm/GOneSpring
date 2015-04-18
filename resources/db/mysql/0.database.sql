@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS gone;
 CREATE DATABASE gone DEFAULT CHARACTER SET utf8;
 
-use jpdb;
+use gone;
 
 ##new user
 GRANT ALL ON gone.* TO ganjp@'175.156.107.251' IDENTIFIED BY 'ganjp';

@@ -367,3 +367,53 @@ create table cm_website
    send_date_time       datetime,
    primary key (website_id)
 );
+
+/*==============================================================*/
+/* Table: cm_file                                               */
+/*==============================================================*/
+create table cm_file
+(
+   file_id              char(32) not null,
+   file_cd              varchar(32),
+   file_name            varchar(128),
+   file_url             varchar(256),
+   tags                 varchar(256),
+   role_ids             varchar(256),
+   lang                 varchar(10),
+   operator_id          char(32),
+   operator_name        varchar(128),
+   data_status          char(1),
+   create_date_time     datetime,
+   modify_timestamp     timestamp,
+   display_no           numeric(9,0),
+   send_status          varchar(1) comment '0£∫don''t sent, 1£∫has sent',
+   send_date_time       datetime,
+   receive_date_time    datetime,
+   primary key (file_id)
+);
+
+/*==============================================================*/
+/* Table: cm_video                                              */
+/*==============================================================*/
+create table cm_video
+(
+   video_id             char(32) not null,
+   video_cd             varchar(32),
+   video_name           varchar(128),
+   video_url            varchar(256),
+   title                varchar(256),
+   description          text,
+   tags                 varchar(256),
+   role_ids             varchar(256),
+   display_no           numeric(9,0),
+   lang                 varchar(10),
+   operator_id          char(32),
+   operator_name        varchar(128),
+   create_date_time     datetime,
+   modify_timestamp     timestamp,
+   data_status          char(1),
+   send_status          varchar(1) comment '0£∫don''t sent, 1£∫has sent',
+   send_date_time       datetime,
+   receive_date_time    datetime,
+   primary key (video_id)
+);

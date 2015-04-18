@@ -14,7 +14,7 @@
 	<property name="resources" value="src/main/resources" />
 	<property name="tmp" value="dist/tmp" />
     <property name="web" value="src/main/webapp" />
-    <property name="page" value="${web}/WEB-INF/views/jsp" />
+    <property name="page" value="${web}/WEB-INF/views/spring" />
     <property name="lib" value="resources/jar/ant" />
 	
 	<path id="lib.path">

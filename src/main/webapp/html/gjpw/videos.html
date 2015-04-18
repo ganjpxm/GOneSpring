@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Personal,Software,Hardeware">
+  <meta name="author" content="Gan Jianping">
+  <link rel="icon" href="../../resources/jp/image/favicon.png">
+  <title>Gan Jianping Videos</title>
+  <link rel="stylesheet" href="../../resources/jqueryui/1.11.2/jquery-ui.css">
+  <link rel="stylesheet" href="../../resources/bootstrap/v3.3.2/css/bootstrap.css">
+  <link rel="stylesheet" href="../../resources/other/style-metronic.css">
+  <link rel="stylesheet" href="../../resources/henry/v3.0/style.css">
+  <link rel="stylesheet" href="../../resources/font-awesome/v4.3.0/css/font-awesome.css">
+  <link rel="stylesheet" href="../../resources/chosen/v1.1/chosen.css">
+  <link rel="stylesheet" href="../../resources/fileupload/v5.41/fileupload.css">
+  <link rel="stylesheet" href="../../resources/magnific-popup/v0.9/magnific-popup.css">
+  <link rel="stylesheet" href="../../resources/jp/jp-gone.css">
+</head>
+<body>
+  <!-- ***************************************************** Menu ******************************************************* -->
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-extra-bold" href="home.html">&nbsp;&nbsp;&nbsp;<span id="brand-name"></span>&nbsp;&nbsp;&nbsp;</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="font-size:16px;">
+              <li><a href="websites.html"><i class="fa fa-globe fa-fw"></i> <span id="menu-websites"></span></a></li>
+              <li><a href="articles.html"><i class="fa fa-book fa-fw"></i> <span id="menu-articles"></span></a></li>
+              <li><a href="images.html"><i class="fa fa-picture-o fa-fw"></i> <span id="menu-images"></span></a></li>
+              <li class="active"><a href="videos.html"><i class="fa fa-video-camera fa-fw"></i> <span id="menu-videos"></span></a></li>
+              <li><a href="files.html"><i class="fa fa-cloud-download fa-fw"></i> <span id="menu-download"></span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="menu-more"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <!-- <li class="divider"></li> -->
+                  <li><a href="http://www.ganjianping.com:8080/gone/spring/gdemo" target="_blank"><i class="fa fa-link fa-fw"></i> GDemo</a></li>
+                  <li><a href="http://www.ganjianping.com:8080/gone/spring/login" target="_blank"><i class="fa fa-link fa-fw"></i> GOne</a></li>
+                  <!-- <li class="dropdown-header">Nav header</li> -->
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right"  style="font-size:16px;">
+              <li>
+              	<a id="login-out-menu" name="login" href="javascript:showLoginPanelOrLogout();" >
+              		<i class="fa fa-sign-in fa-fw"></i> <span id="menu-login"></span>
+              	</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                	<img id="img-language" style="height:18px;"> <span class="caret"></span> 
+                </a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li>
+	                  <a id="login-out-menu" name="login" href="javascript:changeLanguage('zh_CN');" >
+	              		<img src="../../resources/jp/image/ic_flag_cn.png" alt="中文" style="height:18px;"> 中文
+	              	  </a>
+	              	</li>
+	                <li>
+	              	<a id="login-out-menu" name="login" href="javascript:changeLanguage('en_SG');" > 
+	              		<img src="../../resources/jp/image/ic_flag_us.png" alt="English" style="height:18px;"> English
+	              	</a>
+	              </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- ***************************************************** Content ******************************************************* -->
+  <div>
+ 	<div class="container">
+	  <div style="margin-top:50px;">
+	    <div>
+		    <div class="input-group">
+			  <span id="video-tags-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-tags" style="color:black;"></i></span>
+			  <span id="search-condition-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-filter" style="color:black;"></i></span>
+			  <input id="keywords" name="keywords" type="text" class="form-control" value="" />
+			  <span id="search-btn" class="input-group-addon" style="cursor:pointer;"><i class="fa fa-search" style="color:black;"></i></span>
+			  <span id="operation-btn" class="input-group-addon" style="cursor:pointer;"><span id="totalNumber" class="badge" style="color:white;background-color:#1abc9c;"></span></span>
+			</div>
+		</div>
+	  </div>
+	  <div id="search-condition-div" class="row" style="display:none;margin:5px 0px;">
+	  		<div id='role-ids-div' class="col-md-3" style="display:none;padding:2px;">
+				<select id="role-ids" name="roleIds" class="form-control"></select>
+			</div>
+			<div class="col-md-3" style="padding:2px;">
+				<select id="field" name="field" class="form-control">
+				  <option value="all" >All</option>
+				  <option value="tag" >Tag</option>
+				  <option value="name">Name</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="search-lang" name="lang" class="form-control">
+				  <option value="all" >All</option>
+				  <option value="en_SG">English</option>
+				  <option value="zh_CN">中文</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="order-by" name="orderBy" class="form-control">
+				  <option value="displayNo asc" >Display No. &uarr;</option>
+				  <option value="createDateTime desc">Create Datetime &darr;</option>
+				  <option value="modifyTimestamp desc">Modify Datetime &darr;</option>
+				</select>
+			</div>
+			<div class="col-md-2" style="padding:2px;">
+				<select id="page-size" name="pageSize" class="form-control">
+				  <option value="50" selected> 50 </option>
+				  <option value="200"> 200 </option>
+				  <option value="500"> 500 </option>
+				  <option value="1000"> 1000 </option>
+				  <option value="10000"> 10000 </option>
+				  <option value="100000"> 100000 </option>						
+				</select>
+			</div>
+	  </div>
+	  <div id="video-tag-btns" style="display:none;"></div>
+	  <div style="clear:both;"></div>
+	  <div id="video-operate-btns"  style="display:none;margin-top:10px;">
+	  	 <a id="edit-video-btn" href="javascript:editVideos();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="margin:4px;">
+	  	 	<i class="fa fa-edit"></i> <span id="edit-image"></span></a>
+	  	 <a id="add-video-btn" href="javascript:showVideoAddPanel();" class="btn btn-primary btn-xs jp-hide jp-fr" role="button" style="float:right;margin:4px;">
+	  	 	<i class="fa fa-plus"></i> <span id="add-image"></span></a>
+	  	 <label class="fileinput-button mt5" style="float:right;margin-top:3px;">
+		   <form method="post">
+		     <input type="hidden" name="folder" value="videos"/>
+		     <input type="hidden" name="save" value="yes"/>
+		     <input type="hidden" id="upload_video_lang" name="lang"/>
+		     <button type="button" class="btn btn-primary btn-xs" style="margin-right:10px;">
+			   <span class="glyphicon glyphicon-upload"></span> <span id="upload-text"></span>
+			 </button>
+		     <input id="upload-video-save-db-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/gone/spring/gjpw/uploadFile" multiple></input>
+		   </form>
+		 </label>
+	  </div>
+	  <div style="clear:both;"></div>
+	  <div class="jp-box-big" style="margin-top:5px;">
+	    <div id="video-cells" class="popup-gallery" style="display:block;"> 
+		  <div class="jp-tc jp-theme-color"><i class="fa fa-spinner fa-spin fa-3x" style="margin-top:50px;"></i></div>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <div class="panel-footer" style="text-align:center;">
+	<ul id="pagination" class="pagination" style="margin-top:1px;margin-bottom:1px;">
+	</ul>
+  </div>
+  <hr class="featurette-divider">
+  <footer>
+    <div style="background-color:#00796B; text-align:center;color:white;padding:20px;margin-top:-30px;">
+        <p>Email : ganjpxm@gmail.com</p>
+    	<p>&copy; 2014 Gan Jianping &middot;</p>
+    </div>
+  </footer>
+
+  <!-- ******************************************* magnific-popup Panel ************************************************** -->
+  <div id="login-in-panel" class="mfp-hide white-popup-block" style="max-width:400px;">
+    <form id="login-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/login" method="post">
+      <input name="subsystemId" type="hidden" value='402881844c364ba2014c3659098d006c'/>
+	  <h3 id="login-title" class="jp-tc"></h3>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+		<input id="user-cd" name="userCd" class="form-control placeholder-no-fix" autocomplete="off" placeholder="" tabindex="1"/>
+	  </div>
+	  <div class="input-group jp-mt30">
+		<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		<input id="password" name="password" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="" tabindex="2" />
+	  </div>
+	  <div id="login-error-info" class="jp-red jp-tc"></div>
+	  <div id="login-btn" class="jp-mt30 jp-mb30">  
+		<a href="javascript:login();" class="btn btn-primary" style="height:40px;width:100%;" role="button" tabindex="3"><i class="fa fa-sign-in"></i> <span id="btn-login"></span></a>        
+	  </div>
+	  <div id="login-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+	</form>    
+  </div>
+  
+  <div id="video-panel" class="white-popup-block mfp-hide" style="max-width:800px;">
+    <form id="video-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/video/save" method="post">
+      <input id="video-uuid" name="uuid" type="hidden"/>
+      <input id="video-tags" name="tags" type="hidden"/>
+      <input id="video-role-ids" name="roleIds" type="hidden"/>
+	  <h3 style="text-align:center;"><span id="add-video-title"></span></h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <div class="form-group" style="margin-top:10px;">
+	    <div class="input-group">
+	      <input id="video-url" name="url" class="form-control" type="text" placeholder=""/>
+	      <div class="input-group-addon" style="padding:2px;">
+	      	<label class="fileinput-button" style="height:30px;margin-top:-15px;margin-bottom:-30px;">
+			  <input type="hidden" name="folder" value="videos"/>
+			  <input type="hidden" name="save" value="no"/>
+			  <button type="button" class="btn btn-default btn-sm" style="background-color:#eee;border:0px;">
+				<i class="fa fa-cloud-upload fa-lg"></i>
+			  </button>
+			  <input id="upload-video-btn" type="file" name="file" data-url="http://www.ganjianping.com:8080/gone/spring/gjpw/uploadFile" multiple></input>
+			</label>
+	      </div>
+	    </div>
+	  </div>
+	  <div id="video-display" style="margin-top:10px;"></div>
+	  <div style="margin-top:5px;">
+	  	<input id="video-name" name="name" class="form-control" type="text" placeholder="">
+	  </div>
+	  <div style="margin-top:10px;">
+	    <select id="video-tag" name="videoTag" data-placeholder="" class="form-control chosen-select" multiple>
+        </select>
+      </div>
+      <div id="video-tags-error" style="color:red;margin-top:5px;margin-bottom:5px;"></div>
+      <div id="video-roles" class="jp-mt15 jp-hide">
+	    <select id="video-role-id" name="roleId" data-placeholder="" class="form-control chosen-select" multiple tabindex="6"></select>
+      </div>
+	  <input id="video-display-no" name="displayNo" class="form-control" type="number" placeholder="" style="margin-top:10px;">
+	  <div style="margin-top:10px;display:none;">
+	  	<textarea id="video-content" name="content" class="form-control" rows="5" cols="70"></textarea>
+	  </div>
+	  <input id="video-lang" name="lang" class="form-control" type="text" placeholder="" style="margin-top:10px;">
+	</form>
+	<div id="save-video-error-info" class="jp-red jp-tc"></div>
+	<div id="save-video-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	  <a href="javascript:dismiss();" class="btn btn-default" style="width:100px;" role="button"><i class="fa fa-remove"></i> <span id="cancel-image"></span></a>
+	  <a href="javascript:saveVideo();" class="btn btn-primary" style="width:200px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-image"></span></a>     
+	</div>
+	<div id="save-video-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="tags-panel" class="mfp-hide white-popup-block">
+    <form id="tags-form" action="http://www.ganjianping.com:8080/gone/spring/gjpw/tags/save" method="post"> 
+	  <input id="tags-uuid" name="uuid" type="hidden"/>
+	  <h3 id="tags-title" style="text-align:center;">Tags</h3>
+	  <button title="Close" type="button" class="mfp-close" style="color:#333;">×</button>
+	  <textarea id="tags" name="tags" class="form-control" placeholder="Tag Category:Tag1,Tag2;"></textarea>
+	</form>   
+	<div id="save-tags-error-info" class="jp-red jp-tc"></div> 
+	<div id="save-tags-btn" style="height:60px;margin-top:20px;text-align:center;"> 
+	    <a href="javascript:saveTags();" class="btn btn-primary" style="width:250px;" role="button"><i class="fa fa-floppy-o"></i> <span id="save-tags"></span></a>   
+	</div>
+	<div id="save-tags-processing-icon" class="jp-tc jp-mt10 jp-mb10 jp-hide"><i class="fa fa-spinner fa-spin fa-3x jp-theme-color"></i></div>
+  </div>
+  
+  <div id="processing-panel" class="mfp-hide white-popup-block" style="max-width:60px;background-color:#1abc9c;opacity:0.65;border-radius:4px;">
+    <!-- <div style="float:right;margin-top:-10px;margin-right:-5px;font-size:10px;cursor:pointer;" onclick="closeProcessingPanel();"><i class="fa fa-times"></i></div> -->
+    <div><i class="fa fa-spinner fa-spin fa-3x" style="text-align:center;color:white;"></i></div>
+  </div>
+</body>
+<script src="../../resources/jquery/jquery-1.11.1.js"></script>
+<script src="../../resources/jqueryui/1.11.2/jquery-ui.js"></script>
+<script src="../../resources/bootstrap/v3.3.2/js/bootstrap.js"></script>
+<script src="../../resources/henry/v3.0/henry.js"></script>
+<script src="../../resources/henry/v3.0/tools.js"></script>
+<script src="../../resources/henry/v3.0/lang/en.js"></script>
+<script src="../../resources/chosen/v1.1/jquery.chosen.js"></script>
+<script src="../../resources/fileupload/v5.41/jquery.fileupload.js"></script>
+<script src="../../resources/magnific-popup/v0.9/jquery.magnific-popup.js"></script>
+<script src="../../resources/jqueryform/jquery.form-3.51.js"></script>
+<script src="../../resources/jqueryvalidation/1.13.1/jquery.validate.js"></script>
+<script src="../../resources/jp/jp-gone.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../resources/other/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="../../resources/other/html5shiv.min.js"></script>
+  <script src="../../resources/other/respond.min.js"></script>
+<![endif]--> 
+</html>
+
+<script type="text/javascript">
+var docWidth = $(document).width();
+var currentVideoTag = "all";
+var currentVideoTagIndex = 0;
+var totalNumber = 0;
+
+var isInitArticleContent = false;
+var isInitVideoContent = false;
+// --------------------------------------------------- init Page ---------------------------------------------
+var videoWidth = $(document).width();
+	
+setPage(currentLanguage);
+function setPage(lang) {
+  if (lang == "zh_CN") {
+	loadJs("i18nZhCnJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_cn.png");
+  } else {
+	loadJs("i18nEnSgJs");
+	$("#img-language").attr("src", jp.resourceRoot + "/jp/image/ic_flag_us.png");
+  }
+  var loadI18nTimeout = setInterval(function () {
+	if (I18N) {
+	  if ((currentLanguage=="en_SG"&&I18N.home=="Home") || (currentLanguage=="zh_CN"&&I18N.home=="首页")) {
+	    setTextInPage();
+	    clearTimeout(loadI18nTimeout);
+	  }
+	}
+  }, 100);
+}
+function setTextInPage() {
+  $("#title").text(I18N.brandName);
+  $("#brand-name").text(I18N.brandName);
+  $("#menu-home").text(I18N.home);
+  $("#menu-websites").text(I18N.websites);
+  $("#menu-articles").text(I18N.articles);
+  $("#menu-images").text(I18N.images);
+  $("#menu-videos").text(I18N.videos);
+  $("#menu-more").text(I18N.more);
+  $("#menu-download").text(I18N.download);
+  $("#btn-login").text(I18N.login);
+  
+  $("#login-title").text(I18N.loginTitle);
+  $("#user-cd").attr("placeholder", I18N.loginWay); 
+  $("#password").attr("placeholder", I18N.password);
+  
+  $("#save-tags").text(I18N.save);
+  
+  $("#add-video-title").text(I18N.addVideoTitle);
+  $("#video-name").attr("placeholder", I18N.imageTitle);
+  $("#video-content").attr("placeholder", I18N.imageContent);
+  $("#video-display-no").attr("placeholder", I18N.displayNo);
+  $("#video-tag").attr("data-placeholder", I18N.chooseTags);
+  $("#video-role-id").attr("data-placeholder", I18N.chooseRoles);
+  $("#upload-text").text(I18N.upload);
+  $("#add-image").text(I18N.add);
+  $("#edit-image").text(I18N.edit);
+  $("#save-image").text(I18N.save);
+  $("#cancel-image").text(I18N.cancel);
+  
+  //$("#").text(I18N.);
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+  } else {
+	$("#menu-login").text(I18N.login);
+  }
+}
+
+//------------------------------ Login ------------------------------
+function showLoginPanelOrLogout() {
+  if ($("#login-out-menu").attr("name") == "login") {
+	$.magnificPopup.open({items: { src: "#login-in-panel" }, type: 'inline', callbacks: {
+	  open: function() {
+	    setTimeout(function() { $("#user-cd").focus(); }, 100);
+	  }	  
+	}});
+  } else {
+	$("#video-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
+	sessionStorage.removeItem(jp.keyRoleIdNames);
+	$("#login-out-menu").html("<i class='fa fa-sign-in fa-fw'></i> " + I18N.login + "</a>");
+	$("#login-out-menu").attr("name","login");
+	
+	$("#video-roles").hide();
+	$("#video-cells").html("");
+	$("#video-role-id").html("");
+	$("#role-ids").html("");
+	$("#role-ids-div").hide();
+	$("#video-form .chosen-select").trigger("chosen:updated");
+	
+	jpingRoleIds = "empty";
+	asynVideoInfos();
+	$("#edit-video-btn").hide();
+    $("#add-video-btn").hide();
+  }
+}
+function login() {
+  if ($('#login-form').validate().form()) {
+	$("#login-btn").hide();
+	$("#login-processing-icon").show();
+	$("#login-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	  $("#login-btn").show();
+	  $("#login-processing-icon").hide();
+	  if (resp.result=="success") {
+		$("#user-cd").val("");
+		$("#password").val("");
+		sessionStorage.setItem(jp.keyRoleIdNames, resp.data.roleIdNames);
+		jpingRoleOptionsHtml = getRoleOptionsHtml();
+		jpingRoleIds = getRoleIds();
+		asynTags();
+		$("#login-out-menu").html("<i class='fa fa-sign-out fa-fw'></i> " + I18N.logout + "</a>");
+		$("#login-out-menu").attr("name","logout");
+		
+		$("#video-role-id").html(jpingRoleOptionsHtml);
+		$("#video-roles").show();
+		$("#role-ids").html(jpingRoleOptionsHtml);
+		$("#role-ids-div").show();
+		$("#video-form .chosen-select").trigger("chosen:updated");
+		
+		showEditBtns();
+		$.magnificPopup.close();
+		asynVideoInfos();
+	  } else {
+		$("#login-error-info").html("Password is wrong.");
+	  }
+	}});
+  }
+}
+function changeLanguage(lang) {
+  setCurrentLanguage(lang);
+  setPage(lang);
+  asynVideoInfos();
+}
+
+function dismiss() {
+  $.magnificPopup.close();
+}
+
+//--------------------------------------- search ----------------------------------
+function filter(el) {
+  var value = $(el).val().toLowerCase();
+  totalNumber = 0;
+  $("#video-cells .jp-cell-big").each(function(index) {
+	var filter = $(this).attr("filter");
+	if (filter) {
+		filter = filter.toLowerCase();
+	} else {
+		filter = "";
+	}
+	
+	var valueArr = value.split("&");
+	var isContain = true;
+	for (var i=0; i < valueArr.length; i++) {
+		if (valueArr[i]!=null && valueArr[i]!="") {
+			if (valueArr[i].indexOf("|")!=-1) {
+				var orValueArr = valueArr[i].split("|");
+				var isContainWithOr = false;
+				for (var k=0; k < orValueArr.length; k++) {
+					if (orValueArr[k]!=null && orValueArr[k]!="" && filter.indexOf(orValueArr[k])!=-1) {
+						isContainWithOr = true;
+						break;
+					}
+				}
+				if (isContainWithOr==false) {
+					isContain = false;
+					break;
+				}
+			} else {
+				if (valueArr[i].indexOf("!=")!=-1 || valueArr[i].indexOf("<>")!=-1) {
+					var notValue = valueArr[i].substring(2);
+					if (notValue=="" || filter.indexOf(notValue) == -1) {
+						isContain = true;
+					} else {
+						isContain = false;
+					}
+					if (isContain == false) {
+						break;
+					}
+				} else {
+					if (filter.indexOf(valueArr[i]) == -1) {
+						isContain = false;
+						break;
+					}	
+				}
+			}
+		}
+	}
+	
+	if (isContain==false) {
+		$(this).hide();
+	} else {
+		totalNumber++;
+		$(this).show();
+	}
+  });
+  $("#totalNumber").text(totalNumber);
+}
+function search(pageNo) {
+  var keywords = $("#keywords").val();
+  var field = $("#field").val();
+  var lang = $("#search-lang").val();
+  var roleIds = $("#role-ids").val();
+  if (roleIds) {
+	  roleIds = "only" + roleIds;
+  } else {
+	  roleIds = jpingRoleIds;
+  }
+  var pageSize = $("#page-size").val();
+  if (!keywords) {
+	  keywords = "all";
+  }
+  if (pageSize==null) {
+	  
+  }
+  var orderBy = $("#order-by").val();
+  getVideoInfos(keywords, field, roleIds, lang, pageNo, pageSize, orderBy);
+  asynTags();
+} 
+//------------------------------ Videos ------------------------------
+function asynVideoInfos() {
+  $("#upload_video_lang").val(currentLanguage);
+  $("#order-by").val("modifyTimestamp desc");
+  $("#field").val("tag");
+  $("#search-lang").val(currentLanguage);
+  getVideoInfos(currentVideoTag,"tag",jpingRoleIds,currentLanguage,1,$("#page-size").val(),'modifyTimestamp desc');
+  asynTags();
+}
+function getVideoInfos(keywords,field,roleIds,lang,pageNo,pagesize,orderBy) {
+  $("#video-cells").html("<div class='jp-tc jp-theme-color'><i class='fa fa-spinner fa-spin fa-3x' style='margin-top:50px;'></i></div>");
+  var getVideoInfosUrl = "http://www.ganjianping.com:8080/gone/spring/gjpw/videos/" + keywords + "/" + field + "/" + roleIds + "/" + lang + "/" + pageNo +"/" + pagesize + "/" + orderBy;
+  $.ajax({type: "GET", url: getVideoInfosUrl, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var images = response.data;
+		var imageHtml = "";
+		totalNumber = 0;
+		for (var i=0; i<images.length; i++) {
+			var image = images[i];
+			
+			var uuid = image.uuid;
+			var name = image.name;
+			var content = image.content;
+			var contentHtml = image.contentHtml;
+			var url = image.url;
+			var tags = image.tags;
+			var displayNo = image.displayNo;
+			var roleIds = image.roleIds;
+			var lang = image.lang;
+			if (url && url.indexOf("http")==-1) {
+				url = "http://www.ganjianping.com:8080/gone" + url;
+			}
+			
+			imageHtml += "<div class='jp-cell-big' style='padding:1px 0px;padding-right:0px;' filter='" + tags + name + "'>";
+			if (url.indexOf("youtube")!=-1) {
+				imageHtml += "<iframe width='100%' height='350' src='" + url + "' frameborder='0' allowfullscreen></iframe>";
+			} else if (url.indexOf("vimeo")!=-1) {
+				imageHtml += "<iframe width='100%' height='350' src='" + url + "'></iframe>";
+			} else {
+				imageHtml += "<video width='100%' height='350' controls><source src='" + url + "' type='video/mp4'>Your browser does not support the video tag.</video>";
+				imageHtml += "<br/>" + name + "";
+			}
+			imageHtml += "<br/><span class='video-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showVideoEditPanel(&#39;" + uuid + 
+				"&#39;, &#39;" + image.url + "&#39;, &#39;" + name + "&#39;, &#39;" + tags + "&#39;, &#39;" + displayNo + "&#39;, &#39;" + roleIds + "&#39;, &#39;" + lang + "&#39;)'><i class='fa fa-pencil-square-o'></i></span></div>"+
+				"<div id='" + uuid + "VideoContent' style='font-size:14px;color:#838383;display:none;'>" + content + "</div>";
+			totalNumber++;
+		}
+		
+		totalNumber = response.totalCount;
+		$("#totalNumber").text(totalNumber);
+		$("#video-cells").html(imageHtml);
+		var beginPageNo = response.beginPageNo - 0;
+		var endPageNo = response.endPageNo - 0;
+		var pageNo = response.pageNo - 0;
+		if (beginPageNo != endPageNo) {
+			var pageHtml = "<li><a href='javascript:search(" + beginPageNo + ");'>&lt;&lt;</a></li>";
+			pageHtml += "<li><a href='javascript:search(" + response.prePageNo + ");'>&lt;</a></li>";
+			for (var i=1; i<=endPageNo; i++) {
+				pageHtml += "<li><a href='javascript:search(" + i + ");' "; 
+				if (i==pageNo) {
+					pageHtml += "style='background-color:#00796B;color:white;'";
+				}
+				pageHtml += ">" + i + "</a></li>";	
+			}
+			pageHtml += "<li><a href='javascript:search(" + response.nextPageNo + ");'>&gt;</a></li>";
+			pageHtml += "<li><a href='javascript:search(" + endPageNo + ");'>&gt;&gt;</a></li>";
+			
+			$("#pagination").html(pageHtml);
+		} else {
+			$("#pagination").hide();
+		}
+	  }
+	},
+	fail : function() {
+	  $("#video-cells").html(I18N.fail);
+	}
+  });
+}
+
+function showVideoAddPanel() {
+  $("#video-uuid").val("");
+  $("#video-url").val("");
+  $("#video-name").val("");
+  $("#video-content").val("");
+  $("#video-display").html("");
+  $("#video-lang").val(currentLanguage);
+  if (isInitVideoContent==true) {
+	  $("#paper").html("");
+  } else {
+	  $("#video-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitVideoContent=true;
+  }
+  $.magnificPopup.open({items: { src: "#video-panel" }, type: 'inline', modal: true});
+  $("#video-form .chosen-select").chosen({search_contains : false}); 
+}
+function editVideos() {
+  if ($("#video-cells .video-edit-btn").is(":visible")) {
+	  $("#video-cells .video-edit-btn").hide();
+	  $("#video-tag-edit-btn").hide();
+  } else {
+	  $("#video-cells .video-edit-btn").show();
+	  $("#video-tag-edit-btn").show();
+  }
+}
+function showVideoEditPanel(uuid,url,name,tags,displayNo,roleIds,lang) {
+  $("#video-lang").val(lang);
+  $("#video-uuid").val(uuid);
+  $("#video-url").val(url);
+  $("#video-name").val(name);
+  var content = $("#"+uuid+"VideoContent").html();
+  $("#video-display-no").val(displayNo);
+  if (content!=null && content!="" && content!="null") {
+	  $("#video-content").val(content);
+  } else {
+	  content = "";
+	  $("#video-content").val(""); 
+  }
+  if (tags!=null && tags!="" && tags!="null") {
+	 $("#video-tag").val(tags.split(","));
+  } else {
+	 $("#video-tag").val("");
+  }
+  if (roleIds!=null && roleIds!="" && roleIds!="null") {
+	  $("#video-role-id").val(roleIds.split(",")); 
+  } else {
+	  $("#video-role-id").val("");
+  }
+  if (url && url.indexOf("http")==-1) {
+	  url = "http://www.ganjianping.com:8080/gone" + url;
+  }
+  var divEl = "<div id='video' style='display:inline-block;text-align:center;margin:5px;'>" +
+	  "<iframe width='105' height='82' src='" + url + "'></iframe>" +  
+	"</div>";	
+  //$("#video-display").html(divEl);
+
+  if (isInitVideoContent==true) {
+	  $("#paper").html(content);
+  } else {
+	  $("#video-content").henry({tools: ["src", "bold", "italic", "underline", "alignment", "superscript", "subscript"]});
+	  $("#paper").css("background-color","#333").css("color","white");
+	  isInitVideoContent=true;
+  }
+  $.magnificPopup.open({items: { src: "#video-panel" }, type: 'inline', modal: true});
+  $("#video-form .chosen-select").chosen({search_contains : false});
+  $("#video-form .chosen-select").trigger("chosen:updated");
+}
+
+function saveVideo() {
+  if ($('#video-form').validate().form()) {
+	var videoTags = $("#video-tag").val();
+	var videoRoleIds = $("#video-role-id").val();
+	if (videoTags==null) {
+	  $("#video-tags-error").text(I18N.chooseTagsError);
+	} else {
+	  $("#save-video-btn").hide();
+	  $("#save-video-processing-icon").show();
+	  $("#video-tags").val(videoTags);
+	  $("#video-role-ids").val(videoRoleIds);
+	  $("#video-content").val($("#paper").html());
+	  
+	  $("#video-form").ajaxSubmit({dataType:'json', success : function(resp) {
+		if (resp.result=="success") {
+		  search(1);
+		  $("#video-content").val("");
+		  $("#video-url").val("");
+		  $("#video-uuid").val("");
+		  $("#video-name").val("");
+		  $.magnificPopup.close();
+		} else {
+		  $("#save-video-error-info").html(I18N.msg_save_fail);
+		}
+		$("#save-video-btn").show();
+		$("#save-video-processing-icon").hide();
+	  }});
+	}
+  }
+}
+
+//--------------------------------------- all tags operation ---------------------------------
+function changeVideoTag(tag, index) {
+  var keywords = $("#keywords").val();
+  if ($("#video-tag-" + index).hasClass("theme-bg-color")) {
+	$("#video-tag-" + index).removeClass("theme-bg-color");
+	$("#keywords").val(keywords.replace("&"+tag,"").replace(tag+"&","").replace(tag,""));
+  } else {
+	$("#video-tag-" + index).addClass("theme-bg-color");
+	if (keywords!="") keywords+="&";
+	keywords += tag;
+	$("#keywords").val(keywords);
+  }
+  filter("#keywords");
+}
+
+function asynTags() {
+  var lang = $("#search-lang").val();
+  $.ajax({type: "GET", url: "http://www.ganjianping.com:8080/gone/spring/gjpw/tags/all/" + lang, async: true,
+	success : function(response) {
+	  if (response.result=="success") {
+		var tagCdAndInfos = response.data;
+		//image tags
+		var videoTagBtnsHtml = "";
+		var videoTagsOptionHtml = "";
+		
+		if (lang=="all") {
+			var videoTagInfo1;
+			var videoTagInfo2;
+			if (currentLanguage=="zh_CN") {
+				videoTagInfo1 = tagCdAndInfos.videoTagszh_CN;
+				videoTagInfo2 = tagCdAndInfos.videoTagsen_SG;
+			} else {
+				videoTagInfo1 = tagCdAndInfos.videoTagsen_SG;
+				videoTagInfo2 = tagCdAndInfos.videoTagszh_CN;
+			}
+			videoTagBtnsHtml = getVideoTagBtnsHtml(videoTagInfo1);
+			videoTagsOptionHtml = getVideoTagsOptionHtml(videoTagInfo1);
+			videoTagsOptionHtml += getVideoTagsOptionHtml(videoTagInfo2);
+		} else {
+			var videoTagInfo = tagCdAndInfos.videoTags;
+			videoTagBtnsHtml = getVideoTagBtnsHtml(videoTagInfo);
+			videoTagsOptionHtml = getVideoTagsOptionHtml(videoTagInfo);
+		}
+		$("#video-tag-btns").html(videoTagBtnsHtml);
+		$("#video-tag").html(videoTagsOptionHtml);
+		$("#video-form .chosen-select").trigger("chosen:updated");
+	  }
+	},
+	fail : function() {
+	  $("#video-tag-btns").html("Fail");
+	}
+  });
+}
+function getVideoTagBtnsHtml(videoTagInfo) {
+	var videoTagUuid = videoTagInfo.uuid;
+	var imageFirstSecondLevelTags = videoTagInfo.value.split(";");
+	var videoTagBtnsHtml = "";
+	for (var i=0; i<imageFirstSecondLevelTags.length; i++) {
+		var imageFirstSecondLevelTagWithColon = imageFirstSecondLevelTags[i];
+		if (imageFirstSecondLevelTagWithColon!="") {
+			var imageFirstSecondLevelTagArr = imageFirstSecondLevelTagWithColon.split(":")
+			var firstLevelTag = imageFirstSecondLevelTagArr[0];
+			if (videoTagBtnsHtml!="") videoTagBtnsHtml += "<br/>";
+			videoTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+			if (firstLevelTag == currentVideoTag) {
+				videoTagBtnsHtml += "theme-bg-color";
+			}
+			videoTagBtnsHtml += "' href='javascript:changeVideoTag(&#39;" + firstLevelTag + "&#39;, " + i + ");' id='video-tag-" + i + "' style='margin:5px;"
+			videoTagBtnsHtml += "' style='margin-right:5px;'><i class='fa fa-tag fa-fw'></i>&nbsp;" + firstLevelTag + "</a>";
+			
+			if (imageFirstSecondLevelTagArr.length>=2) {
+				var secondLevelTagArr = imageFirstSecondLevelTagArr[1].split(",");
+			    videoTagBtnsHtml += ":";
+				for (var j=0; j<secondLevelTagArr.length; j++) {
+					var tag = secondLevelTagArr[j];
+					videoTagBtnsHtml += "<a class='btn btn-default btn-sm ";
+					if (tag == currentVideoTag) {
+						videoTagBtnsHtml += "theme-bg-color";
+					}
+					videoTagBtnsHtml += "' href='javascript:changeVideoTag(&#39;" + tag + "&#39;,&#39;" + i + '-' + j + "&#39;);' id='video-tag-" + i + "-" + j + "' style='margin:5px;"
+					videoTagBtnsHtml += "'>" + tag + "</a>";
+					
+				}
+			}
+			
+		}
+	}
+	videoTagBtnsHtml += "<br/><span id='video-tag-edit-btn' style='cursor:pointer;margin-left:10px;display:none;' onclick='showTagEditPanel(&#39;" + videoTagUuid 
+		+ "&#39;, &#39;" + videoTagInfo.cd + "&#39;, &#39;" + videoTagInfo.value + "&#39;)'><i class='fa fa-pencil-square-o'></i></span>";
+	return videoTagBtnsHtml;
+}
+function getVideoTagsOptionHtml(videoTagInfo) {
+	var videoTagUuid = videoTagInfo.uuid;
+	var imageFirstSecondLevelTags = videoTagInfo.value.split(";");
+	var videoTagsOptionHtml = "";
+	for (var i=0; i<imageFirstSecondLevelTags.length; i++) {
+		var imageFirstSecondLevelTagWithColon = imageFirstSecondLevelTags[i];
+		if (imageFirstSecondLevelTagWithColon!="") {
+			var imageFirstSecondLevelTagArr = imageFirstSecondLevelTagWithColon.split(":")
+			var firstLevelTag = imageFirstSecondLevelTagArr[0];
+			videoTagsOptionHtml += "<option value='" + firstLevelTag + "' style='font-weight:bold;'>" + firstLevelTag + "</option>";
+			
+			if (imageFirstSecondLevelTagArr.length>=2) {
+				var secondLevelTagArr = imageFirstSecondLevelTagArr[1].split(",");
+			    for (var j=0; j<secondLevelTagArr.length; j++) {
+					var tag = secondLevelTagArr[j];
+					videoTagsOptionHtml += "<option value='" + tag + "' style='margin-left:10px'>  " + tag + "</option>";
+				}
+			}
+			
+		}
+	}
+	return videoTagsOptionHtml;
+}
+function showTagEditPanel(uuid, cd, tags) {
+  if (cd=="videoTags") {
+	$("#tags-title").html("Video Tags");
+  }
+  $("#tags-uuid").val(uuid);
+  $("#tags").val(tags);
+  
+  $.magnificPopup.open({items: { src: "#tags-panel" }, type: 'inline', modal: true});
+}
+function saveTags() {
+  $("#save-tags-btn").hide();
+  $("#save-tags-processing-icon").show();
+  $("#tags-form").ajaxSubmit({dataType:'json', success : function(resp) {
+	$("#save-tags-btn").show();
+	$("#save-tags-processing-icon").hide();
+	if (resp.result=="success") {
+	  asynTags();
+	  $.magnificPopup.close();
+	} else {
+	  $("#save-tags-error-info").html("Fail.");
+	}
+  }});
+}
+
+//--------------------------------------- Processing ---------------------------------
+function showProcessingPanel() {
+  $.magnificPopup.open({items: { src: "#processing-panel" }, type: 'inline', modal:true});
+}
+var currentBgColor = "white";
+var currentColor = "black";
+function changeBackground(elId){
+  if (currentBgColor=="white") {
+	  currentBgColor = "#333"; 
+	  currentColor = "white";
+  } else {
+	  currentBgColor = "white"; 
+	  currentColor = "black";
+  }
+  $("#" + elId).css("background-color",currentBgColor).css("color",currentColor);
+  $(".mfp-close").css("color",currentColor);
+}
+
+function showEditBtns() {
+  //admin and super admin role can edit
+  if ((jpingRoleIds.indexOf("402881844b3fe072014b3fe1aa2e0005")!=-1 || jpingRoleIds.indexOf("402881844c364ba2014c3663f40300fe")!=-1)) {
+    $("#edit-video-btn").show();
+	$("#add-video-btn").show();
+  }
+}
+
+$(document).ready(function(){
+  //-------------------------- Init : magnificPopup, asyn tags,  ----------------------------
+  $('.popup-with-form').magnificPopup();
+  asynVideoInfos();
+  if (jpingRoleIds!=null && jpingRoleIds.length>=32) {
+	$("#video-role-id").html(jpingRoleOptionsHtml);
+	$("#video-roles").show();
+	$("#role-ids").html(jpingRoleOptionsHtml);
+	$("#role-ids-div").show();
+	$("#login-out-menu").attr("name","logout");
+	showEditBtns();
+  }
+  //-------------------------- Login -----------------------------
+  $('#login-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+      userCd: {required: true},
+      password: {required: true}
+  	},
+  	messages: {
+  	  userCd: {required: "Please enter user name or mobile number or email."},
+  	  password: {required: "Please enter password."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.parent()); error.css('color', 'red').css("margin-left","1px");},
+  });
+  $("#user-cd,#password").focus(function() {
+	  $("#login-error-info").html("");
+  });
+  //------------------------ Search ------------------------------
+  $("#video-tags-btn").click(function() {
+	if ($("#video-tag-btns").is(":visible")) {
+	  $("#video-tag-btns").hide();
+	  $("#video-tags-btn").css("background-color","#eee").css("color","#333");
+	} else {
+	  $("#video-tag-btns").show();
+	  $("#video-tags-btn").css("background-color","#1abc9c").css("color","#fff");
+	}
+  });
+  $("#search-condition-btn").click(function() {
+	  if ($("#search-condition-div").is(":visible")) {
+		  $("#search-condition-div").hide();
+		  $("#search-condition-btn").css("background-color","#eee").css("color","#333");
+	  } else {
+		  $("#search-condition-div").show();
+		  $("#search-condition-btn").css("background-color","#1abc9c").css("color","#fff");
+	  }
+  });
+  $("#operation-btn").click(function() {
+	  if ($("#video-operate-btns").is(":visible")) {
+		  $("#video-operate-btns").hide();
+		  $("#operation-btn").css("background-color","#eee").css("color","#333");
+	  } else {
+		  $("#video-operate-btns").show();
+		  $("#operation-btn").css("background-color","#1abc9c").css("color","#fff");
+	  }
+  });
+  $("#search-btn").click(function() {
+	  search(1);
+  })
+  $("#keywords").keyup(function( event ) {
+    if ( event.which == 13 ) {
+	    event.preventDefault();
+	} else {
+		filter(this);
+	}
+  });
+  $("#role-ids,#order-by,#search-lang,#page-size,#field").change(function() {
+	  search(1);
+  });
+  //-------------------------- Videos --------------------------- 
+  $('.popup-gallery').magnificPopup({
+	delegate: 'a',
+	type: 'image',
+	tLoading: 'Loading image #%curr%...',
+	mainClass: 'mfp-img-mobile',
+	gallery: {
+		enabled: true,
+		navigateByImgClick: true,
+		preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+	},
+	image: {
+		tError: 'The image could not be loaded.'
+	}
+  });
+  $('#video-form').validate({
+  	errorElement: 'span', //default input error message container
+  	errorClass: 'help-block', // default input error message class
+  	focusInvalid: false, // do not focus the last invalid input
+  	rules: {
+  	  url: {required: true, maxlength:256},
+      name: {required: true, maxlength:100}
+  	},
+  	messages: {
+  	  url: {required: "Please enter video url or upload the video."},
+  	  name: {required: "Please enter video name."}
+  	},
+  	invalidHandler:function(form, validator) {var errors = validator.numberOfInvalids(); if (errors) {validator.errorList[0].element.focus();}},
+    success: function (label) {label.closest('.form-control').removeClass('has-error'); label.remove(); },
+    errorPlacement: function (error, element) {error.insertAfter(element.closest('.form-control'));error.css('color', 'red');},
+    submitHandler: function (form) {form.submit();}
+  });
+  $('#upload-video-save-db-btn').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+      if (data.result.result == "success") {
+    	var saveUrl = data.result.saveUrl;
+      	if (saveUrl && saveUrl.indexOf("http")==-1) {
+      		saveUrl = "http://www.ganjianping.com:8080/gone" + saveUrl;
+  		}
+    	var imageHtml = "<div class='jp-cell-big'>";
+    	if (url.indexOf("youtube")!=-1) {
+			imageHtml += "<iframe width='100%' height='350' src='" + saveUrl + "' frameborder='0' allowfullscreen></iframe>";
+		} else if (url.indexOf("vimeo")!=-1) {
+			imageHtml += "<iframe width='100%' height='350' src='" + saveUrl + "'></iframe>";
+		} else {
+			imageHtml += "<video width='100%' height='350' controls><source src='" + saveUrl + "' type='video/mp4'>Your browser does not support the video tag.</video>";
+		}
+		imageHtml += "</div>";
+			
+		$("#video-cells").append(imageHtml);
+      } else {
+    	alert(data.result.result);
+      }
+    }
+  });
+  $('#upload-video-btn').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+      if (data.result.result == "success") {
+    	$("#video-url").val(data.result.saveUrl);
+    	$("#video-name").val(data.result.fileName);
+    	var saveUrl = data.result.saveUrl;
+    	if (saveUrl && saveUrl.indexOf("http")==-1) {
+    		saveUrl = "http://www.ganjianping.com:8080/gone" + saveUrl;
+		}
+        var divEl = "<div id='video' style='display:inline-block;text-align:center;margin:5px;'>" +
+        	"<video width='210' height='168' controls><source src='" + saveUrl + "' type='video/mp4'>Your browser does not support the video tag.</video>" +  
+		"</div>";
+	    $("#video-display").html(divEl);
+      } else {
+    	alert(data.result.result);
+      }
+    }
+  });
+  
+  $("#video-name,#video-content,#video-tag,#video-url,#video-role-id").focus(function() {
+	$("#save-video-error-info").html("");
+	$("#video-tags-error").html("");
+  });
+  
+});
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49817046-2', 'auto');
+ga('send', 'pageview');
+</script>
